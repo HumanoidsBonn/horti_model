@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+
+
+<robot name="horti">
+
+    <group name="trolley">
+        <joint name="trolley_platform_joint" />
+    </group>
+
+    <group name="arm_left">
+      <joint name="arm_left_joint1" />
+      <joint name="arm_left_joint2" />
+      <joint name="arm_left_joint3" />
+      <joint name="arm_left_joint4" />
+      <joint name="arm_left_joint5" />
+      <joint name="arm_left_joint6" />
+      <joint name="arm_left_joint7" />
+    </group>
+    <group name="arm_right">
+      <joint name="arm_right_joint1" />
+      <joint name="arm_right_joint2" />
+      <joint name="arm_right_joint3" />
+      <joint name="arm_right_joint4" />
+      <joint name="arm_right_joint5" />
+      <joint name="arm_right_joint6" />
+      <joint name="arm_right_joint7" />
+    </group>
+
+    <group name="head">
+      <joint name="head_joint1" />
+      <joint name="head_joint2" />
+      <joint name="head_joint3" />
+      <joint name="head_joint4" />
+      <joint name="head_joint5" />
+      <joint name="head_joint6" />
+      <link name="head_eef_link" />
+    </group>
+
+
+    <group name="left_eef">
+        <link name="arm_left_link7" />
+    </group>
+
+    <group name="right_eef">
+        <link name="arm_right_link7" />
+    </group>
+
+    <group name="head_eef">
+        <link name="head_eef_link" />
+    </group>
+
+    <end_effector name="left_eef" parent_link="arm_left_link7" parent_group="arm_left" group="left_eef" />
+    <end_effector name="right_eef" parent_link="arm_right_link7" parent_group="arm_right" group="right_eef" />
+    <end_effector name="head_eef" parent_link="head_eef_link" parent_group="head" group="head_eef" />
+
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="trolley_base_link" link2="trolley_platform_link" reason="Adjacent"/>
+    <disable_collisions link1="arm_holder_link" link2="trolley_platform_link" reason="Adjacent"/>
+    <disable_collisions link1="arm_holder_link" link2="arm_left_link_base" reason="Adjacent"/>
+    <disable_collisions link1="arm_holder_link" link2="arm_right_link_base" reason="Adjacent"/>
+
+
+
+    <disable_collisions link1="trolley_platform_link" link2="arm_left_link_base" reason="Adjacent" />
+    <disable_collisions link1="arm_left_link6" link2="arm_left_link7" reason="Adjacent" />
+    <disable_collisions link1="arm_left_link1" link2="arm_left_link2" reason="Adjacent" />
+    <disable_collisions link1="arm_left_link1" link2="arm_left_link3" reason="Never" />
+    <disable_collisions link1="arm_left_link1" link2="arm_left_link4" reason="Never" />
+    <disable_collisions link1="arm_left_link1" link2="arm_left_link_base" reason="Adjacent" />
+    <disable_collisions link1="arm_left_link2" link2="arm_left_link3" reason="Adjacent" />
+    <disable_collisions link1="arm_left_link2" link2="arm_left_link_base" reason="Never" />
+    <disable_collisions link1="arm_left_link3" link2="arm_left_link4" reason="Adjacent" />
+    <disable_collisions link1="arm_left_link3" link2="arm_left_link5" reason="Never" />
+    <disable_collisions link1="arm_left_link3" link2="arm_left_link6" reason="Never" />
+    <disable_collisions link1="arm_left_link3" link2="arm_left_link7" reason="Never" />
+    <disable_collisions link1="arm_left_link3" link2="arm_left_link_base" reason="Never" />
+    <disable_collisions link1="arm_left_link4" link2="arm_left_link5" reason="Adjacent" />
+    <disable_collisions link1="arm_left_link4" link2="arm_left_link6" reason="Never" />
+    <disable_collisions link1="arm_left_link4" link2="arm_left_link7" reason="Never" />
+    <disable_collisions link1="arm_left_link5" link2="arm_left_link6" reason="Adjacent" />
+    <disable_collisions link1="arm_left_link5" link2="arm_left_link7" reason="Never" />
+    <disable_collisions link1="arm_left_link6" link2="arm_left_link7" reason="Adjacent" />
+    <disable_collisions link1="arm_left_link4" link2="arm_left_link_eef" reason="Never" />
+    <disable_collisions link1="arm_left_link6" link2="arm_left_link_eef" reason="Never" />
+    <disable_collisions link1="arm_left_link7" link2="arm_left_link_eef" reason="Adjacent" />
+    <disable_collisions link1="trolley_platform_link" link2="arm_right_link_base" reason="Adjacent" />
+    <disable_collisions link1="arm_right_link6" link2="arm_right_link7" reason="Adjacent" />
+    <disable_collisions link1="arm_right_link1" link2="arm_right_link2" reason="Adjacent" />
+    <disable_collisions link1="arm_right_link1" link2="arm_right_link3" reason="Never" />
+    <disable_collisions link1="arm_right_link1" link2="arm_right_link4" reason="Never" />
+    <disable_collisions link1="arm_right_link1" link2="arm_right_link_base" reason="Adjacent" />
+    <disable_collisions link1="arm_right_link2" link2="arm_right_link3" reason="Adjacent" />
+    <disable_collisions link1="arm_right_link2" link2="arm_right_link_base" reason="Never" />
+    <disable_collisions link1="arm_right_link3" link2="arm_right_link4" reason="Adjacent" />
+    <disable_collisions link1="arm_right_link3" link2="arm_right_link5" reason="Never" />
+    <disable_collisions link1="arm_right_link3" link2="arm_right_link6" reason="Never" />
+    <disable_collisions link1="arm_right_link3" link2="arm_right_link7" reason="Never" />
+    <disable_collisions link1="arm_right_link3" link2="arm_right_link_base" reason="Never" />
+    <disable_collisions link1="arm_right_link4" link2="arm_right_link5" reason="Adjacent" />
+    <disable_collisions link1="arm_right_link4" link2="arm_right_link6" reason="Never" />
+    <disable_collisions link1="arm_right_link4" link2="arm_right_link7" reason="Never" />
+    <disable_collisions link1="arm_right_link5" link2="arm_right_link6" reason="Adjacent" />
+    <disable_collisions link1="arm_right_link5" link2="arm_right_link7" reason="Never" />
+    <disable_collisions link1="arm_right_link6" link2="arm_right_link7" reason="Adjacent" />
+    <disable_collisions link1="arm_right_link4" link2="arm_right_link_eef" reason="Never" />
+    <disable_collisions link1="arm_right_link6" link2="arm_right_link_eef" reason="Never" />
+    <disable_collisions link1="arm_right_link7" link2="arm_right_link_eef" reason="Adjacent" />
+
+
+</robot>

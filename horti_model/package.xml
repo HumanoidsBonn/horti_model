@@ -1,0 +1,12 @@
+<package format="2">
+	<name>horti_model</name>
+	<version>1.0.0</version>
+	<description>URDF model of the horti robot</description>
+	<maintainer email="lenz@ais.uni-bonn.de">Christian Lenz</maintainer>
+	<license>BSD</license>
+
+	<buildtool_depend>catkin</buildtool_depend>
+
+	<build_depend>urdf</build_depend>
+	<build_depend>xacro</build_depend>
+</package>

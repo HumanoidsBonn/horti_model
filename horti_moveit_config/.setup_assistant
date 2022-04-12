@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: horti_model
+    relative_path: robots/horti.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/horti.srdf
+  CONFIG:
+    author_name: Christian Lenz
+    author_email: lenz@ais.uni-bonn.de
+    generated_timestamp: 1649259619

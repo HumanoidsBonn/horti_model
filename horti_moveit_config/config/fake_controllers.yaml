@@ -1,0 +1,7 @@
+controller_list:
+  []
+initial:  # Define initial robot poses.
+#  - group: group
+#    pose: home
+
+  []
