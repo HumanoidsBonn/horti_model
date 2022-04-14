@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.4)
 
-project(horti_model)
+project(horti_description)
 
 find_package(catkin REQUIRED
 )

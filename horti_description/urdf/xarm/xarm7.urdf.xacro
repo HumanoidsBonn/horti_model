@@ -39,7 +39,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link_base.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link_base.STL" />
       </geometry>
       <material name="White" />
     </visual>
@@ -49,7 +49,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link_base.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link_base.STL" />
       </geometry>
     </collision>
   </link>
@@ -75,7 +75,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link1.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link1.STL" />
       </geometry>
       <material name="White" />
     </visual>
@@ -85,7 +85,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link1.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link1.STL" />
       </geometry>
     </collision>
   </link>
@@ -104,7 +104,7 @@
     <limit
       lower="${joint1_lower_limit}"
       upper="${joint1_upper_limit}"
-      effort="50"
+      effort="500"
       velocity="3.14" />
     <dynamics
       damping="10"
@@ -132,7 +132,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link2.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link2.STL" />
       </geometry>
       <material name="White" />
     </visual>
@@ -142,7 +142,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link2.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link2.STL" />
       </geometry>
     </collision>
   </link>
@@ -161,7 +161,7 @@
     <limit
       lower="${joint2_lower_limit}"
       upper="${joint2_upper_limit}"
-      effort="50"
+      effort="500"
       velocity="3.14" />
     <dynamics
       damping="10"
@@ -189,7 +189,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link3.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link3.STL" />
       </geometry>
       <material name="White" />
     </visual>
@@ -199,7 +199,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link3.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link3.STL" />
       </geometry>
     </collision>
   </link>
@@ -218,7 +218,7 @@
     <limit
       lower="${joint3_lower_limit}"
       upper="${joint3_upper_limit}"
-      effort="30"
+      effort="300"
       velocity="3.14" />
     <dynamics
       damping="5"
@@ -246,7 +246,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link4.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link4.STL" />
       </geometry>
       <material name="White" />
     </visual>
@@ -256,7 +256,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link4.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link4.STL" />
       </geometry>
     </collision>
   </link>
@@ -275,7 +275,7 @@
     <limit
       lower="${joint4_lower_limit}"
       upper="${joint4_upper_limit}"
-      effort="30"
+      effort="300"
       velocity="3.14" />
     <dynamics
       damping="5"
@@ -303,7 +303,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link5.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link5.STL" />
       </geometry>
       <material name="White" />
     </visual>
@@ -313,7 +313,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link5.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link5.STL" />
       </geometry>
     </collision>
   </link>
@@ -332,7 +332,7 @@
     <limit
       lower="${joint5_lower_limit}"
       upper="${joint5_upper_limit}"
-      effort="30"
+      effort="300"
       velocity="3.14" />
     <dynamics
       damping="5"
@@ -360,7 +360,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link6.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link6.STL" />
       </geometry>
       <material name="White" />
     </visual>
@@ -370,7 +370,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link6.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link6.STL" />
       </geometry>
     </collision>
   </link>
@@ -389,7 +389,7 @@
     <limit
       lower="${joint6_lower_limit}"
       upper="${joint6_upper_limit}"
-      effort="20"
+      effort="200"
       velocity="3.14" />
     <dynamics
       damping="2"
@@ -417,7 +417,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/visual/link7.STL" />
+          filename="package://horti_description/meshes/xarm7/visual/link7.STL" />
       </geometry>
       <material name="Silver" />
     </visual>
@@ -427,7 +427,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_model/meshes/xarm7/collision/end_tool.STL" />
+          filename="package://horti_description/meshes/xarm7/collision/end_tool.STL" />
       </geometry>
     </collision>
   </link>
@@ -446,7 +446,7 @@
     <limit
       lower="${joint7_lower_limit}"
       upper="${joint7_upper_limit}"
-      effort="20"
+      effort="200"
       velocity="3.14" />
     <dynamics
       damping="2"

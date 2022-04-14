@@ -4,8 +4,8 @@
 <!-- 	<xacro:include filename="$(find avatar_model)/robots/helpers.urdf.xacro" /> -->
 <!-- 	<xacro:property name="arm_height" value="1.1" /> -->
 
-    <xacro:include filename="$(find horti_model)/robots/xarm7.urdf.xacro" />
-    <xacro:include filename="$(find horti_model)/robots/light6.urdf.xacro" />
+    <xacro:include filename="$(find horti_description)/robots/xarm7.urdf.xacro" />
+    <xacro:include filename="$(find horti_description)/robots/light6.urdf.xacro" />
 
 	<material name="gray">
 		<color rgba="0.4 0.4 0.4 1"/>
@@ -48,12 +48,12 @@
 		<visual>
 			<material name="gray" />
 			<geometry>
-				<mesh filename="package://horti_model/meshes/trolley_base.stl" scale="0.001 0.001 0.001" />
+				<mesh filename="package://horti_description/meshes/trolley_base.stl" scale="0.001 0.001 0.001" />
 			</geometry>
 		</visual>
 		<collision>
         <geometry>
-          <mesh filename="package://horti_model/meshes/trolley_base.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://horti_description/meshes/trolley_base.stl" scale="0.001 0.001 0.001"/>
         </geometry>
         <origin xyz="0 0 0" rpy="0 0 0"/>
       </collision>
@@ -68,12 +68,12 @@
 		<visual>
 			<material name="gray" />
 			<geometry>
-				<mesh filename="package://horti_model/meshes/trolley_platform.stl" scale="0.001 0.001 0.001" />
+				<mesh filename="package://horti_description/meshes/trolley_platform.stl" scale="0.001 0.001 0.001" />
 			</geometry>
 		</visual>
 		<collision>
         <geometry>
-          <mesh filename="package://horti_model/meshes/trolley_platform.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://horti_description/meshes/trolley_platform.stl" scale="0.001 0.001 0.001"/>
         </geometry>
         <origin xyz="0 0 0" rpy="0 0 0"/>
 		</collision>

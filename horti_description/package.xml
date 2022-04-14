@@ -1,5 +1,5 @@
 <package format="2">
-	<name>horti_model</name>
+	<name>horti_description</name>
 	<version>1.0.0</version>
 	<description>URDF model of the horti robot</description>
 	<maintainer email="lenz@ais.uni-bonn.de">Christian Lenz</maintainer>

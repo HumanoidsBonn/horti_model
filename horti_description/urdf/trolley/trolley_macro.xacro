@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find horti_description)/urdf/trolley/trolley_base_transmissions.xacro" />
+<xacro:include filename="$(find horti_description)/urdf/other_geometry.macro.xacro" />
+
+<xacro:macro name="trollomatic" params="prefix arm_prefix transmission_hw_interface enable_collisions:=false enable_inertia:=false joint_type:=fixed">
+    
+  <!-- <xacro:trolley_base_transmissions prefix="${prefix}" hw_interface="${transmission_hw_interface}" /> -->
+  <xacro:property name="PI" value="3.1415926535897931"/>
+  <material name="grey">
+    <color rgba="0.5 0.5 0.5 1"/>
+  </material>
+
+  <joint name="${prefix}world_joint" type="fixed">
+    <parent link="world" />
+    <child link = "${prefix}platform_start_link" />
+    <origin xyz="-1.0 0.0 0.10" rpy="0.0 0.0 0.0" />
+  </joint>
+
+  <link name="${prefix}platform_start_link">
+    <xacro:cylinder_inertial radius="0.06" length="0.2" mass="1">
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+    </xacro:cylinder_inertial>
+  </link>
+
+  <joint name="${prefix}platform_move_joint" type="${joint_type}">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    <axis xyz="1 0 0"/>
+    <limit upper="4.0" lower="0.0" effort="1000" velocity="1.0"/>
+    <parent link="${prefix}platform_start_link" />
+    <child link = "${prefix}base_link" />
+  </joint>
+ <!-- scissorlift  -->
+  <link name="${prefix}base_link">
+    <visual>
+        <geometry>
+            <mesh filename="package://horti_description/meshes/trolley/trolley_base.stl" scale="0.001 0.001 0.001"/>
+            <!-- For inertia computation, see: http://gazebosim.org/tutorials?tut=inertia&cat=build_robot
+            Mesh Bounding Box Size 2.022500 0.778000 2.816000
+            Mesh Bounding Box Diag 3.553259
+            Mesh Volume is 0.257415
+            Mesh Surface is 6.066614
+            Thin shell barycenter -0.757169 0.073326 0.492247
+            Center of Mass is -0.727568 0.022890 0.222313
+            Inertia Tensor is :
+            | 0.054632 0.002944 0.007421 |
+            | 0.002944 0.106547 -0.006310 |
+            | 0.007421 -0.006310 0.077534 |
+            Principal axes are :
+            | 0.950700 0.026703 0.308960 |
+            | -0.085846 0.980013 0.179456 |
+            | -0.297993 -0.197132 0.933991 |
+            axis momenta are :
+            | 0.052040 0.107896 0.078777 |
+            -->
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+        <material name="grey"/>
+    </visual>
+    <xacro:if value="${enable_collisions}">
+      <collision>
+        <geometry>
+          <mesh filename="package://horti_description/meshes/trolley/trolley_base.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+      </collision>
+    </xacro:if>
+    <xacro:if value="${enable_inertia}">
+      <inertial>
+        <mass value="10.0"/>
+        <origin rpy="0 0 0" xyz="0.727568 -0.022890 0.222313"/>
+        <inertia ixx="2.2233" ixy="0.14368" ixz="0.288289" iyy="0.413911" iyz="-0.24513" izz="3.1202"/>
+      </inertial>
+    </xacro:if>
+  </link>
+
+  <joint name="${prefix}platform_lift_joint" type="${joint_type}">
+        <origin xyz="0.025734 0.000458 0.469001" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit upper="2.2" lower="0" effort="1000" velocity="1.0"/>
+        <parent link="${prefix}base_link"/>
+        <child link="${prefix}platform_base"/>
+  </joint>
+
+  <link name="${prefix}platform_base">
+    <visual>
+        <geometry>
+            <mesh filename="package://horti_description/meshes//trolley/trolley_platform.stl" scale="0.001 0.001 0.001"/>
+            <!-- For inertia computation, see: http://gazebosim.org/tutorials?tut=inertia&cat=build_robot
+            MeshLab Output:
+            Mesh Bounding Box Size 1.445693 0.420000 0.147347
+            Mesh Bounding Box Diag 1.512660
+            Mesh Volume is 0.063594
+            Mesh Surface is 1.832135
+            Thin shell barycenter -0.722672 -0.000002 -0.031958
+            Center of Mass is -0.722708 -0.000002 -0.039040
+            Inertia Tensor is :
+            | 0.001112 -0.000000 0.000056 |
+            | -0.000000 0.011134 0.000000 |
+            | 0.000056 0.000000 0.012108 |
+            Principal axes are :
+            | 0.999987 -0.000000 0.005086 |
+            | 0.000000 1.000000 0.000002 |
+            | -0.005086 -0.000002 0.999987 |
+            axis momenta are :
+            | 0.001112 0.011134 0.012109 |
+            -->
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+        <material name="grey"/>
+    </visual>
+    <xacro:if value="${enable_collisions}">
+      <collision>
+        <geometry>
+          <mesh filename="package://horti_description/meshes/trolley/trolley_platform.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+      </collision>
+    </xacro:if>
+    <xacro:if value="${enable_inertia}">
+      <inertial>
+        <mass value="10.0"/>
+        <origin rpy="0 0 0" xyz="0.722708 0.000002 -0.039040"/>
+        <inertia ixx="0.174859" ixy="0.0" ixz="0.008806" iyy="1.750794" iyz="0.0" izz="1.903953"/>
+      </inertial>
+    </xacro:if>
+  </link>
+</xacro:macro>
+</robot>

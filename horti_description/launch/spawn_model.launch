@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+    
+	<arg name="gazebo_model_name" default="robot" doc="The name to give to the model in Gazebo (after spawning it)." />
+	<arg name="robot_description_param_name" default="robot_description" doc="Name of the parameter which contains the robot description (ie: URDF) which should be spawned into Gazebo." />
+	<param name="robot_description" command="$(find xacro)/xacro '$(find horti_description)/urdf/horti_robot.gazebo.urdf.xacro'" />
+
+	<node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model"
+    args="
+      -urdf
+      -param $(arg robot_description_param_name)
+      -model $(arg gazebo_model_name)"
+    output="screen" respawn="false" />
+			
+</launch>
