@@ -3,6 +3,7 @@
 	<version>1.0.0</version>
 	<description>URDF model of the horti robot</description>
 	<maintainer email="lenz@ais.uni-bonn.de">Christian Lenz</maintainer>
+	<maintainer email="rohit.menon@uni-bonn.de">Rohit Menon</maintainer>
 	<license>BSD</license>
 
 	<buildtool_depend>catkin</buildtool_depend>
