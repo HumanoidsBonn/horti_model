@@ -18,22 +18,8 @@
     
     <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
 
-    <xacro:include filename="$(find horti_description)/urdf/trolley/trolley_macro.xacro"/>
-    <xacro:include filename="$(find horti_description)/urdf/xarm/xarm7.urdf.xacro" />
-    <xacro:include filename="$(find horti_description)/urdf/xarm/light6.urdf.xacro" />
+    <xacro:include filename="$(find horti_description)/urdf/horti.urdf.xacro"/>
 
-    <xacro:include filename="$(find horti_description)/urdf/common.gazebo.xacro" />
-    <xacro:include filename="$(find horti_description)/urdf/xarm/xarm7.gazebo.xacro" />
-    <xacro:include filename="$(find horti_description)/urdf/xarm/xarm7.transmission.xacro" />
-    <xacro:include filename="$(find horti_description)/urdf/xarm/xarm6.gazebo.xacro" />
-    <xacro:include filename="$(find horti_description)/urdf/xarm/xarm6.transmission.xacro" /> 
-    <xacro:include filename="$(find horti_description)/urdf/sensors/depth_camera.xacro" /> 
-
-    <xacro:property name="holder_length" value="1.3" />
-    <xacro:property name="holder_width" value="0.32" />
-    <xacro:property name="holder_height" value="0.0" />
-    <xacro:property name="arm_width" value="0.6" />
-    <xacro:property name="arm_y_offset" value="0.08" />
 
     <xacro:gazebo_ros_control_plugin namespace=""/>
 
@@ -90,7 +76,7 @@
 
     <!-- Head -->
     <xacro:property name="pedestal_height" value="0.1" />
-    <xacro:light6_urdf prefix="head" />
+    <xacro:lite6_urdf prefix="head" />
     <!-- <link name="head_pedestal_link">
         <visual>
             <material name="White" />
