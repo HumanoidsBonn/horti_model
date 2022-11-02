@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="trollomatic">
+
+<xacro:include filename="$(find trolley_description)/urdf/trolley_macro_d435.xacro" />
+<!--  <xacro:include filename="$(find trolley_description)/urdf/trolley_macro_d455.xacro" />  -->
+
+<xacro:trollomatic />
+
+</robot>
