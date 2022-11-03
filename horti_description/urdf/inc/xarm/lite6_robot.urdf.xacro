@@ -24,7 +24,7 @@
   <xacro:arg name="add_realsense_d435i" default="false"/>
 
   <!-- load lite6 robot -->
-  <xacro:include filename="$(find xarm_description)/urdf/lite6_robot_macro.xacro" />
+  <xacro:include filename="$(find horti_description)/urdf/inc/lite6_robot_macro.xacro" />
   <xacro:lite6_robot prefix="$(arg prefix)" namespace="$(arg ros_namespace)" limited="$(arg limited)" 
     effort_control="$(arg effort_control)" velocity_control="$(arg velocity_control)"
     rs_d435i="$(arg add_realsense_d435i)"
@@ -37,13 +37,13 @@
     geometry_mesh_tcp_xyz="$(arg geometry_mesh_tcp_xyz)" geometry_mesh_tcp_rpy="$(arg geometry_mesh_tcp_rpy)" />
 
   <xacro:if value="$(arg add_gripper)">
-    <xacro:include filename="$(find xarm_description)/urdf/lite_gripper.urdf.xacro" />
+    <xacro:include filename="$(find horti_description)/urdf/inc/lite_gripper.urdf.xacro" />
     <xacro:uflite_gripper_urdf attach_to="$(arg prefix)link_eef" />
   </xacro:if>
 
   <xacro:unless value="$(arg add_gripper)">
     <xacro:if value="$(arg add_vacuum_gripper)" >
-      <xacro:include filename="$(find xarm_description)/urdf/lite_vacuum_gripper.urdf.xacro" />
+      <xacro:include filename="$(find horti_description)/urdf/inc/lite_vacuum_gripper.urdf.xacro" />
       <xacro:uflite_vacuum_gripper_urdf attach_to="$(arg prefix)link_eef" />
     </xacro:if>
   </xacro:unless>

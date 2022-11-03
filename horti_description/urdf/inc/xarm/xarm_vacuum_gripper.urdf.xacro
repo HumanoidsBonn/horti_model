@@ -33,7 +33,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://xarm_description/meshes/vacuum_gripper/visual/vacuum_gripper.STL" />
+          filename="package://horti_description/meshes/vacuum_gripper/visual/vacuum_gripper.STL" />
       </geometry>
       <material name="White">
         <color rgba="1.0 1.0 1.0 1.0"/>
@@ -45,7 +45,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://xarm_description/meshes/vacuum_gripper/collision/vacuum_gripper.STL" />
+          filename="package://horti_description/meshes/vacuum_gripper/collision/vacuum_gripper.STL" />
       </geometry>
     </collision>
   </link>

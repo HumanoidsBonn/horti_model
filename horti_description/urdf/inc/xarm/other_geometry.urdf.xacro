@@ -41,7 +41,7 @@
       <xacro:property name="_mesh_filename" value="${geometry_mesh_filename}"/>
     </xacro:if>
     <xacro:unless value="${geometry_mesh_filename.startswith('file:///') or geometry_mesh_filename.startswith('package://')}">
-      <xacro:property name="_mesh_filename" value="file:///$(find xarm_description)/meshes/other/${geometry_mesh_filename}"/>
+      <xacro:property name="_mesh_filename" value="file:///$(find horti_description)/meshes/other/${geometry_mesh_filename}"/>
     </xacro:unless>
 
     <link

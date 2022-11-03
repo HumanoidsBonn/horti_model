@@ -13,13 +13,13 @@
     geometry_mesh_tcp_rpy:='0 0 0' ">
 
     <!-- include xarm6 relative macros: -->
-    <xacro:include filename="$(find xarm_description)/urdf/inc/xarm/xarm6.urdf.xacro" />
-    <xacro:include filename="$(find xarm_description)/urdf/inc/xarm/xarm6.transmission.xacro" />
-    <xacro:include filename="$(find xarm_description)/urdf/inc/xarm/xarm6.gazebo.xacro" />
+    <xacro:include filename="$(find horti_description)/urdf/inc/xarm/xarm6.urdf.xacro" />
+    <xacro:include filename="$(find horti_description)/urdf/inc/xarm/xarm6.transmission.xacro" />
+    <xacro:include filename="$(find horti_description)/urdf/inc/xarm/xarm6.gazebo.xacro" />
 
     <!-- gazebo_plugin -->
     <xacro:if value="${load_gazebo_plugin}">
-    <xacro:include filename="$(find xarm_description)/urdf/common.gazebo.xacro" />
+    <xacro:include filename="$(find horti_description)/urdf/common.gazebo.xacro" />
     <xacro:gazebo_ros_control_plugin namespace="${namespace}"/>
     </xacro:if>
 
@@ -53,7 +53,7 @@
     <xacro:xarm6_gazebo prefix="${prefix}" />
 
     <xacro:if value="${add_other_geometry}">
-      <xacro:include filename="$(find xarm_description)/urdf/other_geometry.urdf.xacro" />
+      <xacro:include filename="$(find horti_description)/urdf/other_geometry.urdf.xacro" />
       <xacro:other_geometry prefix="${prefix}" attach_to="${prefix}link_eef"
         geometry_type="${geometry_type}" geometry_mass="${geometry_mass}" 
         geometry_height="${geometry_height}" geometry_radius="${geometry_radius}"

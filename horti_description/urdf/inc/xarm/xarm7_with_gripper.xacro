@@ -10,7 +10,7 @@
   <xacro:arg name="use_gazebo_camera" default="false"/>
 
   <!-- load xarm7 robot -->
-  <xacro:include filename="$(find xarm_description)/urdf/xarm7_robot_macro.xacro" />
+  <xacro:include filename="$(find horti_description)/urdf/xarm7_robot_macro.xacro" />
   
   <!-- Attach gripper --> 
   <xacro:include filename="$(find xarm_gripper)/urdf/xarm_gripper_model.xacro" />
@@ -28,7 +28,7 @@
     <!-- <xacro:include filename="$(find kinect_v2)/urdf/kinect_v2.urdf.xacro" />
     <xacro:kinect_v2  parent="link_base">
     </xacro:kinect_v2> -->
-    <xacro:include filename="$(find xarm_description)/urdf/camera.gazebo.xacro" />
+    <xacro:include filename="$(find horti_description)/urdf/camera.gazebo.xacro" />
     <xacro:camera_gazebo prefix="$(arg prefix)" />
   </xacro:if>
 </robot>

@@ -19,7 +19,7 @@
 
     <!-- gazebo_plugin -->
     <xacro:if value="${load_gazebo_plugin}">
-    <xacro:include filename="$(find xarm_description)/urdf/common.gazebo.xacro" />
+    <xacro:include filename="$(find horti_description)/urdf/common.gazebo.xacro" />
     <xacro:gazebo_ros_control_plugin namespace="${namespace}"/>
     </xacro:if>
 
@@ -54,7 +54,7 @@
     <xacro:xarm7_gazebo prefix="${prefix}" />
 
     <xacro:if value="${add_other_geometry}">
-      <xacro:include filename="$(find xarm_description)/urdf/other_geometry.urdf.xacro" />
+      <xacro:include filename="$(find horti_description)/urdf/inc/xarm/other_geometry.urdf.xacro" />
       <xacro:other_geometry prefix="${prefix}" attach_to="${prefix}link_eef"
         geometry_type="${geometry_type}" geometry_mass="${geometry_mass}" 
         geometry_height="${geometry_height}" geometry_radius="${geometry_radius}"
