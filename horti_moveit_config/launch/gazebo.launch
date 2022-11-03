@@ -1,35 +1,54 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="paused" default="false"/>
-  <arg name="gazebo_gui" default="true"/>
-  <arg name="initial_joint_positions" doc="Initial joint configuration of the robot"
-       default=""/>
+<arg name="paused" default="true" doc="Starts Gazebo in paused mode" />
+	<arg name="gui" default="true" doc="Starts Gazebo gui" />
+	<arg name="world_path" default="$(find horti_description)/worlds" />
+	<arg name="world_name" default="world14" />
+	<arg name="gazebo_model_name" default="robot" doc="The name to give to the model in Gazebo (after spawning it)." />
+	<arg name="robot_description_param_name" default="robot_description" doc="Name of the parameter which contains the robot description (ie: URDF) which should be spawned into Gazebo." />
+	<param name="robot_description" command="$(find xacro)/xacro '$(find horti_description)/urdf/horti.gazebo.urdf.xacro'" />
+
+	<!-- robot_state_publisher configuration -->
+	<arg name="tf_prefix" default="" doc="tf_prefix used for the robot."/>
+	<arg name="tf_pub_rate" default="500" doc="Rate at which robot_state_publisher should publish transforms."/>
+
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model"
+    args="
+      -urdf
+      -param $(arg robot_description_param_name)
+      -model $(arg gazebo_model_name)"
+    output="screen" respawn="false" />
 
   <!-- startup simulated world -->
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" default="worlds/empty.world"/>
-    <arg name="paused" value="true"/>
-    <arg name="gui" value="$(arg gazebo_gui)"/>
-  </include>
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="world_name" default="$(arg world_path)/$(arg world_name).world"/>
+		<arg name="paused" value="$(arg paused)"/>
+		<arg name="gui" value="$(arg gui)"/>
+	</include>
 
-  <!-- send robot urdf to param server -->
-  <param name="robot_description" textfile="$(find horti_moveit_config)/config/gazebo_horti.urdf" />
+  <arg name="controller_config_file" default="$(find horti_description)/config//gazebo_controllers.yaml" doc="Config file used for defining the ROS-Control controllers."/>
+  <rosparam file="$(arg controller_config_file)" command="load"/>
+  <arg name="controllers" default="joint_state_controller left_arm_pos_joint_traj_controller right_arm_pos_joint_traj_controller head_pos_traj_controller" doc="Controllers that are activated by default."/>
+  <arg name="stopped_controllers" default="joint_group_pos_controller" doc="Controllers that are initally loaded, but not started."/>
+  
+  <!-- Load and start the controllers listed in the 'controllers' arg. -->
+  <node name="ros_control_controller_spawner" pkg="controller_manager" type="controller_manager"
+    args="spawn $(arg controllers)" output="screen" respawn="false" />
 
-  <!-- unpause only after loading robot model -->
-  <arg name="unpause" value="$(eval '' if arg('paused') else '-unpause')" />
-  <!-- push robot_description to factory and spawn robot in gazebo at the origin, change x,y,z arguments to spawn in a different position -->
-  <arg name="world_pose" value="-x 0 -y 0 -z 0" />
-  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot $(arg unpause) $(arg world_pose) $(arg initial_joint_positions)"
-    respawn="false" output="screen" />
+  <!-- Load other controllers, but do not start them -->
+  <!-- <node name="ros_control_stopped_spawner" pkg="controller_manager" type="spawner"
+    args="stopped $(arg stopped_controllers)" output="screen" respawn="false" /> -->
 
-  <!-- Load joint controller parameters for Gazebo -->
-  <rosparam file="$(find horti_moveit_config)/config/gazebo_controllers.yaml" />
-  <!-- Spawn Gazebo ROS controllers -->
-  <node name="gazebo_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller" />
-  <!-- Load ROS controllers -->
-  <include file="$(dirname)/ros_controllers.launch"/>
-
-  <!-- Given the published joint states, publish tf for the robot links -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
-
+  <!-- Spawn the model loaded earlier in the simulation just started -->
+  <!-- <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model"
+    args="
+      -urdf
+      -param $(arg robot_description_param_name)
+      -model $(arg gazebo_model_name)"
+    output="screen" respawn="false" /> -->
+    
+	<!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find horti_description)/rviz/rviz.rviz"/>
+		
 </launch>

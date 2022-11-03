@@ -4,10 +4,8 @@
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
 <robot name="horti" xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <!-- 	<xacro:include filename="$(find avatar_model)/robots/helpers.urdf.xacro" /> -->
-    <!-- 	<xacro:property name="arm_height" value="1.1" /> -->
-    <!--
-  Author: Jimy Zhang <jimy.zhang@ufactory.cc> <jimy92@163.com>
+   <!--
+  Author: Rohit Menon <rohit.menon@uni-bonn.de>
   Contributers:
 -->
 
@@ -18,8 +16,6 @@
         <parent link="map" />
         <child link="world" />
     </joint> -->
-    
-    
 
     <xacro:include filename="$(find horti_description)/urdf/horti_gazebo_macro.xacro" />
     <xacro:horti_gazebo limited='false' effort_control='false' enable_d435i='true' enable_d405='true'/>
