@@ -37,7 +37,7 @@
     <xacro:trollomatic enable_collisions="false" enable_inertia="false" joint_type="fixed"/>
     <joint name="base_link_joint" type="fixed" >
         <origin xyz="0 0 0" rpy="0 0 0" />
-        <parent link="map" />
+        <parent link="world" />
         <child link="base_link" />
     </joint>
     

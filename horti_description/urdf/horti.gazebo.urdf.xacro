@@ -11,13 +11,13 @@
   Contributers:
 -->
 
-	<link name="map"/>
+	<!-- <link name="map"/> -->
     <link name="world"/>
-    <joint name="world_joint" type="fixed" >
+    <!-- <joint name="world_joint" type="fixed" >
         <origin xyz="0 0 0" rpy="0 0 0" />
         <parent link="map" />
         <child link="world" />
-    </joint>
+    </joint> -->
     
     
 
