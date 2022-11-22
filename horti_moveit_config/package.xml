@@ -5,8 +5,8 @@
   <description>
      An automatically generated package with all the configuration and launch files for using the horti with the MoveIt Motion Planning Framework
   </description>
-  <author email="lenz@ais.uni-bonn.de">Christian Lenz</author>
-  <maintainer email="lenz@ais.uni-bonn.de">Christian Lenz</maintainer>
+  <author email="salih285@gmail.com">Salih Marangoz</author>
+  <maintainer email="salih285@gmail.com">Salih Marangoz</maintainer>
 
   <license>BSD</license>
 
@@ -19,7 +19,7 @@
   <run_depend>moveit_ros_move_group</run_depend>
   <run_depend>moveit_fake_controller_manager</run_depend>
   <run_depend>moveit_kinematics</run_depend>
-  <run_depend>moveit_planners_ompl</run_depend>
+  <run_depend>moveit_planners</run_depend>
   <run_depend>moveit_ros_visualization</run_depend>
   <run_depend>moveit_setup_assistant</run_depend>
   <run_depend>moveit_simple_controller_manager</run_depend>
@@ -29,9 +29,13 @@
   <run_depend>rviz</run_depend>
   <run_depend>tf2_ros</run_depend>
   <run_depend>xacro</run_depend>
+  <!-- The next 2 packages are required for the gazebo simulation.
+       We don't include them by default to prevent installing gazebo and all its dependencies. -->
+  <!-- <run_depend>joint_trajectory_controller</run_depend> -->
+  <!-- <run_depend>gazebo_ros_control</run_depend> -->
   <!-- This package is referenced in the warehouse launch files, but does not build out of the box at the moment. Commented the dependency until this works. -->
   <!-- <run_depend>warehouse_ros_mongo</run_depend> -->
-    <run_depend>horti_model</run_depend>
+  <run_depend>horti_description</run_depend>
 
 
 </package>

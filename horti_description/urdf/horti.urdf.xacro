@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot name="horti" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- 	<xacro:include filename="$(find avatar_model)/robots/helpers.urdf.xacro" /> -->
+<!-- 	<xacro:property name="arm_height" value="1.1" /> -->
+
+
+    <xacro:include filename="$(find horti_description)/urdf/horti_macro.xacro" />
+    <xacro:horti_bot />
+
+	<link name="map"/>
+    <link name="world"/>
+    <joint name="world_joint" type="fixed" >
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="map" />
+        <child link="world" />
+    </joint>
+    
+
+
+</robot>

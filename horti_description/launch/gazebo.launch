@@ -6,11 +6,18 @@
 	<arg name="world_name" default="world14" />
 	<arg name="gazebo_model_name" default="robot" doc="The name to give to the model in Gazebo (after spawning it)." />
 	<arg name="robot_description_param_name" default="robot_description" doc="Name of the parameter which contains the robot description (ie: URDF) which should be spawned into Gazebo." />
+	<param name="robot_description" command="$(find xacro)/xacro '$(find horti_description)/urdf/horti.gazebo.urdf.xacro'" />
 
 	<!-- robot_state_publisher configuration -->
 	<arg name="tf_prefix" default="" doc="tf_prefix used for the robot."/>
 	<arg name="tf_pub_rate" default="500" doc="Rate at which robot_state_publisher should publish transforms."/>
 
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model"
+    args="
+      -urdf
+      -param $(arg robot_description_param_name)
+      -model $(arg gazebo_model_name)"
+    output="screen" respawn="false" />
 
   <!-- startup simulated world -->
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -42,6 +49,6 @@
     
 	<!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
 	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-	<!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find horti_description)/config/rviz.rviz"/> -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find horti_description)/rviz/rviz.rviz"/>
 		
 </launch>

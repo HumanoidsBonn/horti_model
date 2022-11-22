@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:macro name="trollomatic" params="enable_collisions:=false enable_inertia:=false joint_type:='prismatic'">
+
+  <xacro:property name="PI" value="3.1415926535897931"/>
+  <xacro:property name="PI_2" value="1.570796327"/>
+
+
+  <material name="grey">
+    <color rgba="0.5 0.5 0.5 1"/>
+  </material>
+
+   <!-- scissorlift  -->
+  <link name="base_link">
+    <visual>
+        <geometry>
+            <mesh filename="package://trolley_description/meshes/cart.stl" scale="0.001 0.001 0.001"/>
+            <!-- For inertia computation, see: http://gazebosim.org/tutorials?tut=inertia&cat=build_robot
+            Mesh Bounding Box Size 2.022500 0.778000 2.816000
+            Mesh Bounding Box Diag 3.553259
+            Mesh Volume is 0.257415
+            Mesh Surface is 6.066614
+            Thin shell barycenter -0.757169 0.073326 0.492247
+            Center of Mass is -0.727568 0.022890 0.222313
+            Inertia Tensor is :
+            | 0.054632 0.002944 0.007421 |
+            | 0.002944 0.106547 -0.006310 |
+            | 0.007421 -0.006310 0.077534 |
+            Principal axes are :
+            | 0.950700 0.026703 0.308960 |
+            | -0.085846 0.980013 0.179456 |
+            | -0.297993 -0.197132 0.933991 |
+            axis momenta are :
+            | 0.052040 0.107896 0.078777 |
+            -->
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+        <material name="grey"/>
+    </visual>
+    <xacro:if value="${enable_collisions}">
+      <collision>
+        <geometry>
+          <mesh filename="package://trolley_description/meshes/cart.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+      </collision>
+    </xacro:if>
+    <xacro:if value="${enable_inertia}">
+      <inertial>
+        <mass value="100.0"/>
+        <origin rpy="0 0 0" xyz="0.727568 -0.022890 0.222313"/>
+        <inertia ixx="21.2233" ixy="1.14368" ixz="2.88289" iyy="41.3911" iyz="-2.4513" izz="30.1202"/>
+      </inertial>
+    </xacro:if>
+  </link>
+
+  <joint name="base_link_to_platform" type="${joint_type}">
+        <origin xyz="0.025734 0.000458 0.469001" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit upper="2.2" lower="0" effort="1000" velocity="1000.00"/>
+        <parent link="base_link"/>
+        <child link="platform_base"/>
+  </joint>
+
+  <link name="platform_base">
+    <visual>
+        <geometry>
+            <mesh filename="package://trolley_description/meshes/platform.stl" scale="0.001 0.001 0.001"/>
+            <!-- For inertia computation, see: http://gazebosim.org/tutorials?tut=inertia&cat=build_robot
+            MeshLab Output:
+            Mesh Bounding Box Size 1.445693 0.420000 0.147347
+            Mesh Bounding Box Diag 1.512660
+            Mesh Volume is 0.063594
+            Mesh Surface is 1.832135
+            Thin shell barycenter -0.722672 -0.000002 -0.031958
+            Center of Mass is -0.722708 -0.000002 -0.039040
+            Inertia Tensor is :
+            | 0.001112 -0.000000 0.000056 |
+            | -0.000000 0.011134 0.000000 |
+            | 0.000056 0.000000 0.012108 |
+            Principal axes are :
+            | 0.999987 -0.000000 0.005086 |
+            | 0.000000 1.000000 0.000002 |
+            | -0.005086 -0.000002 0.999987 |
+            axis momenta are :
+            | 0.001112 0.011134 0.012109 |
+            -->
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+        <material name="grey"/>
+    </visual>
+    <xacro:if value="${enable_collisions}">
+      <collision>
+        <geometry>
+          <mesh filename="package://trolley_description/meshes/platform.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+      </collision>
+    </xacro:if>
+    <xacro:if value="${enable_inertia}">
+      <inertial>
+        <mass value="10.0"/>
+        <origin rpy="0 0 0" xyz="0.722708 0.000002 -0.039040"/>
+        <inertia ixx="0.174859" ixy="0.0" ixz="0.008806" iyy="1.750794" iyz="0.0" izz="1.903953"/>
+      </inertial>
+    </xacro:if>
+  </link>
+
+  <!--joint name="platform_base_to_control_box" type="fixed">
+    <origin xyz="1.19 0 0.04" rpy="0 0 0"/>
+    <parent link="platform_base"/>
+    <child link="control_box"/>
+  </joint>
+
+
+  <link name="control_box">
+    <visual>
+      <origin xyz="0.115 0  0.225" rpy="0 0 0" />
+      <geometry>
+        <box size="0.23 0.45 0.4" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link-->
+
+  <!-- Camera fixed joints -->
+
+  <joint name="base_link_to_cam0" type="fixed">
+        <origin xyz="1.860 -0.238319 0.6835" rpy="${PI_2} 0 ${PI_2}"/>
+        <parent link="base_link"/>
+        <child link="camera0_link"/>
+  </joint>
+  <link name="camera0_link">
+  </link>
+
+  <joint name="base_link_to_cam1" type="fixed">
+        <origin xyz="1.860 -0.237319 1.3475" rpy="${PI_2} 0 ${PI_2}"/>
+        <parent link="base_link"/>
+        <child link="camera1_link"/>
+  </joint>
+  <link name="camera1_link">
+  </link>
+
+  <joint name="base_link_to_cam2" type="fixed">
+        <origin xyz="1.860 -0.237319 2.0115" rpy="${PI_2} 0 ${PI_2}"/>
+        <parent link="base_link"/>
+        <child link="camera2_link"/>
+  </joint>
+  <link name="camera2_link">
+  </link>
+
+  <joint name="base_link_to_cam3" type="fixed">
+        <origin xyz="1.860 -0.237319 2.6755" rpy="${PI_2} 0 ${PI_2}"/>
+        <parent link="base_link"/>
+        <child link="camera3_link"/>
+  </joint>
+  <link name="camera3_link">
+  </link>
+
+  <joint name="base_link_to_tracker" type="fixed">
+        <origin xyz="1.815 -0.237319 1.3475" rpy="0 0 ${PI_2}"/>
+        <parent link="base_link"/>
+        <child link="tracker"/>
+  </joint>
+  <link name="tracker">
+  </link>
+
+</xacro:macro>
+
+</robot>
