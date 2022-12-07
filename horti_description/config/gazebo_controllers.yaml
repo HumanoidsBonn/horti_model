@@ -85,6 +85,38 @@ head_pos_traj_controller:
   state_publish_rate: *loop_hz
   action_monitor_rate: 10
 
+left_arm_pos_joint_group_pos_controller:
+  type: position_controllers/JointGroupPositionController
+  joints:
+    - arm_left_joint1
+    - arm_left_joint2
+    - arm_left_joint3
+    - arm_left_joint4
+    - arm_left_joint5
+    - arm_left_joint6
+    - arm_left_joint7
+
+right_arm_pos_joint_group_pos_controller:
+  type: position_controllers/JointGroupPositionController
+  joints:
+    - arm_right_joint1
+    - arm_right_joint2
+    - arm_right_joint3
+    - arm_right_joint4
+    - arm_right_joint5
+    - arm_right_joint6
+    - arm_right_joint7
+
+head_pos_joint_group_pos_controller:
+  type: position_controllers/JointGroupPositionController
+  joints:
+    - head_joint1
+    - head_joint2
+    - head_joint3
+    - head_joint4
+    - head_joint5
+    - head_joint6
+
 joint_group_pos_controller:
   type: position_controllers/JointGroupPositionController
   joints: 
