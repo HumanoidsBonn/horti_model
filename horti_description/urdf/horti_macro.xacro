@@ -2,7 +2,7 @@
 <robot name="horti" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 
-    <xacro:macro name="horti_bot" params="limited:='false' effort_control:='false' enable_d435i:='true'">  
+    <xacro:macro name="horti_bot" params="limited:='false' effort_control:='false' enable_d435i:='true'">
 
     <material name="gray">
 		<color rgba="0.4 0.4 0.4 1"/>
@@ -25,22 +25,100 @@
 
     <xacro:include filename="$(find horti_description)/urdf/inc/xarm/xarm7_robot_macro.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/inc/xarm/lite6_robot_macro.xacro" />
-    <xacro:include filename="$(find horti_description)/urdf/inc/trolley/trolley_macro_d435.xacro" />
-    
+    <!--xacro:include filename="$(find horti_description)/urdf/inc/trolley/trolley_macro_d435.xacro" /-->
+
+
+    <!-- Trolley -->
+
+    <xacro:property name="holder_length" value="1.3" />
+    <xacro:property name="holder_width" value="0.32" />
+    <xacro:property name="holder_height" value="0.1" />
+    <xacro:property name="arm_width" value="0.6" />
+    <xacro:property name="arm_y_offset" value="0.08" />
+
+
+	<link name="trolley_base_link">
+		<visual>
+			<material name="gray" />
+			<geometry>
+				<mesh filename="package://horti_description/meshes/trolley_base.stl" scale="0.001 0.001 0.001" />
+			</geometry>
+		</visual>
+		<collision>
+        <geometry>
+          <mesh filename="package://horti_description/meshes/trolley_base.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </collision>
+	</link>
+	<joint name="trolley_base_joint" type="fixed">
+		<parent link="map" />
+		<child link="trolley_base_link" />
+		<origin xyz="0 0 0" rpy="0 0 0" />
+	</joint>
+
+	<link name="trolley_platform_link">
+		<visual>
+			<material name="gray" />
+			<geometry>
+				<mesh filename="package://horti_description/meshes/trolley_platform.stl" scale="0.001 0.001 0.001" />
+			</geometry>
+		</visual>
+		<collision>
+        <geometry>
+          <mesh filename="package://horti_description/meshes/trolley_platform.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+		</collision>
+	</link>
+	<joint name="trolley_platform_joint" type="prismatic">
+		<parent link="trolley_base_link" />
+		<child link="trolley_platform_link" />
+        <origin xyz="0.025734 0.000458 0.469001" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit upper="2.2" lower="0" effort="1000" velocity="1000.00"/>
+	</joint>
+
+
+    <link name="arm_holder_link">
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 0 -${holder_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${holder_length} ${holder_width} ${holder_height}" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 -${holder_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${holder_length} ${holder_width} ${holder_height}" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="arm_holder_joint" type="fixed" >
+        <origin xyz="${-holder_length / 2 - 0.1} 0 ${holder_height}" rpy="0 0 0" />
+        <parent link="trolley_platform_link" />
+        <child link="arm_holder_link" />
+    </joint>
+
+
+
+
+<!--
 
     <xacro:property name="holder_length" value="1.3" />
     <xacro:property name="holder_width" value="0.32" />
     <xacro:property name="holder_height" value="0.1" />
     <xacro:property name="arm_width" value="0.9" />
     <xacro:property name="arm_y_offset" value="0.08" />
-    
+
     <xacro:trollomatic enable_collisions="false" enable_inertia="false" joint_type="fixed"/>
     <joint name="base_link_joint" type="fixed" >
         <origin xyz="0 0 0" rpy="0 0 0" />
         <parent link="world" />
         <child link="base_link" />
     </joint>
-    
+
     <link name="arm_holder_link">
         <visual>
             <material name="gray" />
@@ -67,16 +145,77 @@
         <child link="arm_holder_link" />
     </joint>
 
+    -->
+
 
 <!-- Arms -->
-    <xacro:xarm7_robot prefix="arm_right_" namespace="" limited="true" attach_to='arm_holder_link' xyz="${-arm_width / 2} ${arm_y_offset} 0.0" rpy="0 0 ${-pi/4}" />
-    
+    <xacro:xarm7_robot prefix="arm_right_" namespace="" limited="false" attach_to='arm_holder_link' xyz="${-arm_width / 2} ${arm_y_offset} 0.0" rpy="0 0 ${-pi/4}" />
 
-    <xacro:xarm7_robot prefix="arm_left_" namespace="" limited="true" attach_to='arm_holder_link' xyz="${arm_width / 2} ${arm_y_offset} 0.0" rpy="0 0 ${-3*pi/4}" />
+    <xacro:xarm7_robot prefix="arm_left_" namespace="" limited="false" attach_to='arm_holder_link' xyz="${arm_width / 2} ${arm_y_offset} 0.0" rpy="0 0 ${-3*pi/4}" />
+
+
+<!-- FT-Sensors -->
+
+    <xacro:property name="ft_height" value="0.0222" />
+	<xacro:property name="ft_radius" value="0.04" />
+
+    <xacro:macro name="ft_and_gripper" params="prefix parent">
+
+        <link name="${prefix}_ft_link">
+            <visual>
+                <origin xyz="0 0 -${ft_height/2}" rpy="0 0 0" />
+                <material name="gray" />
+                <geometry>
+                    <cylinder radius="${ft_radius}" length="${ft_height}" />
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0 0 -${ft_height/2}" rpy="0 0 0" />
+                <material name="gray" />
+                <geometry>
+                    <cylinder radius="${ft_radius}" length="${ft_height}" />
+                </geometry>
+            </collision>
+        </link>
+        <joint name="${prefix}_ft_joint" type="fixed">
+            <origin xyz="0 0 ${ft_height}" rpy="0 0 0" />
+            <parent link="${parent}" />
+            <child link="${prefix}_ft_link" />
+        </joint>
+
+        <link name="${prefix}_gripper_link">
+            <visual>
+                <material name="gray" />
+                <origin xyz="0 0 -0.04" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://horti_description/meshes/gripper/softgripper_3finger_transform.stl" scale="0.001 0.001 0.001" />
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0 0 -0.04" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://horti_description/meshes/gripper/softgripper_3finger_transform.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}_gripper_joint" type="fixed">
+            <origin xyz="0 0 0.04" rpy="0 0 0" />
+            <parent link="${prefix}_ft_link" />
+            <child link="${prefix}_gripper_link" />
+        </joint>
+
+    </xacro:macro>
+
+
+    <xacro:ft_and_gripper prefix="arm_right" parent="arm_right_link7" />
+    <xacro:ft_and_gripper prefix="arm_left" parent="arm_left_link7" />
 
 
 <!-- Head -->
 	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='arm_holder_link' xyz="0 0 0.6" rpy=" 0 0 ${-pi/2}" />
+
+
 
 </xacro:macro>
 
