@@ -1,6 +1,26 @@
 <?xml version="1.0"?>
 <robot name="horti" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+    <xacro:macro name="capsule-collision" params="e1 e2 rad len rpy mid">
+		<collision>
+			<origin rpy="${rpy}" xyz="${e1}" />
+			<geometry>
+				<sphere radius="${rad}" />
+			</geometry>
+		</collision>
+		<collision>
+			<origin rpy="${rpy}" xyz="${mid}" />
+			<geometry>
+				<cylinder length="${len}" radius="${rad}" />
+			</geometry>
+		</collision>
+		<collision>
+			<origin rpy="${rpy}" xyz="${e2}" />
+			<geometry>
+				<sphere radius="${rad}" />
+			</geometry>
+		</collision>
+	</xacro:macro>
 
     <xacro:macro name="horti_bot" params="limited:='false' effort_control:='false' enable_d435i:='true'">
 
@@ -34,7 +54,7 @@
     <xacro:property name="holder_width" value="0.32" />
     <xacro:property name="holder_height" value="0.1" />
     <xacro:property name="arm_width" value="0.6" />
-    <xacro:property name="arm_y_offset" value="0.08" />
+    <xacro:property name="arm_y_offset" value="0.0" />
 
 
 	<link name="trolley_base_link">
@@ -101,6 +121,27 @@
         <child link="arm_holder_link" />
     </joint>
 
+    <xacro:property name="back_height" value="1.5" />
+    <link name="trolley_back_link">
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 0 ${back_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${holder_length} 0.001 ${back_height}" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 ${back_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${holder_length} 0.001 ${back_height}" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="trolley_back_joint" type="fixed" >
+        <origin xyz="${-holder_length / 2} ${holder_width / 2 + 0.08} 0" rpy="0 0 0" />
+        <parent link="trolley_platform_link" />
+        <child link="trolley_back_link" />
+    </joint>
 
 
 
@@ -149,9 +190,50 @@
 
 
 <!-- Arms -->
-    <xacro:xarm7_robot prefix="arm_right_" namespace="" limited="false" attach_to='arm_holder_link' xyz="${-arm_width / 2} ${arm_y_offset} 0.0" rpy="0 0 ${-pi/4}" />
 
-    <xacro:xarm7_robot prefix="arm_left_" namespace="" limited="false" attach_to='arm_holder_link' xyz="${arm_width / 2} ${arm_y_offset} 0.0" rpy="0 0 ${-3*pi/4}" />
+
+    <link name="arm_mount_x_link" />
+    <joint name="arm_mount_x_joint" type="prismatic" >
+        <origin xyz="${-arm_width / 2} ${arm_y_offset} 0.0" rpy="0 0 ${-pi/2}" />
+        <parent link="arm_holder_link" />
+        <child link="arm_mount_x_link" />
+        <axis xyz="1 0 0"/>
+        <limit upper="0.2" lower="-0.2" effort="1000" velocity="1000.00"/>
+    </joint>
+
+    <link name="arm_mount_y_link" />
+    <joint name="arm_mount_y_joint" type="prismatic" >
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="arm_mount_x_link" />
+        <child link="arm_mount_y_link" />
+        <axis xyz="0 1 0"/>
+        <limit upper="0.2" lower="-0.2" effort="1000" velocity="1000.00"/>
+    </joint>
+
+    <link name="arm_mount_pitch_link" />
+    <joint name="arm_mount_pitch_joint" type="revolute" >
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="arm_mount_y_link" />
+        <child link="arm_mount_pitch_link" />
+        <axis xyz="0 1 0"/>
+        <limit upper="${pi}" lower="${-pi}" effort="1000" velocity="1000.00"/>
+    </joint>
+
+    <link name="arm_mount_roll_link" />
+    <joint name="arm_mount_roll_joint" type="revolute" >
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="arm_mount_pitch_link" />
+        <child link="arm_mount_roll_link" />
+        <axis xyz="1 0 0"/>
+        <limit upper="${pi}" lower="${-pi}" effort="1000" velocity="1000.00"/>
+    </joint>
+
+
+
+
+    <xacro:xarm7_robot prefix="arm_right_" namespace="" limited="false" attach_to='arm_mount_roll_link' xyz="0 0 0.0" rpy="0 ${15 * pi / 180.0} 0" />
+
+    <xacro:xarm7_robot prefix="arm_left_" namespace="" limited="false" attach_to='arm_holder_link' xyz="${arm_width / 2} ${arm_y_offset} 0.0" rpy="0 ${15 * pi / 180.0} ${-pi/2}" />
 
 
 <!-- FT-Sensors -->
@@ -166,6 +248,7 @@
                 <origin xyz="0 0 -${ft_height/2}" rpy="0 0 0" />
                 <material name="gray" />
                 <geometry>
+
                     <cylinder radius="${ft_radius}" length="${ft_height}" />
                 </geometry>
             </visual>
@@ -182,38 +265,107 @@
             <parent link="${parent}" />
             <child link="${prefix}_ft_link" />
         </joint>
-
-        <link name="${prefix}_gripper_link">
-            <visual>
-                <material name="gray" />
-                <origin xyz="0 0 -0.04" rpy="0 0 0" />
-                <geometry>
-                    <mesh filename="package://horti_description/meshes/gripper/softgripper_3finger_transform.stl" scale="0.001 0.001 0.001" />
-                </geometry>
-            </visual>
-            <collision>
-                <origin xyz="0 0 -0.04" rpy="0 0 0" />
-                <geometry>
-                    <mesh filename="package://horti_description/meshes/gripper/softgripper_3finger_transform.stl" scale="0.001 0.001 0.001"/>
-                </geometry>
-            </collision>
-        </link>
-
-        <joint name="${prefix}_gripper_joint" type="fixed">
-            <origin xyz="0 0 0.04" rpy="0 0 0" />
-            <parent link="${prefix}_ft_link" />
-            <child link="${prefix}_gripper_link" />
-        </joint>
-
     </xacro:macro>
-
 
     <xacro:ft_and_gripper prefix="arm_right" parent="arm_right_link7" />
     <xacro:ft_and_gripper prefix="arm_left" parent="arm_left_link7" />
 
+    <!-- right gripper & eef link -->
+
+    <link name="arm_right_gripper_link">
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 0 0.0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/gripper/4Finger_visual.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+    <!--<collision>
+            <origin xyz="0 0 -0.04" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/gripper/4Finger_collision.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>-->
+        <xacro:capsule-collision e1="-0.000373856 -0.00111577 0.05043" e2="1.2756e-05 0.000562519 0.00209387" rad="0.048421797225357054" len="0.048366796323702978" rpy="-3.10689 0.00799342 -0.452684" mid="-0.00018055 -0.000276625 0.0262619" />
+    </link>
+
+    <joint name="arm_right_gripper_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="arm_right_ft_link" />
+        <child link="arm_right_gripper_link" />
+    </joint>
+
+    <link name="arm_right_eef_link" />
+    <joint name="arm_right_eef_joint" type="fixed" >
+        <origin xyz="0 0 0.04" rpy="0 0 0" />
+        <parent link="arm_right_gripper_link" />
+        <child link="arm_right_eef_link" />
+    </joint>
+
+
+    <!-- left gripper & eef link -->
+
+    <xacro:property name="cylinder_length" value="0.1" />
+
+    <link name="arm_left_gripper_link">
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 0 ${cylinder_length / 2}" rpy="0 0 0" />
+            <geometry>
+                <cylinder length="${cylinder_length}" radius="0.03" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 ${cylinder_length / 2}" rpy="0 0 0" />
+            <geometry>
+                <cylinder length="${cylinder_length}" radius="0.03" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="arm_left_gripper_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="arm_left_ft_link" />
+        <child link="arm_left_gripper_link" />
+    </joint>
+
+    <link name="arm_left_eef_link" />
+    <joint name="arm_left_eef_joint" type="fixed" >
+        <origin xyz="0 0 ${cylinder_length}" rpy="0 0 0" />
+        <parent link="arm_left_gripper_link" />
+        <child link="arm_left_eef_link" />
+    </joint>
+
+
+
+
 
 <!-- Head -->
-	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='arm_holder_link' xyz="0 0 0.6" rpy=" 0 0 ${-pi/2}" />
+    <xacro:property name="head_height" value="0.4" />
+    <xacro:property name="head_mount_width" value="0.15" />
+
+    <link name="head_mount_link" >
+        <visual>
+        <material name="gray" />
+        <origin xyz="0 0 ${-head_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${head_mount_width} ${head_mount_width} ${head_height}" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 ${-head_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${head_mount_width} ${head_mount_width} ${head_height}" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="head_mount_joint" type="fixed" >
+        <origin xyz="0 0.1 ${head_height}" rpy="0 0 ${-pi/2}" />
+        <parent link="arm_holder_link" />
+        <child link="head_mount_link" />
+    </joint>
+
+	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='head_mount_link' xyz="0 0.0 0.0" rpy=" 0 ${45*pi / 180.0} 0" />
 
 
 
