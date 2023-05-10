@@ -173,7 +173,8 @@
     <disable_collisions link1="arm_left_ft_link" link2="arm_left_gripper_link" reason="Adjacent"/>
     <disable_collisions link1="arm_left_link7" link2="arm_left_gripper_link" reason="Adjacent"/>
 
-
+    <disable_collisions link1="trolley_base_link" link2="power_link" reason="Adjacent"/>
+    <disable_collisions link1="trolley_base_link" link2="base_control_link" reason="Adjacent"/>
 
 
     <disable_collisions link1="trolley_platform_link" link2="arm_left_link_base" reason="Adjacent" />
