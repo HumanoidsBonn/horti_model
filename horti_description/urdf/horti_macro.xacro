@@ -50,11 +50,11 @@
 
     <!-- Trolley -->
 
-    <xacro:property name="holder_length" value="1.3" />
-    <xacro:property name="holder_width" value="0.32" />
-    <xacro:property name="holder_height" value="0.1" />
-    <xacro:property name="arm_width" value="0.6" />
-    <xacro:property name="arm_y_offset" value="0.0" />
+    <xacro:property name="holder_length" value="1.44" />
+    <xacro:property name="holder_width" value="0.42" />
+    <xacro:property name="holder_height" value="0.03" />
+    <xacro:property name="arm_width" value="0.7" />
+    <xacro:property name="arm_y_offset" value="-0.1" />
 
 
 	<link name="trolley_base_link">
@@ -94,7 +94,8 @@
 	<joint name="trolley_platform_joint" type="prismatic">
 		<parent link="trolley_base_link" />
 		<child link="trolley_platform_link" />
-        <origin xyz="0.025734 0.000458 0.469001" rpy="0 0 0"/>
+<!--         <origin xyz="0.025734 0.000458 0.469001" rpy="0 0 0"/> -->
+        <origin xyz="0.0 0.0 0.469001" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
         <limit upper="2.2" lower="0" effort="1000" velocity="1000.00"/>
 	</joint>
@@ -116,7 +117,7 @@
         </collision>
     </link>
     <joint name="arm_holder_joint" type="fixed" >
-        <origin xyz="${-holder_length / 2 - 0.1} 0 ${holder_height}" rpy="0 0 0" />
+        <origin xyz="${-holder_length / 2} 0 ${holder_height+0.05}" rpy="0 0 0" />
         <parent link="trolley_platform_link" />
         <child link="arm_holder_link" />
     </joint>
@@ -138,9 +139,84 @@
         </collision>
     </link>
     <joint name="trolley_back_joint" type="fixed" >
-        <origin xyz="${-holder_length / 2} ${holder_width / 2 + 0.08} 0" rpy="0 0 0" />
+        <origin xyz="${-holder_length / 2} ${holder_width / 2 + 0.1} 0" rpy="0 0 0" />
         <parent link="trolley_platform_link" />
         <child link="trolley_back_link" />
+    </joint>
+
+
+    <xacro:property name="power_height" value="0.35" />
+    <xacro:property name="power_width" value="0.10" />
+    <xacro:property name="power_length" value="0.45" />
+    <link name="power_link" >
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 ${-power_width / 2} ${power_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${power_length} ${power_width} ${power_height}" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 ${-power_width / 2} ${power_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${power_length} ${power_width} ${power_height}" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="power_joint" type="fixed">
+        <parent link="trolley_base_link"/>
+        <child link="power_link" />
+        <origin xyz="${-1.44 / 2} ${-0.42 / 2 - 0.01} 0.18" rpy="0 0 0" />
+    </joint>
+
+
+    <xacro:property name="base_control_height" value="0.12" />
+    <xacro:property name="base_control_width" value="0.15" />
+    <xacro:property name="base_control_length" value="0.3" />
+    <link name="base_control_link" >
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 ${-base_control_width / 2} ${base_control_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${base_control_length} ${base_control_width} ${base_control_height}" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 ${-base_control_width / 2} ${base_control_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${base_control_length} ${base_control_width} ${base_control_height}" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="base_control_joint" type="fixed">
+        <parent link="trolley_base_link"/>
+        <child link="base_control_link" />
+        <origin xyz="${-1.44 / 2 + 0.5} ${-0.42 / 2 - 0.01} 0.18" rpy="0 0 0" />
+    </joint>
+
+
+    <xacro:property name="basket_height" value="0.15" />
+    <xacro:property name="basket_width" value="0.15" />
+    <xacro:property name="basket_length" value="0.4" />
+    <link name="basket_link" >
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 0 ${basket_height / 2 + 0.04}" rpy="0 0 0" />
+            <geometry>
+                <box size="${basket_length} ${basket_width} ${basket_height}" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 ${basket_height / 2 + 0.04}" rpy="0 0 0" />
+            <geometry>
+                <box size="${basket_length} ${basket_width} ${basket_height}" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="basket_joint" type="fixed">
+        <parent link="trolley_platform_link"/>
+        <child link="basket_link" />
+        <origin xyz="${-1.44 + basket_length / 2} ${-0.42 / 2 - 0.01 - basket_width / 2} 0.14" rpy="${pi} 0 0" />
     </joint>
 
 
@@ -192,7 +268,7 @@
 <!-- Arms -->
 
 
-    <link name="arm_mount_x_link" />
+    <!--<link name="arm_mount_x_link" />
     <joint name="arm_mount_x_joint" type="prismatic" >
         <origin xyz="${-arm_width / 2} ${arm_y_offset} 0.0" rpy="0 0 ${-pi/2}" />
         <parent link="arm_holder_link" />
@@ -226,14 +302,14 @@
         <child link="arm_mount_roll_link" />
         <axis xyz="1 0 0"/>
         <limit upper="${pi}" lower="${-pi}" effort="1000" velocity="1000.00"/>
-    </joint>
+    </joint>-->
 
 
 
 
-    <xacro:xarm7_robot prefix="arm_right_" namespace="" limited="false" attach_to='arm_mount_roll_link' xyz="0 0 0.0" rpy="0 ${15 * pi / 180.0} 0" />
+    <xacro:xarm7_robot prefix="arm_right_" namespace="" limited="false" attach_to='arm_holder_link' xyz="${-arm_width / 2} ${arm_y_offset} 0.0" rpy="0 0 ${-pi/2}" />
 
-    <xacro:xarm7_robot prefix="arm_left_" namespace="" limited="false" attach_to='arm_holder_link' xyz="${arm_width / 2} ${arm_y_offset} 0.0" rpy="0 ${15 * pi / 180.0} ${-pi/2}" />
+    <xacro:xarm7_robot prefix="arm_left_" namespace="" limited="false" attach_to='arm_holder_link' xyz="${arm_width / 2} ${arm_y_offset} 0.0" rpy="0 ${0 * pi / 180.0} ${-pi/2}" />
 
 
 <!-- FT-Sensors -->
@@ -297,7 +373,7 @@
 
     <link name="arm_right_eef_link" />
     <joint name="arm_right_eef_joint" type="fixed" >
-        <origin xyz="0 0 0.04" rpy="0 0 0" />
+        <origin xyz="0 0 0.08" rpy="0 0 0" />
         <parent link="arm_right_gripper_link" />
         <child link="arm_right_eef_link" />
     </joint>
@@ -360,12 +436,12 @@
         </collision>
     </link>
     <joint name="head_mount_joint" type="fixed" >
-        <origin xyz="0 0.1 ${head_height}" rpy="0 0 ${-pi/2}" />
+        <origin xyz="0 0.08 ${head_height}" rpy="0 0 ${-pi/2}" />
         <parent link="arm_holder_link" />
         <child link="head_mount_link" />
     </joint>
 
-	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='head_mount_link' xyz="0 0.0 0.0" rpy=" 0 ${45*pi / 180.0} 0" />
+	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='head_mount_link' xyz="0 0.0 0.0" rpy=" 0 ${30*pi / 180.0} 0" />
 
 
 
