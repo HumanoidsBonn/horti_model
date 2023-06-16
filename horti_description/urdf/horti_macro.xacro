@@ -139,7 +139,7 @@
         </collision>
     </link>
     <joint name="trolley_back_joint" type="fixed" >
-        <origin xyz="${-holder_length / 2} ${holder_width / 2 + 0.1} 0" rpy="0 0 0" />
+        <origin xyz="${-holder_length / 2} ${holder_width / 2 + 0.05} 0" rpy="0 0 0" />
         <parent link="trolley_platform_link" />
         <child link="trolley_back_link" />
     </joint>
@@ -366,7 +366,7 @@
     </link>
 
     <joint name="arm_right_gripper_joint" type="fixed">
-        <origin xyz="0 0 0" rpy="0 0 0" />
+        <origin xyz="0 0 0" rpy="0 0 ${-pi/4}" />
         <parent link="arm_right_ft_link" />
         <child link="arm_right_gripper_link" />
     </joint>
