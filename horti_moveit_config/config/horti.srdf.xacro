@@ -42,12 +42,12 @@
       <link name="head_link_eef" />
     </group>
 
-    <group name="workspace" >
+<!--    <group name="workspace" >
         <joint name="arm_mount_x_joint" />
         <joint name="arm_mount_y_joint" />
         <joint name="arm_mount_pitch_joint" />
         <joint name="arm_mount_roll_joint" />
-    </group>
+    </group>-->
 
     <group name="left_eef">
         <link name="arm_left_eef_link" />
@@ -101,7 +101,7 @@
 
     <group_state name="init" group="head">
       <joint name="head_joint1" value="0"/>
-      <joint name="head_joint2" value="0"/>
+      <joint name="head_joint2" value="-1.3"/>
       <joint name="head_joint3" value="0.5"/>
       <joint name="head_joint4" value="0"/>
       <joint name="head_joint5" value="0"/>
@@ -150,6 +150,14 @@
       <joint name="arm_left_joint7" value="0"/>
     </group_state>
 
+    <group_state name="workspace" group="head">
+      <joint name="head_joint1" value="0"/>
+      <joint name="head_joint2" value="-1.30"/>
+      <joint name="head_joint3" value="0.5"/>
+      <joint name="head_joint4" value="0"/>
+      <joint name="head_joint5" value="0"/>
+      <joint name="head_joint6" value="0"/>
+    </group_state>
 
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
 
