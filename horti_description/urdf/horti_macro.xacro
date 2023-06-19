@@ -220,92 +220,14 @@
     </joint>
 
 
-
-<!--
-
-    <xacro:property name="holder_length" value="1.3" />
-    <xacro:property name="holder_width" value="0.32" />
-    <xacro:property name="holder_height" value="0.1" />
-    <xacro:property name="arm_width" value="0.9" />
-    <xacro:property name="arm_y_offset" value="0.08" />
-
-    <xacro:trollomatic enable_collisions="false" enable_inertia="false" joint_type="fixed"/>
-    <joint name="base_link_joint" type="fixed" >
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <parent link="world" />
-        <child link="base_link" />
+    <link name="trolley_local_link" />
+    <joint name="trolley_local_joint" type="fixed" >
+        <origin xyz="0 0 0" rpy="0 0 ${pi}" />
+        <parent link="trolley_platform_link" />
+        <child link="trolley_local_link" />
     </joint>
-
-    <link name="arm_holder_link">
-        <visual>
-            <material name="gray" />
-            <origin xyz="0 0 -${holder_height / 2}" rpy="0 0 0" />
-            <geometry>
-                <box size="${holder_length} ${holder_width} ${holder_height}" />
-            </geometry>
-        </visual>
-        <collision>
-            <origin xyz="0 0 -${holder_height / 2}" rpy="0 0 0" />
-            <geometry>
-                <box size="${holder_length} ${holder_width} ${holder_height}" />
-            </geometry>
-        </collision>
-        <inertial>
-            <mass value="5.0" />
-            <origin rpy="0 0 0" xyz="0.0 0.0 0.00" />
-            <inertia ixx="0.000468" iyy="0.007" izz="0.075" ixy="0.0" ixz="0.0" iyz="0.0" />
-        </inertial>
-    </link>
-    <joint name="arm_holder_joint" type="fixed" >
-        <origin xyz="${holder_length/2} 0 ${holder_height}" rpy="0 0 ${pi}" />
-        <parent link="platform_base" />
-        <child link="arm_holder_link" />
-    </joint>
-
-    -->
-
 
 <!-- Arms -->
-
-
-    <!--<link name="arm_mount_x_link" />
-    <joint name="arm_mount_x_joint" type="prismatic" >
-        <origin xyz="${-arm_width / 2} ${arm_y_offset} 0.0" rpy="0 0 ${-pi/2}" />
-        <parent link="arm_holder_link" />
-        <child link="arm_mount_x_link" />
-        <axis xyz="1 0 0"/>
-        <limit upper="0.2" lower="-0.2" effort="1000" velocity="1000.00"/>
-    </joint>
-
-    <link name="arm_mount_y_link" />
-    <joint name="arm_mount_y_joint" type="prismatic" >
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <parent link="arm_mount_x_link" />
-        <child link="arm_mount_y_link" />
-        <axis xyz="0 1 0"/>
-        <limit upper="0.2" lower="-0.2" effort="1000" velocity="1000.00"/>
-    </joint>
-
-    <link name="arm_mount_pitch_link" />
-    <joint name="arm_mount_pitch_joint" type="revolute" >
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <parent link="arm_mount_y_link" />
-        <child link="arm_mount_pitch_link" />
-        <axis xyz="0 1 0"/>
-        <limit upper="${pi}" lower="${-pi}" effort="1000" velocity="1000.00"/>
-    </joint>
-
-    <link name="arm_mount_roll_link" />
-    <joint name="arm_mount_roll_joint" type="revolute" >
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <parent link="arm_mount_pitch_link" />
-        <child link="arm_mount_roll_link" />
-        <axis xyz="1 0 0"/>
-        <limit upper="${pi}" lower="${-pi}" effort="1000" velocity="1000.00"/>
-    </joint>-->
-
-
-
 
     <xacro:xarm7_robot prefix="arm_right_" namespace="" limited="false" attach_to='arm_holder_link' xyz="${-arm_width / 2} ${arm_y_offset} 0.0" rpy="0 0 ${-pi/2}" />
 
