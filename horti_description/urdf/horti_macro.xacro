@@ -444,6 +444,47 @@
 	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='head_mount_link' xyz="0 0.0 0.0" rpy=" 0 ${30*pi / 180.0} 0" />
 
 
+    <link name="zed2i_holder_link">
+        <visual>
+        <material name="gray" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/camera/ZED2i_adaptor.STL" />
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/camera/ZED2i_adaptor.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="zed2i_holder_joint" type="fixed" >
+        <origin xyz="0 0 0" rpy="0 0 ${pi/4}" />
+        <parent link="head_link_eef" />
+        <child link="zed2i_holder_link" />
+    </joint>
+
+    <link name="zed2i_link">
+        <visual>
+        <material name="gray" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/camera/zed2i.stl" />
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/camera/zed2i.stl" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="zed2i_joint" type="fixed" >
+        <!-- transform estimated -->
+        <origin xyz="0 0 0.044" rpy="${pi} ${-pi/2} 0" />
+        <parent link="zed2i_holder_link" />
+        <child link="zed2i_link" />
+    </joint>
+
 
 </xacro:macro>
 
