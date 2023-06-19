@@ -41,11 +41,39 @@
       </geometry>
       <material name="White" />
     </visual>
+    
+    <!-- Original
     <collision>
         <geometry>
+            
             <mesh filename="package://horti_description/meshes/xarm7/collision/link_base_collision.STL" />
+
+            
         </geometry>
     </collision>
+    -->
+    
+    <collision>
+        <origin xyz="0.0 0.0 0.05" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="0.05"/>
+        </geometry>
+    </collision>
+        
+    <collision>
+        <origin xyz="0.0 0.0 0.15" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="0.05"/>
+        </geometry>
+    </collision>
+    
+    <collision>
+        <origin xyz="0.0 0.0 0.25" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="0.05"/>
+        </geometry>
+    </collision>
+        
     <!--<xacro:capsule-collision e1="-0.000213989 -2.89319e-05 0.0883932" e2="-0.0129459 0.000484928 0.0317038" rad="0.081895279580145044" len="0.058103800326894536" rpy="-3.13253 -0.220917 3.05991" mid="-0.00657996 0.000227998 0.0600485" />-->
   </link>
   <link
@@ -128,11 +156,29 @@
       </geometry>
       <material name="White" />
     </visual>
+    
+    <!-- Original
     <collision>
         <geometry>
             <mesh filename="package://horti_description/meshes/xarm7/collision/link2_collision.STL" />
         </geometry>
     </collision>
+    -->
+    
+    <collision>
+        <origin xyz="0.0 -0.1 0.08" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="0.05"/>
+        </geometry>
+    </collision>
+    
+    <collision>
+        <origin xyz="0.0 0.0 0.08" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="0.05"/>
+        </geometry>
+    </collision>
+    
     <!--<xacro:capsule-collision e1="-3.45385e-05 -0.139089 0.0179407" e2="-0.000544098 -0.0320002 0.0843023" rad="0.079891635947292372" len="0.12598468896291548" rpy="-1.01603 -0.00404463 0.00225186" mid="-0.000289318 -0.0855446 0.0511215" />-->
   </link>
   <joint
@@ -290,11 +336,29 @@
       </geometry>
       <material name="White" />
     </visual>
+    
+    <!-- Original
     <collision>
         <geometry>
             <mesh filename="package://horti_description/meshes/xarm7/collision/link5_collision.STL" />
         </geometry>
     </collision>
+    -->
+    
+    <collision>
+        <origin xyz="0.0 0.05 0.0" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="0.04"/>
+        </geometry>
+    </collision>
+    
+    <collision>
+        <origin xyz="0.0 0.04 -0.08" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="0.04"/>
+        </geometry>
+    </collision>
+    
     <!--<xacro:capsule-collision e1="-5.45282e-06 0.0461016 -4.23804e-05" e2="-0.000793873 0.00857662 -0.149905" rad="0.055896945982555783" len="0.15449161327345248" rpy="2.89624 -0.00510334 -0.0413857" mid="-0.000399663 0.0273391 -0.0749739" />-->
   </link>
   <joint
@@ -344,11 +408,29 @@
       </geometry>
       <material name="White" />
     </visual>
+    
+    <!-- Original
     <collision>
         <geometry>
             <mesh filename="package://horti_description/meshes/xarm7/collision/link6_collision.STL" />
         </geometry>
     </collision>
+    -->
+    
+    <collision>
+        <origin xyz="0.0 0.0 0.01" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="0.04"/>
+        </geometry>
+    </collision>
+    
+    <collision>
+        <origin xyz="0.08 0.0 0.01" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="0.04"/>
+        </geometry>
+    </collision>
+    
     <!--<xacro:capsule-collision e1="0.0111499 0.000183831 0.0324818" e2="0.0764099 0.0203825 2.84729e-05" rad="0.061231144058150992" len="0.075631202198171668" rpy="-2.58487 1.04092 -2.21655" mid="0.0437799 0.0102832 0.0162552" />-->
   </link>
   <joint
@@ -398,6 +480,14 @@
       </geometry>
       <material name="Silver" />
     </visual>
+    
+    <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="0.05"/>
+        </geometry>
+    </collision>
+    
     <xacro:capsule-collision e1="-3.36121e-05 0.00432082 -0.0135414" e2="7.3351e-05 -0.0128869 -0.013647" rad="0.043332136325713658" len="0.017208420106763666" rpy="1.57693 0.00621578 0.00625404" mid="1.98694e-05 -0.00428306 -0.0135942" />
   </link>
   <joint
