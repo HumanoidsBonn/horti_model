@@ -105,7 +105,7 @@
       <joint name="head_joint3" value="0.5"/>
       <joint name="head_joint4" value="0"/>
       <joint name="head_joint5" value="0"/>
-      <joint name="head_joint6" value="0"/>
+      <joint name="head_joint6" value="-0.785"/>
     </group_state>
 
 
@@ -236,6 +236,9 @@
     <disable_collisions link1="head_link4" link2="head_link5" reason="Adjacent" />
     <disable_collisions link1="head_link5" link2="head_link6" reason="Adjacent" />
     <disable_collisions link1="head_link4" link2="head_link6" reason="Adjacent" />
+
+    <disable_collisions link1="head_link6" link2="zed2i_holder_link" reason="Adjacent" />
+    <disable_collisions link1="zed2i_holder_link" link2="zed2i_link" reason="Adjacent" />
 
 
 </robot>
