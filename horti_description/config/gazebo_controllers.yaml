@@ -74,7 +74,7 @@ head_pos_traj_controller:
     - head_joint6
   constraints:
     goal_time: 0.6
-    stopped_velocity_tolerance: 0.05
+    stopped_velocity_tolerance: 0
     head_joint1: {trajectory: 0.1, goal: 0.1}
     head_joint2: {trajectory: 0.1, goal: 0.1}
     head_joint3: {trajectory: 0.1, goal: 0.1}
@@ -120,7 +120,6 @@ head_pos_joint_group_pos_controller:
 joint_group_pos_controller:
   type: position_controllers/JointGroupPositionController
   joints: 
-  #  - trolley_platform_joint
     - arm_right_joint1
     - arm_right_joint2
     - arm_right_joint3

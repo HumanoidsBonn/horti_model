@@ -1,4 +1,249 @@
-# Publish joint_states
 joint_state_controller:
   type: joint_state_controller/JointStateController
-  publish_rate: 50
+  publish_rate: &loop_hz 500
+
+left_arm_pos_joint_traj_controller:
+  type: position_controllers/JointTrajectoryController
+  joints: &arm_left_joints
+    - arm_left_joint1
+    - arm_left_joint2
+    - arm_left_joint3
+    - arm_left_joint4
+    - arm_left_joint5
+    - arm_left_joint6
+    - arm_left_joint7
+#   gains:
+#     arm_left_joint1:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     arm_left_joint2:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     arm_left_joint3:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     arm_left_joint4:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     arm_left_joint5:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     arm_left_joint6:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     arm_left_joint7:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+right_arm_pos_joint_traj_controller:
+  type: position_controllers/JointTrajectoryController
+  joints: &right_arm_joints
+    - arm_right_joint1
+    - arm_right_joint2
+    - arm_right_joint3
+    - arm_right_joint4
+    - arm_right_joint5
+    - arm_right_joint6
+    - arm_right_joint7
+#   gains:
+#     arm_right_joint1:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     arm_right_joint2:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     arm_right_joint3:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     arm_right_joint4:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     arm_right_joint5:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     arm_right_joint6:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+#     arm_right_joint7:
+#       p: 100
+#       d: 1
+#       i: 1
+#       i_clamp: 1
+head_pos_joint_traj_controller:
+  type: position_controllers/JointTrajectoryController
+  joints: &head_joints
+    - head_joint1
+    - head_joint2
+    - head_joint3
+    - head_joint4
+    - head_joint5
+    - head_joint6
+  constraints:
+      # vel_tolerance is 0 for due to the movegroup/follow_joint_trajectory/goal tolerance is empty
+      stopped_velocity_tolerance: 0 
+      head_joint1: {trajectory: 0.1, goal: 0.1}
+      head_joint2: {trajectory: 0.1, goal: 0.36}
+      head_joint3: {trajectory: 0.1, goal: 0.1}
+      head_joint4: {trajectory: 0.1, goal: 0.1}
+      head_joint5: {trajectory: 0.1, goal: 0.1}
+      head_joint6: {trajectory: 0.1, goal: 0.1}
+  # gains:
+  #   head_joint1:
+  #     p: 100
+  #     d: 1
+  #     i: 1
+  #     i_clamp: 1
+  #   head_joint2:
+  #     p: 100
+  #     d: 1
+  #     i: 1
+  #     i_clamp: 1
+  #   head_joint3:
+  #     p: 100
+  #     d: 1
+  #     i: 1
+  #     i_clamp: 1
+  #   head_joint4:
+  #     p: 100
+  #     d: 1
+  #     i: 1
+  #     i_clamp: 1
+  #   head_joint5:
+  #     p: 100
+  #     d: 1
+  #     i: 1
+  #     i_clamp: 1
+  #   head_joint6:
+  #     p: 100
+  #     d: 1
+  #     i: 1
+  #     i_clamp: 1
+  stop_trajectory_duration: 0.5
+  state_publish_rate:  25
+  action_monitor_rate: 10
+dual_arm_pos_joint_traj_controller:
+  type: position_controllers/JointTrajectoryController
+  joints: &dual_arm_joints
+    - arm_left_joint1
+    - arm_left_joint2
+    - arm_left_joint3
+    - arm_left_joint4
+    - arm_left_joint5
+    - arm_left_joint6
+    - arm_left_joint7
+    - arm_right_joint1
+    - arm_right_joint2
+    - arm_right_joint3
+    - arm_right_joint4
+    - arm_right_joint5
+    - arm_right_joint6
+    - arm_right_joint7
+  gains:
+    arm_left_joint1:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    arm_left_joint2:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    arm_left_joint3:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    arm_left_joint4:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    arm_left_joint5:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    arm_left_joint6:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    arm_left_joint7:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    arm_right_joint1:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    arm_right_joint2:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    arm_right_joint3:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    arm_right_joint4:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    arm_right_joint5:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    arm_right_joint6:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    arm_right_joint7:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+
+left_arm_pos_joint_group_pos_controller:
+  type: position_controllers/JointGroupPositionController
+  joints: *arm_left_joints
+right_arm_pos_joint_group_pos_controller:
+  type: position_controllers/JointGroupPositionController
+  joints: *arm_right_joints
+head_pos_joint_group_pos_controller:
+  type: position_controllers/JointGroupPositionController
+  joints: *head_joints
+dual_arm_pos_joint_group_pos_controller:
+  type: position_controllers/JointGroupPositionController
+  joints: *dual_arm_joints
