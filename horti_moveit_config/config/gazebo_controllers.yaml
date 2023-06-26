@@ -2,7 +2,7 @@ joint_state_controller:
   type: joint_state_controller/JointStateController
   publish_rate: &loop_hz 500
 
-left_arm_pos_joint_traj_controller:
+arm_left_controller:
   type: position_controllers/JointTrajectoryController
   joints: &arm_left_joints
     - arm_left_joint1
@@ -48,7 +48,7 @@ left_arm_pos_joint_traj_controller:
 #       d: 1
 #       i: 1
 #       i_clamp: 1
-right_arm_pos_joint_traj_controller:
+arm_right_controller:
   type: position_controllers/JointTrajectoryController
   joints: &right_arm_joints
     - arm_right_joint1
@@ -94,7 +94,7 @@ right_arm_pos_joint_traj_controller:
 #       d: 1
 #       i: 1
 #       i_clamp: 1
-head_pos_joint_traj_controller:
+head_controller:
   type: position_controllers/JointTrajectoryController
   joints: &head_joints
     - head_joint1

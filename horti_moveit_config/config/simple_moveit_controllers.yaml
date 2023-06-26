@@ -36,7 +36,7 @@ joint_state_controller:
   type: joint_state_controller/JointStateController
   publish_rate: 50
 controller_list:
-- name: "left_arm_pos_joint_traj_controller"
+- name: "arm_left_controller"
   action_ns: follow_joint_trajectory
   type: FollowJointTrajectory
   joints:
@@ -47,7 +47,7 @@ controller_list:
     - arm_left_joint5
     - arm_left_joint6
     - arm_left_joint7
-- name: "right_arm_pos_joint_traj_controller"
+- name: "arm_right_controller"
   action_ns: follow_joint_trajectory
   type: FollowJointTrajectory
   joints:
@@ -59,7 +59,7 @@ controller_list:
     - arm_right_joint6
     - arm_right_joint7
     
-- name: "head_pos_joint_traj_controller"
+- name: "head_controller"
   action_ns: follow_joint_trajectory
   type: FollowJointTrajectory
   joints:

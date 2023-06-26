@@ -168,12 +168,12 @@
                 <box size="${basket_length} ${basket_width} ${basket_height}" />
             </geometry>
         </visual>
-        <collision>
+        <!-- <collision>
             <origin xyz="0 0 ${basket_height / 2 + 0.04}" rpy="0 0 0" />
             <geometry>
                 <box size="${basket_length} ${basket_width} ${basket_height}" />
             </geometry>
-        </collision>
+        </collision> -->
     </link>
     <joint name="basket_joint" type="fixed">
         <parent link="trolley_platform_link"/>

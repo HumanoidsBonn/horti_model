@@ -15,7 +15,7 @@ joint_state_controller:
 #   state_publish_rate: *loop_hz
 #   action_monitor_rate: 10
 
-right_arm_pos_joint_traj_controller:
+arm_right_controller:
   type: position_controllers/JointTrajectoryController
   joints: &right_arm_joints
     - arm_right_joint1
@@ -39,7 +39,7 @@ right_arm_pos_joint_traj_controller:
   state_publish_rate: *loop_hz
   action_monitor_rate: 10
 
-left_arm_pos_joint_traj_controller:
+arm_left_controller:
   type: position_controllers/JointTrajectoryController
   joints: &left_arm_joints
     - arm_left_joint1
@@ -63,7 +63,7 @@ left_arm_pos_joint_traj_controller:
   state_publish_rate: *loop_hz
   action_monitor_rate: 10  
 
-head_pos_traj_controller:
+head_controller:
   type: position_controllers/JointTrajectoryController
   joints: &head_joints
     - head_joint1
