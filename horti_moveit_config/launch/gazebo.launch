@@ -3,7 +3,7 @@
 <arg name="paused" default="true" doc="Starts Gazebo in paused mode" />
 	<arg name="gui" default="true" doc="Starts Gazebo gui" />
 	<arg name="world_path" default="$(find horti_description)/worlds" />
-	<arg name="world_name" default="world14" />
+	<arg name="world_name" default="world23" />
 	<arg name="gazebo_model_name" default="robot" doc="The name to give to the model in Gazebo (after spawning it)." />
 	<arg name="robot_description_param_name" default="robot_description" doc="Name of the parameter which contains the robot description (ie: URDF) which should be spawned into Gazebo." />
 	<param name="robot_description" command="$(find xacro)/xacro '$(find horti_description)/urdf/horti.gazebo.urdf.xacro'" />
@@ -16,7 +16,21 @@
     args="
       -urdf
       -param $(arg robot_description_param_name)
-      -model $(arg gazebo_model_name)"
+      -model $(arg gazebo_model_name)
+      -J arm_left_joint1 1.7
+      -J arm_left_joint2 -0.28
+      -J arm_left_joint3 0.0
+      -J arm_left_joint4 0.1
+      -J arm_left_joint5 0.0
+      -J arm_left_joint6 0.6
+      -J arm_left_joint7 0.0
+      -J arm_right_joint1 0.0
+      -J arm_right_joint2 -0.2
+      -J arm_right_joint3 0.0
+      -J arm_right_joint4 0.15
+      -J arm_right_joint5 0.0
+      -J arm_right_joint6 0.6
+      -J arm_right_joint7 0.0"
     output="screen" respawn="false" />
 
   <!-- startup simulated world -->

@@ -9,7 +9,7 @@
     <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
     <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
-    <group name="left_arm">
+    <group name="arm_left">
         <joint name="arm_left_joint1"/>
         <joint name="arm_left_joint2"/>
         <joint name="arm_left_joint3"/>
@@ -20,7 +20,7 @@
         <joint name="arm_left_joint_eef"/>
         <chain base_link="arm_left_link_base" tip_link="arm_left_link_eef"/>
     </group>
-    <group name="right_arm">
+    <group name="arm_right">
         <joint name="arm_right_joint1"/>
         <joint name="arm_right_joint2"/>
         <joint name="arm_right_joint3"/>
@@ -74,9 +74,29 @@
         <joint name="head_joint6" value="0"/>
     </group_state>
 
+    <group_state name="init" group="arm_right">
+      <joint name="arm_right_joint1" value="0.0"/>
+      <joint name="arm_right_joint2" value="-0.2"/>
+      <joint name="arm_right_joint3" value="0"/>
+      <joint name="arm_right_joint4" value="0.15"/>
+      <joint name="arm_right_joint5" value="0"/>
+      <joint name="arm_right_joint6" value="-0.6"/>
+      <joint name="arm_right_joint7" value="0"/>
+    </group_state>
+
+    <group_state name="init" group="arm_left">
+      <joint name="arm_left_joint1" value="1.7"/>
+      <joint name="arm_left_joint2" value="-0.28"/>
+      <joint name="arm_left_joint3" value="0"/>
+      <joint name="arm_left_joint4" value="0.1"/>
+      <joint name="arm_left_joint5" value="0"/>
+      <joint name="arm_left_joint6" value="0.6"/>
+      <joint name="arm_left_joint7" value="0"/>
+    </group_state>
+
     <group name="dual_arm">
-        <group name="left_arm"/>
-        <group name="right_arm"/>
+        <group name="arm_left"/>
+        <group name="arm_right"/>
     </group>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="arm_holder_link" link2="arm_left_link1" reason="Never"/>
