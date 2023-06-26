@@ -49,7 +49,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_description/meshes/xarm7/visual/link_base.STL" />
+          filename="package://horti_description/meshes/xarm7/collision/link_base_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -85,7 +85,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_description/meshes/xarm7/visual/link1.STL" />
+          filename="package://horti_description/meshes/xarm7/collision/link1_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -142,7 +142,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_description/meshes/xarm7/visual/link2.STL" />
+          filename="package://horti_description/meshes/xarm7/collision/link2_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -199,7 +199,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_description/meshes/xarm7/visual/link3.STL" />
+          filename="package://horti_description/meshes/xarm7/collision/link3_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -256,7 +256,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_description/meshes/xarm7/visual/link4.STL" />
+          filename="package://horti_description/meshes/xarm7/collision/link4_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -313,7 +313,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_description/meshes/xarm7/visual/link5.STL" />
+          filename="package://horti_description/meshes/xarm7/collision/link5_collision.STL" />
       </geometry>
     </collision>
   </link>
@@ -370,7 +370,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://horti_description/meshes/xarm7/visual/link6.STL" />
+          filename="package://horti_description/meshes/xarm7/collision/link6_collision.STL" />
       </geometry>
     </collision>
   </link>
