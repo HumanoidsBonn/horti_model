@@ -15,12 +15,12 @@
   #kinematics_solver_attempts: 1
 
 arm_left:
-  kinematics_solver: bio_ik/BioIKKinematicsPlugin
+  kinematics_solver: nimbro_ik::IKSolver
   kinematics_solver_search_resolution: 0.005
   kinematics_solver_timeout: 0.08
 arm_right:
-  kinematics_solver: bio_ik/BioIKKinematicsPlugin
+  kinematics_solver: nimbro_ik::IKSolver
   kinematics_solver_search_resolution: 0.005
 head:
-  kinematics_solver: bio_ik/BioIKKinematicsPlugin
+  kinematics_solver: nimbro_ik::IKSolver
   kinematics_solver_search_resolution: 0.005
