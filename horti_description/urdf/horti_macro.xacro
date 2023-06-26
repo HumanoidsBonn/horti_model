@@ -45,7 +45,7 @@
 
     <xacro:include filename="$(find horti_description)/urdf/inc/xarm/xarm7_robot_macro.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/inc/xarm/lite6_robot_macro.xacro" />
-    <!--xacro:include filename="$(find horti_description)/urdf/inc/trolley/trolley_macro_d435.xacro" /-->
+    <xacro:include filename="$(find horti_description)/urdf/inc/trolley/trolley_macro_d435.xacro" />
 
 
     <!-- Trolley -->
@@ -56,50 +56,12 @@
     <xacro:property name="arm_width" value="0.7" />
     <xacro:property name="arm_y_offset" value="-0.1" />
 
-
-	<link name="trolley_base_link">
-		<visual>
-			<material name="gray" />
-			<geometry>
-				<mesh filename="package://horti_description/meshes/trolley_base.stl" scale="0.001 0.001 0.001" />
-			</geometry>
-		</visual>
-		<collision>
-        <geometry>
-          <mesh filename="package://horti_description/meshes/trolley_base.stl" scale="0.001 0.001 0.001"/>
-        </geometry>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-      </collision>
-	</link>
-	<joint name="trolley_base_joint" type="fixed">
-		<parent link="map" />
-		<child link="trolley_base_link" />
-		<origin xyz="0 0 0" rpy="0 0 0" />
-	</joint>
-
-	<link name="trolley_platform_link">
-		<visual>
-			<material name="gray" />
-			<geometry>
-				<mesh filename="package://horti_description/meshes/trolley_platform.stl" scale="0.001 0.001 0.001" />
-			</geometry>
-		</visual>
-		<collision>
-        <geometry>
-          <mesh filename="package://horti_description/meshes/trolley_platform.stl" scale="0.001 0.001 0.001"/>
-        </geometry>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-		</collision>
-	</link>
-	<joint name="trolley_platform_joint" type="prismatic">
-		<parent link="trolley_base_link" />
-		<child link="trolley_platform_link" />
-<!--         <origin xyz="0.025734 0.000458 0.469001" rpy="0 0 0"/> -->
-        <origin xyz="0.0 0.0 0.469001" rpy="0 0 0"/>
-        <axis xyz="0 0 1"/>
-        <limit upper="2.2" lower="0" effort="1000" velocity="1000.00"/>
-	</joint>
-
+    <xacro:trollomatic enable_collisions="false" enable_inertia="false" joint_type="fixed"/>
+    <joint name="base_link_joint" type="fixed" >
+        <origin xyz="0.1 0 0" rpy="0.0 0 1.5708" />
+        <parent link="world" />
+        <child link="trolley_base_link" />
+    </joint>
 
     <link name="arm_holder_link">
         <visual>
