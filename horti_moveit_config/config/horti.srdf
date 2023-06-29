@@ -39,62 +39,64 @@
         <joint name="head_joint_eef"/>
         <chain base_link="head_link_base" tip_link="zed2i_camera_center"/>
     </group>
-    <group_state name="head_home" group="head">
+    <group_state name="transport_pose" group="head">
         <joint name="head_joint1" value="0.0"/>
-        <joint name="head_joint2" value="0.089"/>
-        <joint name="head_joint3" value="0.09"/>
+        <joint name="head_joint2" value="-2.3038"/>
+        <joint name="head_joint3" value="0.203767"/>
         <joint name="head_joint4" value="0.0"/>
-        <joint name="head_joint5" value="0.007"/>
-        <joint name="head_joint6" value="0"/>
+        <joint name="head_joint5" value="1.0821"/>
+        <joint name="head_joint6" value="-0.8168"/>
     </group_state>
     <group_state name="obs_pose_1" group="head">
+        <joint name="head_joint1" value="0.0"/>
+        <joint name="head_joint2" value="-2.3038"/>
+        <joint name="head_joint3" value="0.203767"/>
+        <joint name="head_joint4" value="0.0"/>
+        <joint name="head_joint5" value="0.21642"/>
+        <joint name="head_joint6" value="-0.8168"/>
+    </group_state>
+    <group_state name="obs_pose_2" group="head">
+        <joint name="head_joint1" value="0.0"/>
+        <joint name="head_joint2" value="-2.2"/>
+        <joint name="head_joint3" value="0.203767"/>
+        <joint name="head_joint4" value="0.0"/>
+        <joint name="head_joint5" value="0.086568"/>
+        <joint name="head_joint6" value="-0.8168"/>
+    </group_state>
+    <group_state name="obs_pose_3" group="head">
+        <joint name="head_joint1" value="0.0"/>
+        <joint name="head_joint2" value="-1.518487"/>
+        <joint name="head_joint3" value="2.216659"/>
+        <joint name="head_joint4" value="0.0"/>
+        <joint name="head_joint5" value="1.558223"/>
+        <joint name="head_joint6" value="-0.8168"/>
+    </group_state>
+
+
+
+    <group_state name="obs_pose_10" group="head">
         <joint name="head_joint1" value="0.2077325"/>
         <joint name="head_joint2" value="0.0027928"/>
         <joint name="head_joint3" value="0.8675813"/>
         <joint name="head_joint4" value="0.2528779"/>
         <joint name="head_joint5" value="-1.44315"/>
-        <joint name="head_joint6" value="0"/>
+        <joint name="head_joint6" value="-0.8168"/>
     </group_state>
-    <group_state name="obs_pose_2" group="head">
+    <group_state name="obs_pose_20" group="head">
         <joint name="head_joint1" value="-0.692829"/>
         <joint name="head_joint2" value="0.1181469"/>
         <joint name="head_joint3" value="1.003628"/>
         <joint name="head_joint4" value="-0.424167"/>
         <joint name="head_joint5" value="-1.484215"/>
-        <joint name="head_joint6" value="0"/>
+        <joint name="head_joint6" value="-0.8168"/>
     </group_state>
-     <group_state name="obs_pose_3" group="head">
+     <group_state name="obs_pose_30" group="head">
         <joint name="head_joint1" value="0.6732419"/>
         <joint name="head_joint2" value="-0.4624409"/>
         <joint name="head_joint3" value="1.075073"/>
         <joint name="head_joint4" value="0.686085"/>
         <joint name="head_joint5" value="-1.0354832"/>
-        <joint name="head_joint6" value="0"/>
-    </group_state>
-
-    <group_state name="obs_pose_6" group="head">
-        <joint name="head_joint1" value="0.0174"/>
-        <joint name="head_joint2" value="1.2583"/>
-        <joint name="head_joint3" value="2.8362"/>
-        <joint name="head_joint4" value="0"/>
-        <joint name="head_joint5" value="0"/>
-        <joint name="head_joint6" value="0"/>
-    </group_state>
-    <group_state name="obs_pose_5" group="head">
-        <joint name="head_joint1" value="0.0174"/>
-        <joint name="head_joint2" value="1.2583"/>
-        <joint name="head_joint3" value="2.3387"/>
-        <joint name="head_joint4" value="0.1909"/>
-        <joint name="head_joint5" value="-0.9685"/>
-        <joint name="head_joint6" value="0"/>
-    </group_state>
-    <group_state name="obs_pose_4" group="head">
-        <joint name="head_joint1" value="0.0174"/>
-        <joint name="head_joint2" value="1.2583"/>
-        <joint name="head_joint3" value="2.3387"/>
-        <joint name="head_joint4" value="-0.2256"/>
-        <joint name="head_joint5" value="0.2033"/>
-        <joint name="head_joint6" value="0"/>
+        <joint name="head_joint6" value="-0.8168"/>
     </group_state>
 
 
