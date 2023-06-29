@@ -325,7 +325,7 @@
         <child link="head_mount_link" />
     </joint>
 
-	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='head_mount_link' xyz="0 0.0 0.0" rpy=" 0 ${30*pi / 180.0} 0" />
+	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='head_mount_link' xyz="0 0.0 0.0" rpy=" 0 ${45*pi / 180.0} 0" />
 
 
     <link name="zed2i_holder_link">
