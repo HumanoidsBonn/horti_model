@@ -37,7 +37,7 @@
         <joint name="head_joint5"/>
         <joint name="head_joint6"/>
         <joint name="head_joint_eef"/>
-        <chain base_link="head_link_base" tip_link="head_link_eef"/>
+        <chain base_link="head_link_base" tip_link="zed2i_camera_center"/>
     </group>
     <group_state name="head_home" group="head">
         <joint name="head_joint1" value="0.0"/>
@@ -177,9 +177,13 @@
         <link name="head_link_eef" />
     </group>
 
+    <group name="zed2i">
+        <link name="zed2i_camera_center" />
+    </group>
+
     <end_effector name="left_eef" parent_link="arm_left_eef_link" parent_group="arm_left" group="left_eef" />
     <end_effector name="right_eef" parent_link="arm_right_eef_link" parent_group="arm_right" group="right_eef" />
-    <end_effector name="head_eef" parent_link="head_link_eef" parent_group="head" group="head_eef" />
+    <end_effector name="zed2i" parent_link="zed2i_camera_center" parent_group="head" group="zed2i" />
 
 
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
@@ -335,6 +339,7 @@
     <disable_collisions link1="head_link5" link2="head_link6" reason="Adjacent"/>
     <disable_collisions link1="head_link6" link2="zed2i_holder_link" reason="Adjacent" />
     <disable_collisions link1="zed2i_holder_link" link2="zed2i_link" reason="Adjacent" />
+    <disable_collisions link1="zed2i_holder_link" link2="zed2i_camera_center" reason="Adjacent" />
 
     <disable_collisions link1="arm_holder_link" link2="head_mount_link" reason="Adjacent"/>
     <disable_collisions link1="head_mount_link" link2="head_link_base" reason="Adjacent"/>

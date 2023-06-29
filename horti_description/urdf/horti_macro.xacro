@@ -46,6 +46,7 @@
     <xacro:include filename="$(find horti_description)/urdf/inc/xarm/xarm7_robot_macro.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/inc/xarm/lite6_robot_macro.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/inc/trolley/trolley_macro_d435.xacro" />
+    <xacro:include filename="$(find horti_description)/urdf/inc/sensors/zed/zed_macro.urdf.xacro" />
 
 
     <!-- Trolley -->
@@ -348,7 +349,11 @@
         <child link="zed2i_holder_link" />
     </joint>
 
-    <link name="zed2i_link">
+  <xacro:zed_camera name="zed2i" model="zed2i" parent="zed2i_holder_link">
+    <origin xyz="-0.015 0 0.054" rpy="${pi} ${-pi/2} 0.0" />
+  </xacro:zed_camera>
+
+    <!-- <link name="zed2i_link">
         <visual>
         <material name="gray" />
         <origin xyz="0 0 0" rpy="0 0 0" />
@@ -363,11 +368,10 @@
         </collision>
     </link>
     <joint name="zed2i_joint" type="fixed" >
-        <!-- transform estimated -->
         <origin xyz="0 0 0.044" rpy="${pi} ${-pi/2} 0" />
         <parent link="zed2i_holder_link" />
         <child link="zed2i_link" />
-    </joint>
+    </joint> -->
 
 
 </xacro:macro>
