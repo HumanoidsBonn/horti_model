@@ -16,26 +16,6 @@
     args="
       -urdf
       -param $(arg robot_description_param_name)
-      -J arm_left_joint1 1.7
-      -J arm_left_joint2 -0.28
-      -J arm_left_joint3 0.0
-      -J arm_left_joint4 0.1
-      -J arm_left_joint5 0.0
-      -J arm_left_joint6 0.6
-      -J arm_left_joint7 0.0
-      -J arm_right_joint1 0.0
-      -J arm_right_joint2 -0.2
-      -J arm_right_joint3 0.0
-      -J arm_right_joint4 0.15
-      -J arm_right_joint5 0.0
-      -J arm_right_joint6 0.6
-      -J arm_right_joint7 0.0
-      -J head_joint1 0.0
-      -J head_joint2 -2.3038
-      -J head_joint3 0.20377
-      -J head_joint4 0.0
-      -J head_joint5 0.0
-      -J head_joint6 -0.81
       -model $(arg gazebo_model_name)"
     output="screen" respawn="false" />
 
@@ -46,18 +26,6 @@
 		<arg name="gui" value="$(arg gui)"/>
 	</include>
 
-  <arg name="controller_config_file" default="$(find horti_description)/config/gazebo_controllers.yaml" doc="Config file used for defining the ROS-Control controllers."/>
-  <rosparam file="$(arg controller_config_file)" command="load"/>
-  <arg name="controllers" default="joint_state_controller arm_left_controller arm_right_controller head_controller" doc="Controllers that are activated by default."/>
-  <arg name="stopped_controllers" default="left_arm_pos_joint_group_pos_controller right_arm_pos_joint_group_pos_controller head_pos_joint_group_pos_controller" doc="Controllers that are initally loaded, but not started."/>
-  
-  <!-- Load and start the controllers listed in the 'controllers' arg. -->
-  <node name="ros_control_controller_spawner" pkg="controller_manager" type="controller_manager"
-    args="spawn $(arg controllers)" output="screen" respawn="false" />
-
-  <!-- Load other controllers, but do not start them -->
-  <node name="ros_control_stopped_spawner" pkg="controller_manager" type="spawner"
-    args="--stopped $(arg stopped_controllers)" output="screen" respawn="false" />
 
   <!-- Spawn the model loaded earlier in the simulation just started -->
   <!-- <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model"
@@ -69,6 +37,7 @@
     
 	<!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
 	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
 
   <!--
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find horti_description)/rviz/rviz.rviz"/>-->

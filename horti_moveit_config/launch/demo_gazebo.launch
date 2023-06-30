@@ -5,7 +5,7 @@
 
   <!-- Gazebo specific options -->
   <arg name="gazebo_gui" default="true"/>
-  <arg name="paused" default="false"/>
+  <arg name="paused" default="true"/>
 
   <!-- launch the gazebo simulator and spawn the robot -->
   <include file="$(dirname)/gazebo.launch" >
@@ -18,4 +18,7 @@
     <arg name="load_robot_description" value="false" />
     <arg name="moveit_controller_manager" value="ros_control" />
   </include>
+
+  	<include file="$(find horti_moveit_config)/launch/initialize_model.launch"  >
+	</include>
 </launch>
