@@ -87,13 +87,6 @@
 
     <xacro:property name="back_height" value="1.5" />
     <link name="trolley_back_link">
-        <visual>
-            <material name="gray" />
-            <origin xyz="0 0 ${back_height / 2}" rpy="0 0 0" />
-            <geometry>
-                <box size="${holder_length} 0.001 ${back_height}" />
-            </geometry>
-        </visual>
         <collision>
             <origin xyz="0 0 ${back_height / 2}" rpy="0 0 0" />
             <geometry>
@@ -308,9 +301,9 @@
     <link name="head_mount_link" >
         <visual>
         <material name="gray" />
-        <origin xyz="0 0 ${-head_height / 2}" rpy="0 0 0" />
+        <origin xyz="0 0 -${head_height}" rpy="${pi/2} 0 0" />
             <geometry>
-                <box size="${head_mount_width} ${head_mount_width} ${head_height}" />
+                <mesh filename="package://horti_description/meshes/lite6/visual/xarm6LiteHolder.STL"/>
             </geometry>
         </visual>
         <collision>
@@ -326,7 +319,10 @@
         <child link="head_mount_link" />
     </joint>
 
-	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='head_mount_link' xyz="0 0.0 0.0" rpy=" 0 ${45*pi / 180.0} 0" />
+    <xacro:property name="head_mount_angle" value="${45 * pi / 180.0}" />
+    <xacro:property name="head_mount_shift" value="0.008" />
+
+	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='head_mount_link' xyz="${head_mount_shift * cos(head_mount_angle)} 0.0 -${head_mount_shift * sin(head_mount_angle)}" rpy=" 0 ${head_mount_angle} 0" />
 
 
     <link name="zed2i_holder_link">
