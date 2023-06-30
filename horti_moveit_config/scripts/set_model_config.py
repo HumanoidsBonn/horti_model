@@ -5,9 +5,10 @@ from gazebo_msgs.srv import SetModelConfiguration
 from gazebo_msgs.srv import SetModelConfigurationRequest
 from std_srvs.srv import Empty, EmptyRequest
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
+pub_head_command = rospy.Publisher("/head_controller/command", JointTrajectory, queue_size=1, latch=True)
 
 def set_model_config():
-    #time.sleep(1)
+    time.sleep(1)
     rospy.logwarn("Setting model configuration")
     reset_joints =  rospy.ServiceProxy('/gazebo/set_model_configuration', SetModelConfiguration)
 
@@ -24,7 +25,7 @@ def set_model_config():
     rospy.logwarn("...Unpaused physics")
 
 def publish_command():
-    pub_head_command = rospy.Publisher("/head_controller/command", JointTrajectory, queue_size=1)
+    
 
     traj = JointTrajectory()
     traj.header.stamp = rospy.Time.now()
@@ -41,7 +42,7 @@ def publish_command():
         traj.header.stamp = rospy.Time.now()
         pub_head_command.publish(traj)
         i = i +1
-        rospy.sleep(0.5)
+        time.sleep(1)
 
 if __name__ == '__main__':
     rospy.init_node('set_model_config')
