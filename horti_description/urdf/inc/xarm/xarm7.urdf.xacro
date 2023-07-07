@@ -5,7 +5,10 @@
   Author: Jimy Zhang <jimy.zhang@ufactory.cc> <jimy92@163.com>
   Contributers:
 -->
-
+    
+    <xacro:property name="collision_type" value="reduced_mesh_manual_performance" />
+    <!-- Values: reduced_mesh_auto, reduced_mesh_manual_quality, reduced_mesh_manual_performance, spheres, shapes, capsules-->
+    
   <xacro:macro name="xarm7_urdf" params="prefix
     joint1_lower_limit:=${-2.0*pi}  joint1_upper_limit:=${2.0*pi}
     joint2_lower_limit:=${-2.059}  joint2_upper_limit:=${2.0944}
@@ -42,39 +45,72 @@
       <material name="White" />
     </visual>
     
-    <!-- Original
-    <collision>
-        <geometry>
-            
-            <mesh filename="package://horti_description/meshes/xarm7/collision/link_base_collision.STL" />
-
-            
-        </geometry>
-    </collision>
-    -->
+    <xacro:if value="${collision_type == 'reduced_mesh_auto'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision/link_base_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
     
-    <collision>
-        <origin xyz="0.0 0.0 0.05" rpy="0 0 0" />
-        <geometry>
-            <sphere radius="0.05"/>
-        </geometry>
-    </collision>
-        
-    <collision>
-        <origin xyz="0.0 0.0 0.15" rpy="0 0 0" />
-        <geometry>
-            <sphere radius="0.05"/>
-        </geometry>
-    </collision>
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_quality'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_quality/link_base_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
     
-    <collision>
-        <origin xyz="0.0 0.0 0.25" rpy="0 0 0" />
-        <geometry>
-            <sphere radius="0.05"/>
-        </geometry>
-    </collision>
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_performance'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_performance/link_base_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'spheres'}">
+        <collision>
+            <origin xyz="0.0 0.0 0.05" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+        </collision>
+            
+        <collision>
+            <origin xyz="0.0 0.0 0.15" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+        </collision>
         
-    <!--<xacro:capsule-collision e1="-0.000213989 -2.89319e-05 0.0883932" e2="-0.0129459 0.000484928 0.0317038" rad="0.081895279580145044" len="0.058103800326894536" rpy="-3.13253 -0.220917 3.05991" mid="-0.00657996 0.000227998 0.0600485" />-->
+        <collision>
+            <origin xyz="0.0 0.0 0.25" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'shapes'}">
+        <collision>
+            <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.08" />
+            <geometry>
+                <cylinder length="0.16" radius="0.07" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="0.0 1.57 0.0" xyz="-0.09 0.0 0.03" />
+            <geometry>
+                <cylinder length="0.05" radius="0.05" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'capsules'}">
+        <xacro:capsule-collision e1="-0.000213989 -2.89319e-05 0.0883932" e2="-0.0129459 0.000484928 0.0317038" rad="0.081895279580145044" len="0.058103800326894536" rpy="-3.13253 -0.220917 3.05991" mid="-0.00657996 0.000227998 0.0600485" />
+    </xacro:if>
+        
   </link>
   <link
     name="${prefix}link1">
@@ -102,12 +138,50 @@
       </geometry>
       <material name="White" />
     </visual>
-    <collision>
-        <geometry>
-            <mesh filename="package://horti_description/meshes/xarm7/collision/link1_collision.STL" />
-        </geometry>
-    </collision>
-    <!--<xacro:capsule-collision e1="-0.000494258 0.00169954 -0.0559307" e2="-1.82532e-05 0.0171077 8.86826e-05" rad="0.07520456462972773" len="0.058101676815102581" rpy="-0.268414 0.0081927 -0.00110617" mid="-0.000256255 0.00940363 -0.027921" />-->
+    
+    <xacro:if value="${collision_type == 'reduced_mesh_auto'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision/link1_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_quality'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_quality/link1_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_performance'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_performance/link1_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'shapes'}">
+        <collision>
+            <origin rpy="0.15 0.0 0.0" xyz="0.0 -0.01 -0.05" />
+            <geometry>
+                <cylinder length="0.14" radius="0.053" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="1.57 0.0 0.0" xyz="0.0 0.01 0.0" />
+            <geometry>
+                <cylinder length="0.14" radius="0.053" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'capsules'}">
+        <xacro:capsule-collision e1="-0.000494258 0.00169954 -0.0559307" e2="-1.82532e-05 0.0171077 8.86826e-05" rad="0.07520456462972773" len="0.058101676815102581" rpy="-0.268414 0.0081927 -0.00110617" mid="-0.000256255 0.00940363 -0.027921" />
+    </xacro:if>
+    
   </link>
   <joint
     name="${prefix}joint1"
@@ -157,29 +231,78 @@
       <material name="White" />
     </visual>
     
-    <!-- Original
-    <collision>
-        <geometry>
-            <mesh filename="package://horti_description/meshes/xarm7/collision/link2_collision.STL" />
-        </geometry>
-    </collision>
-    -->
+    <xacro:if value="${collision_type == 'reduced_mesh_auto'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision/link2_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
     
-    <collision>
-        <origin xyz="0.0 -0.1 0.08" rpy="0 0 0" />
-        <geometry>
-            <sphere radius="0.05"/>
-        </geometry>
-    </collision>
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_quality'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_quality/link2_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
     
-    <collision>
-        <origin xyz="0.0 0.0 0.08" rpy="0 0 0" />
-        <geometry>
-            <sphere radius="0.05"/>
-        </geometry>
-    </collision>
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_performance'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_performance/link2_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
     
-    <!--<xacro:capsule-collision e1="-3.45385e-05 -0.139089 0.0179407" e2="-0.000544098 -0.0320002 0.0843023" rad="0.079891635947292372" len="0.12598468896291548" rpy="-1.01603 -0.00404463 0.00225186" mid="-0.000289318 -0.0855446 0.0511215" />-->
+    <xacro:if value="${collision_type == 'spheres'}">
+        <collision>
+            <origin xyz="0.0 -0.1 0.08" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+        </collision>
+        
+        <collision>
+            <origin xyz="0.0 0.0 0.08" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'shapes'}">
+        <collision>
+            <origin rpy="1.57 0.0 0.0" xyz="0.0 -0.135 0.0" />
+            <geometry>
+                <cylinder length="0.12" radius="0.048" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="0.0 0.0 0.0" xyz="0.0 -0.11 0.038" />
+            <geometry>
+                <cylinder length="0.168" radius="0.053" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="0.0 0.0 0.0" xyz="0.0 -0.05 0.1" />
+            <geometry>
+                <box size="0.102 0.12 0.045" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.098" />
+            <geometry>
+                <cylinder length="0.048" radius="0.05" />
+            </geometry>
+        </collision>
+    </xacro:if>
+        
+    <xacro:if value="${collision_type == 'capsules'}">
+        <xacro:capsule-collision e1="-3.45385e-05 -0.139089 0.0179407" e2="-0.000544098 -0.0320002 0.0843023" rad="0.079891635947292372" len="0.12598468896291548" rpy="-1.01603 -0.00404463 0.00225186" mid="-0.000289318 -0.0855446 0.0511215" />
+    </xacro:if>
+
+    
   </link>
   <joint
     name="${prefix}joint2"
@@ -228,12 +351,56 @@
       </geometry>
       <material name="White" />
     </visual>
+    
+    <xacro:if value="${collision_type == 'reduced_mesh_auto'}">
         <collision>
-        <geometry>
-            <mesh filename="package://horti_description/meshes/xarm7/collision/link3_collision.STL" />
-        </geometry>
-    </collision>
-    <!--<xacro:capsule-collision e1="0.00923538 0.00384423 -0.0459849" e2="0.0519698 -0.00416959 6.54929e-05" rad="0.076142510102971253" len="0.063333148338168666" rpy="0.172298 0.740634 0.0670316" mid="0.0306026 -0.000162679 -0.0229597" />-->
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision/link3_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_quality'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_quality/link3_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_performance'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_performance/link3_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'shapes'}">
+        <collision>
+            <origin rpy="-0.5 0.5 0.0" xyz="0.022 0.022 -0.019" />
+            <geometry>
+                <cylinder length="0.1" radius="0.0545" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="1.57 0.0 0.0" xyz="0.055 0.005 0.0" />
+            <geometry>
+                <cylinder length="0.145" radius="0.05" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.063" />
+            <geometry>
+                <cylinder length="0.077" radius="0.051" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'capsules'}">
+        <xacro:capsule-collision e1="0.00923538 0.00384423 -0.0459849" e2="0.0519698 -0.00416959 6.54929e-05" rad="0.076142510102971253" len="0.063333148338168666" rpy="0.172298 0.740634 0.0670316" mid="0.0306026 -0.000162679 -0.0229597" />
+    </xacro:if>
+    
   </link>
   <joint
     name="${prefix}joint3"
@@ -282,12 +449,62 @@
       </geometry>
       <material name="White" />
     </visual>
-    <collision>
-        <geometry>
-            <mesh filename="package://horti_description/meshes/xarm7/collision/link4_collision.STL" />
-        </geometry>
-    </collision>
-   <!-- <xacro:capsule-collision e1="0.0237917 -0.0187988 0.082206" e2="0.0852515 -0.117879 0.0100891" rad="0.07499443307953356" len="0.13709514886780519" rpy="2.19998 0.464863 0.870623" mid="0.0545216 -0.068339 0.0461475" />-->
+    
+    <xacro:if value="${collision_type == 'reduced_mesh_auto'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision/link4_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_quality'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_quality/link4_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_performance'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_performance/link4_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'shapes'}">
+        <collision>
+            <origin rpy="1.57 0.0 0.0" xyz="0.077 -0.115 0.0" />
+            <geometry>
+                <cylinder length="0.115" radius="0.048" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="0.0 0.0 0.0" xyz="0.077 -0.08 0.034" />
+            <geometry>
+                <cylinder length="0.158" radius="0.05" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.09" />
+            <geometry>
+                <cylinder length="0.05" radius="0.048" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="0.0 0.0 0.74" xyz="0.0385 -0.0415 0.09" />
+            <geometry>
+                <box size="0.095 0.1 0.05" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'capsules'}">
+        <xacro:capsule-collision e1="0.0237917 -0.0187988 0.082206" e2="0.0852515 -0.117879 0.0100891" rad="0.07499443307953356" len="0.13709514886780519" rpy="2.19998 0.464863 0.870623" mid="0.0545216 -0.068339 0.0461475" />
+    </xacro:if>
+    
   </link>
   <joint
     name="${prefix}joint4"
@@ -337,29 +554,77 @@
       <material name="White" />
     </visual>
     
-    <!-- Original
-    <collision>
-        <geometry>
-            <mesh filename="package://horti_description/meshes/xarm7/collision/link5_collision.STL" />
-        </geometry>
-    </collision>
-    -->
+    <xacro:if value="${collision_type == 'reduced_mesh_auto'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision/link5_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
     
-    <collision>
-        <origin xyz="0.0 0.05 0.0" rpy="0 0 0" />
-        <geometry>
-            <sphere radius="0.04"/>
-        </geometry>
-    </collision>
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_quality'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_quality/link5_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
     
-    <collision>
-        <origin xyz="0.0 0.04 -0.08" rpy="0 0 0" />
-        <geometry>
-            <sphere radius="0.04"/>
-        </geometry>
-    </collision>
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_performance'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_performance/link5_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
     
-    <!--<xacro:capsule-collision e1="-5.45282e-06 0.0461016 -4.23804e-05" e2="-0.000793873 0.00857662 -0.149905" rad="0.055896945982555783" len="0.15449161327345248" rpy="2.89624 -0.00510334 -0.0413857" mid="-0.000399663 0.0273391 -0.0749739" />-->
+    <xacro:if value="${collision_type == 'spheres'}">
+        <collision>
+            <origin xyz="0.0 0.05 0.0" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.04"/>
+            </geometry>
+        </collision>
+        
+        <collision>
+            <origin xyz="0.0 0.04 -0.08" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.04"/>
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'shapes'}">
+        <collision>
+            <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.15" />
+            <geometry>
+                <cylinder length="0.045" radius="0.05" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="1.57 0.0 0.0" xyz="0.0 0.047 0.0" />
+            <geometry>
+                <cylinder length="0.09" radius="0.04" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="-1.05 0.0 0.0" xyz="0.0 0.0285 -0.122" />
+            <geometry>
+                <box size="0.095 0.052 0.1" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="-0.11 0.0 0.0" xyz="0.0 0.069 -0.065" />
+            <geometry>
+                <box size="0.085 0.04 0.1" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'capsules'}">
+        <xacro:capsule-collision e1="-5.45282e-06 0.0461016 -4.23804e-05" e2="-0.000793873 0.00857662 -0.149905" rad="0.055896945982555783" len="0.15449161327345248" rpy="2.89624 -0.00510334 -0.0413857" mid="-0.000399663 0.0273391 -0.0749739" />
+    </xacro:if>
+    
   </link>
   <joint
     name="${prefix}joint5"
@@ -409,29 +674,71 @@
       <material name="White" />
     </visual>
     
-    <!-- Original
-    <collision>
-        <geometry>
-            <mesh filename="package://horti_description/meshes/xarm7/collision/link6_collision.STL" />
-        </geometry>
-    </collision>
-    -->
+    <xacro:if value="${collision_type == 'reduced_mesh_auto'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision/link6_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
     
-    <collision>
-        <origin xyz="0.0 0.0 0.01" rpy="0 0 0" />
-        <geometry>
-            <sphere radius="0.04"/>
-        </geometry>
-    </collision>
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_quality'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_quality/link6_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
     
-    <collision>
-        <origin xyz="0.08 0.0 0.01" rpy="0 0 0" />
-        <geometry>
-            <sphere radius="0.04"/>
-        </geometry>
-    </collision>
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_performance'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_performance/link6_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
     
-    <!--<xacro:capsule-collision e1="0.0111499 0.000183831 0.0324818" e2="0.0764099 0.0203825 2.84729e-05" rad="0.061231144058150992" len="0.075631202198171668" rpy="-2.58487 1.04092 -2.21655" mid="0.0437799 0.0102832 0.0162552" />-->
+    <xacro:if value="${collision_type == 'spheres'}">
+        <collision>
+            <origin xyz="0.0 0.0 0.01" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.04"/>
+            </geometry>
+        </collision>
+        
+        <collision>
+            <origin xyz="0.08 0.0 0.01" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.04"/>
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'shapes'}">
+        <collision>
+            <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.026" />
+            <geometry>
+                <cylinder length="0.07" radius="0.04" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="1.57 0.0 0.0" xyz="0.076 0.017 0.0" />
+            <geometry>
+                <cylinder length="0.105" radius="0.04" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="0.0 0.25 0.0" xyz="0.04 0.0 0.018" />
+            <geometry>
+                <box size="0.063 0.078 0.06" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'capsules'}">
+        <xacro:capsule-collision e1="0.0111499 0.000183831 0.0324818" e2="0.0764099 0.0203825 2.84729e-05" rad="0.061231144058150992" len="0.075631202198171668" rpy="-2.58487 1.04092 -2.21655" mid="0.0437799 0.0102832 0.0162552" />
+    </xacro:if>
+    
   </link>
   <joint
     name="${prefix}joint6"
@@ -481,14 +788,50 @@
       <material name="Silver" />
     </visual>
     
-    <collision>
-        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-        <geometry>
-            <sphere radius="0.05"/>
-        </geometry>
-    </collision>
+    <xacro:if value="${collision_type == 'reduced_mesh_auto'}">
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+        </collision>
+    </xacro:if>
     
-    <xacro:capsule-collision e1="-3.36121e-05 0.00432082 -0.0135414" e2="7.3351e-05 -0.0128869 -0.013647" rad="0.043332136325713658" len="0.017208420106763666" rpy="1.57693 0.00621578 0.00625404" mid="1.98694e-05 -0.00428306 -0.0135942" />
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_quality'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_quality/link7_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'reduced_mesh_manual_performance'}">
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/xarm7/collision_manual_performance/link7_collision.STL" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'shapes'}">
+        <collision>
+            <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.014" />
+            <geometry>
+                <cylinder length="0.032" radius="0.04" />
+            </geometry>
+        </collision>
+        <collision>
+            <origin rpy="1.57 0.0 0.0" xyz="0.0 -0.045 -0.014" />
+            <geometry>
+                <cylinder length="0.02" radius="0.017" />
+            </geometry>
+        </collision>
+    </xacro:if>
+    
+    <xacro:if value="${collision_type == 'capsules'}">
+        <xacro:capsule-collision e1="-3.36121e-05 0.00432082 -0.0135414" e2="7.3351e-05 -0.0128869 -0.013647" rad="0.043332136325713658" len="0.017208420106763666" rpy="1.57693 0.00621578 0.00625404" mid="1.98694e-05 -0.00428306 -0.0135942" />
+    </xacro:if>
+    
   </link>
   <joint
     name="${prefix}joint7"
