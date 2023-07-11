@@ -13,7 +13,7 @@
   </material>
 
    <!-- scissorlift  -->
-  <link name="base_link">
+  <link name="trolley_base_link">
     <visual>
         <geometry>
             <mesh filename="package://trolley_description/meshes/cart.stl" scale="0.001 0.001 0.001"/>
@@ -36,7 +36,7 @@
             | 0.052040 0.107896 0.078777 |
             -->
         </geometry>
-        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <material name="grey"/>
     </visual>
     <xacro:if value="${enable_collisions}">
@@ -44,7 +44,7 @@
         <geometry>
           <mesh filename="package://trolley_description/meshes/cart.stl" scale="0.001 0.001 0.001"/>
         </geometry>
-        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
       </collision>
     </xacro:if>
     <xacro:if value="${enable_inertia}">
@@ -56,15 +56,15 @@
     </xacro:if>
   </link>
 
-  <joint name="base_link_to_platform" type="${joint_type}">
-        <origin xyz="0.025734 0.000458 0.469001" rpy="0 0 0"/>
+  <joint name="trolley_platform_joint" type="${joint_type}">
+        <origin xyz="0.0 0.0 1.0969001" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
         <limit upper="2.2" lower="0" effort="1000" velocity="1000.00"/>
-        <parent link="base_link"/>
-        <child link="platform_base"/>
+        <parent link="trolley_base_link"/>
+        <child link="trolley_platform_link"/>
   </joint>
 
-  <link name="platform_base">
+  <link name="trolley_platform_link">
     <visual>
         <geometry>
             <mesh filename="package://trolley_description/meshes/platform.stl" scale="0.001 0.001 0.001"/>
@@ -88,7 +88,7 @@
             | 0.001112 0.011134 0.012109 |
             -->
         </geometry>
-        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <material name="grey"/>
     </visual>
     <xacro:if value="${enable_collisions}">
@@ -96,7 +96,7 @@
         <geometry>
           <mesh filename="package://trolley_description/meshes/platform.stl" scale="0.001 0.001 0.001"/>
         </geometry>
-        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
       </collision>
     </xacro:if>
     <xacro:if value="${enable_inertia}">
@@ -131,7 +131,7 @@
 
   <joint name="base_link_to_cam0" type="fixed">
         <origin xyz="1.860 -0.238319 0.6835" rpy="${PI_2} 0 ${PI_2}"/>
-        <parent link="base_link"/>
+        <parent link="trolley_base_link"/>
         <child link="camera0_link"/>
   </joint>
   <link name="camera0_link">
@@ -139,7 +139,7 @@
 
   <joint name="base_link_to_cam1" type="fixed">
         <origin xyz="1.860 -0.237319 1.3475" rpy="${PI_2} 0 ${PI_2}"/>
-        <parent link="base_link"/>
+        <parent link="trolley_base_link"/>
         <child link="camera1_link"/>
   </joint>
   <link name="camera1_link">
@@ -147,7 +147,7 @@
 
   <joint name="base_link_to_cam2" type="fixed">
         <origin xyz="1.860 -0.237319 2.0115" rpy="${PI_2} 0 ${PI_2}"/>
-        <parent link="base_link"/>
+        <parent link="trolley_base_link"/>
         <child link="camera2_link"/>
   </joint>
   <link name="camera2_link">
@@ -155,7 +155,7 @@
 
   <joint name="base_link_to_cam3" type="fixed">
         <origin xyz="1.860 -0.237319 2.6755" rpy="${PI_2} 0 ${PI_2}"/>
-        <parent link="base_link"/>
+        <parent link="trolley_base_link"/>
         <child link="camera3_link"/>
   </joint>
   <link name="camera3_link">
@@ -163,7 +163,7 @@
 
   <joint name="base_link_to_tracker" type="fixed">
         <origin xyz="1.815 -0.237319 1.3475" rpy="0 0 ${PI_2}"/>
-        <parent link="base_link"/>
+        <parent link="trolley_base_link"/>
         <child link="tracker"/>
   </joint>
   <link name="tracker">

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="node_start_delay" default="5.0" />  
+
+    <node name="set_model_config" pkg="horti_moveit_config" type="set_model_config.py" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' "/>
+
+
+</launch>

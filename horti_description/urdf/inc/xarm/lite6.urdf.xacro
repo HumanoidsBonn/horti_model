@@ -79,7 +79,7 @@
     <xacro:if value="${collision_type == 'capsules'}">
         <xacro:capsule-collision e1="-0.0054528 -3.46273e-05 0.0283824" e2="-0.00259396 0.000248867 0.0897363" rad="0.09368540881077124" len="0.06142103881013667" rpy="-0.00462062 0.0465617 -0.000107592" mid="-0.00402338 0.00010712 0.0590593" />
     </xacro:if>
-      
+
     </link>
     <link name="${prefix}link1">
       <inertial>
@@ -105,7 +105,6 @@
         </geometry>
         <material name="${prefix}White" />
       </visual>
-      
     <xacro:if value="${collision_type == 'reduced_mesh_auto'}">
         <collision>
             <geometry>
@@ -139,7 +138,6 @@
     <xacro:if value="${collision_type == 'capsules'}">
         <xacro:capsule-collision e1="-0.000361192 0.000422669 -0.0220196" e2="2.08195e-06 0.0296148 -0.0011838" rad="0.063890160267874307" len="0.035867029495341492" rpy="-0.950903 0.0101285 -0.00521464" mid="-0.000179555 0.0150187 -0.0116017" />
     </xacro:if>
-      
     </link>
     <joint name="${prefix}joint1" type="revolute">
       <origin
@@ -182,7 +180,7 @@
         </geometry>
         <material name="${prefix}White" />
       </visual>
-      
+
     <xacro:if value="${collision_type == 'reduced_mesh_auto'}">
         <collision>
             <geometry>
@@ -216,7 +214,7 @@
     <xacro:if value="${collision_type == 'capsules'}">
         <xacro:capsule-collision e1="0.0054332 -9.9597e-05 0.100752" e2="0.201413 -6.01135e-05 0.0811532" rad="0.053148363034440045" len="0.19695717559298798" rpy="-3.13958 1.47112 -3.13937" mid="0.103423 -7.98553e-05 0.0909527" />
     </xacro:if>
-      
+
     </link>
     <joint name="${prefix}joint2" type="revolute">
       <origin
@@ -293,7 +291,7 @@
     <xacro:if value="${collision_type == 'capsules'}">
         <xacro:capsule-collision e1="-0.000200074 -6.06765e-05 -0.00900904" e2="0.0782117 -0.0108837 -1.99642e-05" rad="0.053567713887000434" len="0.079663975339148679" rpy="0.877702 1.39326 0.748316" mid="0.0390058 -0.00547219 -0.0045145" />
     </xacro:if>
-      
+
     </link>
     <joint name="${prefix}joint3" type="revolute">
       <origin
@@ -370,7 +368,7 @@
     <xacro:if value="${collision_type == 'capsules'}">
         <xacro:capsule-collision e1="-0.00693104 -0.0545553 -0.0272353" e2="0.000145021 -0.0012119 -0.138516" rad="0.066752435195672727" len="0.12360792315155163" rpy="-2.69459 0.0572774 -0.25074" mid="-0.00339301 -0.0278836 -0.0828755" />
     </xacro:if>
-      
+
     </link>
     <joint name="${prefix}joint4" type="revolute">
       <origin
@@ -413,6 +411,7 @@
         </geometry>
         <material name="${prefix}Silver" />
       </visual>
+
       
     <xacro:if value="${collision_type == 'reduced_mesh_auto'}">
         <collision>
@@ -447,7 +446,7 @@
     <xacro:if value="${collision_type == 'capsules'}">
         <xacro:capsule-collision e1="0.000256318 0.00945339 0.00418025" e2="-0.000230592 -0.00402292 0.00211128" rad="0.054491213054397282" len="0.013642894966188644" rpy="1.72313 -0.0356972 -0.0415943" mid="1.2863e-05 0.00271524 0.00314576" />
     </xacro:if>
-      
+
     </link>
     <joint name="${prefix}joint5" type="revolute">
       <origin
@@ -524,7 +523,7 @@
     <xacro:if value="${collision_type == 'capsules'}">
         <xacro:capsule-collision e1="-0.000205766 0.000151288 -0.0101214" e2="0.00034011 -4.8247e-05 -0.0101304" rad="0.039592907362076969" len="0.00058126976613551964" rpy="1.61557 1.22003 1.2624" mid="6.71721e-05 5.15207e-05 -0.0101259" />
     </xacro:if>
-      
+
     </link>
     <joint name="${prefix}joint6" type="revolute">
       <origin
@@ -583,6 +582,6 @@
       <child
         link="${prefix}link_eef" />
     </joint>
-
+  
   </xacro:macro>
 </robot>
