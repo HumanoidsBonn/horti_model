@@ -175,6 +175,58 @@
         <origin xyz="${-1.44 + basket_length / 2} ${-0.42 / 2 - 0.01 - basket_width / 2} 0.14" rpy="${pi} 0 0" />
     </joint>
 
+    <xacro:property name="controller_height" value="0.12" />
+    <xacro:property name="controller_width" value="0.32" />
+    <xacro:property name="controller_length" value="0.15" />
+
+    <link name="arm_right_controller_link" >
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 0 ${controller_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${controller_length} ${controller_width} ${controller_height}" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 ${controller_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${controller_length} ${controller_width} ${controller_height}" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="arm_right_controller_joint" type="fixed" >
+        <origin xyz=" ${-1.44 + 0.05 + controller_length /2} 0 ${holder_height+0.05}" rpy="0 0 0" />
+        <child link="arm_right_controller_link" />
+        <parent link="trolley_platform_link" />
+    </joint>
+
+    <link name="arm_left_controller_link" >
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 0 ${controller_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${controller_length} ${controller_width} ${controller_height}" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 ${controller_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${controller_length} ${controller_width} ${controller_height}" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="arm_left_controller_joint" type="fixed" >
+        <origin xyz=" ${-0.05-controller_length  / 2} 0 ${holder_height+0.05}" rpy="0 0 0" />
+        <child link="arm_left_controller_link" />
+        <parent link="trolley_platform_link" />
+    </joint>
+
+
+
+
+
+
+
 
     <link name="trolley_local_link" />
     <joint name="trolley_local_joint" type="fixed" >
