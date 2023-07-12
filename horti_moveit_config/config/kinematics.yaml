@@ -21,6 +21,16 @@ arm_left:
 arm_right:
   kinematics_solver: nimbro_ik::IKSolver
   kinematics_solver_search_resolution: 0.005
+  nimbro_ik:
+    ik_type: full
+    cost_functions:
+      - type: "nimbro_ik::cost::LimitPlane"
+        weight: 20.0
+        link: "arm_right_link4"
+        plane:
+            frame_id: "trolley_local_link"
+            normal: [1, 0, 0]
+            offset: 1.0
 head:
   kinematics_solver: bio_ik/BioIKKinematicsPlugin
   kinematics_solver_search_resolution: 0.005
