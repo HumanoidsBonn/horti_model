@@ -1,0 +1,29 @@
+<robot name="anna_calib" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- Calibrated head_link_eef_calib in head_link_eef -->
+<xacro:macro name="cam_calib">
+    <origin xyz="0.003227 0.002322 0.019451" rpy="0.00827223 -0.00514288 -0.00101069" /> <!-- 0.561° in total -->
+</xacro:macro>
+
+<!-- Calibrated head_mount_link_calib in head_mount_link -->
+<xacro:macro name="head_arm_calib">
+    <origin xyz="-0.003466 0.000658 -0.010000" rpy="0.01934490 -0.00111180 -0.01298161" /> <!-- 1.336° in total -->
+</xacro:macro>
+
+<!-- Calibrated arm_left_link_base_calib frame in arm_left_link_base -->
+<xacro:macro name="left_arm_calib">
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.00000000 -0.00000000 0.00000000" /> <!-- 0.000° in total -->
+</xacro:macro>
+
+<!-- Calibrated arm_left_marker_link_calib in arm_left_marker_link -->
+<xacro:macro name="left_marker_calib">
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.00000000 -0.00000000 0.00000000" /> <!-- 0.000° in total -->
+</xacro:macro>
+
+<!-- Calibrated arm_right_marker_link_calib in arm_right_marker_link -->
+<xacro:macro name="right_marker_calib">
+    <origin xyz="0.003402 0.002952 0.000008" rpy="0.00000000 -0.00000000 0.00000000" /> <!-- 0.000° in total -->
+</xacro:macro>
+
+
+</robot>

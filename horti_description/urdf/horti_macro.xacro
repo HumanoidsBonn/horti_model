@@ -47,6 +47,7 @@
     <xacro:include filename="$(find horti_description)/urdf/inc/xarm/lite6_robot_macro.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/inc/trolley/trolley_macro_d435.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/inc/sensors/zed/zed_macro.urdf.xacro" />
+    <xacro:include filename="$(find horti_description)/urdf/horti_calibration.urdf.xacro" />
 
 
     <!-- Trolley -->
@@ -223,11 +224,6 @@
 
 
 
-
-
-
-
-
     <link name="trolley_local_link" />
     <joint name="trolley_local_joint" type="fixed" >
         <origin xyz="0 0 0" rpy="0 0 ${pi}" />
@@ -239,23 +235,38 @@
 
     <xacro:xarm7_robot prefix="arm_right_" namespace="" limited="false" attach_to='arm_holder_link' xyz="${-arm_width / 2} ${arm_y_offset} 0.0" rpy="0 0 ${-pi/2}" />
 
-    <xacro:xarm7_robot prefix="arm_left_" namespace="" limited="false" attach_to='arm_holder_link' xyz="${arm_width / 2} ${arm_y_offset} 0.0" rpy="0 ${0 * pi / 180.0} ${-pi/2}" />
+
+     <!-- left arm calibration link -->
+    <link name="arm_left_calib_link" />
+    <joint name="arm_left_calib_joint" type="fixed" >
+        <parent link="arm_holder_link" />
+        <child link="arm_left_calib_link" />
+        <origin xyz="${arm_width / 2} ${arm_y_offset} 0.0" rpy="0 ${0 * pi / 180.0} ${-pi/2}" />
+    </joint>
+
+    <link name="arm_left_mount_link" />
+    <joint name="arm_left_mount_joint" type="fixed" >
+        <parent link="arm_left_calib_link" />
+        <child link="arm_left_mount_link" />
+        <xacro:left_arm_calib />
+    </joint>
+
+    <xacro:xarm7_robot prefix="arm_left_" namespace="" limited="false" attach_to='arm_left_mount_link' xyz="0 0 0" rpy="0 0 0" />
 
 
 <!-- FT-Sensors -->
 
-    <xacro:property name="ft_height" value="0.0222" />
+    <xacro:property name="ft_height" value="0.0364" />
 	<xacro:property name="ft_radius" value="0.04" />
 
     <xacro:macro name="ft_and_gripper" params="prefix parent">
 
         <link name="${prefix}_ft_link">
             <visual>
-                <origin xyz="0 0 -${ft_height/2}" rpy="0 0 0" />
+                <origin xyz="0 0 -${ft_height}" rpy="0 0 0" />
                 <material name="gray" />
                 <geometry>
-
-                    <cylinder radius="${ft_radius}" length="${ft_height}" />
+                    <mesh filename="package://horti_description/meshes/ft_sensor/FT_Sensor_Calib_Holder.stl" scale="0.001 0.001 0.001" />
                 </geometry>
             </visual>
             <collision>
@@ -308,6 +319,41 @@
         <child link="arm_right_eef_link" />
     </joint>
 
+
+    <!-- calibration marker -->
+
+    <!--
+    <link name="arm_right_marker_calib_link" />
+    <joint name="arm_right_marker_calib_joint" type="fixed" >
+
+        <origin xyz="${0.039 + 0.0027} 0 -0.0114" rpy="${pi/2} 0 ${pi/2}" />
+        <parent link="arm_right_ft_link" />
+        <child link="arm_right_marker_calib_link" />
+    </joint>
+
+
+    <link name="arm_right_marker_link" >
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 0 0.0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/ft_sensor/Marker_mid.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0.0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.07 0.07 0.005" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="arm_right_marker_joint" type="fixed" >
+        <xacro:right_marker_calib />
+        <parent link="arm_right_marker_calib_link" />
+        <child link="arm_right_marker_link" />
+    </joint>
+    -->
 
     <!-- left gripper & eef link -->
 
@@ -371,11 +417,26 @@
         <child link="head_mount_link" />
     </joint>
 
+    <!-- head mount calibration link -->
+    <link name="head_mount_link_calib" />
+    <joint name="head_mount_calib_joint" type="fixed" >
+        <parent link="head_mount_link" />
+        <child link="head_mount_link_calib" />
+        <xacro:head_arm_calib />
+    </joint>
+
     <xacro:property name="head_mount_angle" value="${45 * pi / 180.0}" />
     <xacro:property name="head_mount_shift" value="0.008" />
 
-	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='head_mount_link' xyz="${head_mount_shift * cos(head_mount_angle)} 0.0 -${head_mount_shift * sin(head_mount_angle)}" rpy=" 0 ${head_mount_angle} 0" />
+	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='head_mount_link_calib' xyz="${head_mount_shift * cos(head_mount_angle)} 0.0 -${head_mount_shift * sin(head_mount_angle)}" rpy=" 0 ${head_mount_angle} 0" />
 
+    <!-- camera calibration link -->
+    <link name="head_link_eef_calib" />
+    <joint name="head_eef_calib_joint" type="fixed" >
+        <parent link="head_link_eef" />
+        <child link="head_link_eef_calib" />
+        <xacro:cam_calib />
+    </joint>
 
     <link name="zed2i_holder_link">
         <visual>
@@ -393,7 +454,7 @@
     </link>
     <joint name="zed2i_holder_joint" type="fixed" >
         <origin xyz="0 0 0" rpy="0 0 ${pi/4}" />
-        <parent link="head_link_eef" />
+        <parent link="head_link_eef_calib" />
         <child link="zed2i_holder_link" />
     </joint>
 
