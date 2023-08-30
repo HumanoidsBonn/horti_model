@@ -16,7 +16,7 @@
   <link name="trolley_base_link">
     <visual>
         <geometry>
-            <mesh filename="package://trolley_description/meshes/cart.stl" scale="0.001 0.001 0.001"/>
+            <mesh filename="package://horti_description/meshes/trolley/cart.stl" scale="0.001 0.001 0.001"/>
             <!-- For inertia computation, see: http://gazebosim.org/tutorials?tut=inertia&cat=build_robot
             Mesh Bounding Box Size 2.022500 0.778000 2.816000
             Mesh Bounding Box Diag 3.553259
@@ -42,7 +42,7 @@
     <xacro:if value="${enable_collisions}">
       <collision>
         <geometry>
-          <mesh filename="package://trolley_description/meshes/cart.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://horti_description/meshes/trolley/cart.stl" scale="0.001 0.001 0.001"/>
         </geometry>
         <origin xyz="0 0 0" rpy="0 0 0"/>
       </collision>
@@ -67,7 +67,7 @@
   <link name="trolley_platform_link">
     <visual>
         <geometry>
-            <mesh filename="package://trolley_description/meshes/platform.stl" scale="0.001 0.001 0.001"/>
+            <mesh filename="package://horti_description/meshes/trolley/platform.stl" scale="0.001 0.001 0.001"/>
             <!-- For inertia computation, see: http://gazebosim.org/tutorials?tut=inertia&cat=build_robot
             MeshLab Output:
             Mesh Bounding Box Size 1.445693 0.420000 0.147347
@@ -94,7 +94,7 @@
     <xacro:if value="${enable_collisions}">
       <collision>
         <geometry>
-          <mesh filename="package://trolley_description/meshes/platform.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://horti_description/meshes/trolley/platform.stl" scale="0.001 0.001 0.001"/>
         </geometry>
         <origin xyz="0 0 0" rpy="0 0 0"/>
       </collision>
