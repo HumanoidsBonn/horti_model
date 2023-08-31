@@ -1,7 +1,7 @@
 <robot name="anna_calib" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <!-- Calibrated head_link_eef_calib in head_link_eef -->
-<xacro:macro name="cam_calib">
+<xacro:macro name="zed_calib">
     <origin xyz="0.003227 0.002322 0.019451" rpy="0.00827223 -0.00514288 -0.00101069" /> <!-- 0.561° in total -->
 </xacro:macro>
 
@@ -27,3 +27,5 @@
 
 
 </robot>
+
+

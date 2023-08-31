@@ -430,57 +430,74 @@
 
 	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='head_mount_link_calib' xyz="${head_mount_shift * cos(head_mount_angle)} 0.0 -${head_mount_shift * sin(head_mount_angle)}" rpy=" 0 ${head_mount_angle} 0" />
 
-    <!-- camera calibration link -->
-    <link name="head_link_eef_calib" />
-    <joint name="head_eef_calib_joint" type="fixed" >
-        <parent link="head_link_eef" />
-        <child link="head_link_eef_calib" />
-        <xacro:cam_calib />
-    </joint>
 
-    <link name="zed2i_holder_link">
+
+    <link name="camera_holder_link">
         <visual>
         <material name="gray" />
         <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="package://horti_description/meshes/camera/ZED2i_adaptor.STL" />
+                <mesh filename="package://horti_description/meshes/camera/cam_holder.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision>
             <geometry>
-                <mesh filename="package://horti_description/meshes/camera/ZED2i_adaptor.STL" />
+                <mesh filename="package://horti_description/meshes/camera/cam_holder.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
-    <joint name="zed2i_holder_joint" type="fixed" >
+    <joint name="camera_holder_joint" type="fixed" >
         <origin xyz="0 0 0" rpy="0 0 ${pi/4}" />
-        <parent link="head_link_eef_calib" />
-        <child link="zed2i_holder_link" />
+        <parent link="head_link_eef" />
+        <child link="camera_holder_link" />
     </joint>
 
-  <xacro:zed_camera name="zed2i" model="zed2i" parent="zed2i_holder_link">
-    <origin xyz="-0.015 0 0.054" rpy="${pi} ${-pi/2} 0.0" />
-  </xacro:zed_camera>
+    <!-- zed calibration link -->
+    <link name="zed_calib_link" />
+    <joint name="zed_calib_joint" type="fixed" >
+        <parent link="camera_holder_link" />
+        <child link="zed_calib_link" />
+        <xacro:zed_calib />
+    </joint>
 
-    <!-- <link name="zed2i_link">
+    <xacro:zed_camera name="zed2i" model="zed2i" parent="zed_calib_link">
+        <origin xyz="-0.015 0 0.054" rpy="${pi} ${-pi/2} 0.0" />
+    </xacro:zed_camera>
+
+
+    <!-- realsense calibration link -->
+    <link name="realsense_calib_link" />
+    <joint name="realsense_calib_joint" type="fixed" >
+        <parent link="camera_holder_link" />
+        <child link="realsense_calib_link" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
+
+    <link name="realsense_link" >
         <visual>
         <material name="gray" />
         <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="package://horti_description/meshes/camera/zed2i.stl" />
+                <mesh filename="package://horti_description/meshes/camera/d405.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision>
+            <origin xyz="0 0 ${-0.022 / 2}" rpy="0 0 0" />
             <geometry>
-                <mesh filename="package://horti_description/meshes/camera/zed2i.stl" />
+                <box size="0.042 0.042 0.022" />
             </geometry>
         </collision>
     </link>
-    <joint name="zed2i_joint" type="fixed" >
-        <origin xyz="0 0 0.044" rpy="${pi} ${-pi/2} 0" />
-        <parent link="zed2i_holder_link" />
-        <child link="zed2i_link" />
-    </joint> -->
+
+    <!-- values from 3d model -->
+    <joint name="realsense_joint" type="fixed" >
+        <parent link="realsense_calib_link" />
+        <child link="realsense_link" />
+        <origin xyz="${0.019125 + 0.022} 0 ${0.044494 + 0.042 / 2}" rpy="0 0 0" />
+    </joint>
+
+
+
 
 
 </xacro:macro>
