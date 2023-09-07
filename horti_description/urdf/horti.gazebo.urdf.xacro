@@ -18,6 +18,6 @@
     </joint> -->
 
     <xacro:include filename="$(find horti_description)/urdf/horti_gazebo_macro.xacro" />
-    <xacro:horti_gazebo limited='false' effort_control='false' enable_d435i='false' enable_d405='false' enable_zed2i='true'/>
+    <xacro:horti_gazebo limited='false' effort_control='false' enable_d435i='false' enable_d405='true' enable_zed2i='true'/>
 
 </robot>
