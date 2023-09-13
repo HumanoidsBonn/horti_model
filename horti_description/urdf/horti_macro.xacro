@@ -357,34 +357,66 @@
 
     <!-- left gripper & eef link -->
 
-    <xacro:property name="cylinder_length" value="0.1" />
-
-    <link name="arm_left_gripper_link">
+    <link name="arm_left_cutter_link">
         <visual>
             <material name="gray" />
-            <origin xyz="0 0 ${cylinder_length / 2}" rpy="0 0 0" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <cylinder length="${cylinder_length}" radius="0.03" />
+                <mesh filename="package://horti_description/meshes/cutter/cutter.STL"/>
             </geometry>
         </visual>
         <collision>
-            <origin xyz="0 0 ${cylinder_length / 2}" rpy="0 0 0" />
+            <origin xyz="0 0 0.01" rpy="0 0 0" />
             <geometry>
-                <cylinder length="${cylinder_length}" radius="0.03" />
+                <cylinder length="0.02" radius="0.04" />
+            </geometry>
+        </collision>
+       <collision>
+            <origin xyz="0 0.015 0.06" rpy="0 0 0" />
+            <geometry>
+                <box size="0.05 0.055 0.08"/>
+            </geometry>
+        </collision>
+        <collision>
+            <origin xyz="0 0.00 0.11" rpy="0 0 0" />
+            <geometry>
+                <box size="0.05 0.03 0.07"/>
             </geometry>
         </collision>
     </link>
 
-    <joint name="arm_left_gripper_joint" type="fixed">
-        <origin xyz="0 0 0" rpy="0 0 0" />
+    <joint name="arm_left_cutter_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 ${pi / 2}" />
         <parent link="arm_left_ft_link" />
-        <child link="arm_left_gripper_link" />
+        <child link="arm_left_cutter_link" />
     </joint>
+
+
+
+    <link name="blade_link" >
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/cutter/blade.STL"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="blade_joint" type="revolute" >
+        <origin xyz="0.0 0 0.10525" rpy="${pi/2} ${pi / 8} 0 " />
+        <parent link="arm_left_cutter_link" />
+        <child link="blade_link" />
+        <axis xyz="0 0 -1" />
+        <limit lower="0" upper="1.1" effort="50" velocity="3.14" />
+    </joint>
+
+
 
     <link name="arm_left_eef_link" />
     <joint name="arm_left_eef_joint" type="fixed" >
-        <origin xyz="0 0 ${cylinder_length}" rpy="0 0 0" />
-        <parent link="arm_left_gripper_link" />
+        <origin xyz="0 0 ${0.1}" rpy="0 0 0" />
+        <parent link="arm_left_cutter_link" />
         <child link="arm_left_eef_link" />
     </joint>
 
