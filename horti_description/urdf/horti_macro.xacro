@@ -386,7 +386,7 @@
     </link>
 
     <joint name="arm_left_cutter_joint" type="fixed">
-        <origin xyz="0 0 0" rpy="0 0 ${pi / 2}" />
+        <origin xyz="0 0 0" rpy="0 0 ${pi / 4}" />
         <parent link="arm_left_ft_link" />
         <child link="arm_left_cutter_link" />
     </joint>
