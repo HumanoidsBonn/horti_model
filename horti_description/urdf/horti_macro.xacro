@@ -528,6 +528,12 @@
         <origin xyz="${0.019125 + 0.022} 0 ${0.044494 + 0.042 / 2}" rpy="0 0 0" />
     </joint>
 
+    <link name="head_camera_d405_color_optical_frame" > </link>
+    <joint name="head_camera_optical_joint" type="fixed" >
+        <parent link="realsense_link" />
+        <child link="head_camera_d405_color_optical_frame" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
 
 
 
