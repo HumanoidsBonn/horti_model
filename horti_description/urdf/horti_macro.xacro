@@ -532,7 +532,7 @@
     <joint name="head_camera_optical_joint" type="fixed" >
         <parent link="realsense_link" />
         <child link="head_camera_d405_link" />
-        <origin xyz="0 0 0" rpy="0 -1.5708 -1.5708" />
+        <origin xyz="0.008 0.019 -0.008" rpy="0 -1.5708 -1.5708" />
     </joint>
 
 
