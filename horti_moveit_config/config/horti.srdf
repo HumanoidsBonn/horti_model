@@ -409,5 +409,9 @@
     <disable_collisions link1="arm_left_cutter_link" link2="arm_left_ft_link" reason="Adjacent"/>
     <disable_collisions link1="realsense_link" link2="camera_holder_link" reason="Adjacent"/>
 
+    <disable_collisions link1="arm_left_marker_link" link2="arm_left_cutter_link" reason="Adjacent"/>
+    <disable_collisions link1="arm_left_marker_link" link2="arm_left_ft_link" reason="Adjacent"/>
+    <disable_collisions link1="arm_left_marker_link" link2="arm_left_link7" reason="Adjacent"/>
+
 
 </robot>
