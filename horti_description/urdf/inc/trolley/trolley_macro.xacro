@@ -1,36 +1,17 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-<xacro:include filename="$(find horti_description)/urdf/trolley/trolley_base_transmissions.xacro" />
-<xacro:include filename="$(find horti_description)/urdf/other_geometry.macro.xacro" />
+<!-- <xacro:include filename="$(find horti_description)/urdf/trolley/trolley_base_transmissions.xacro" /> -->
+<!-- <xacro:include filename="$(find horti_description)/urdf/other_geometry.macro.xacro" /> -->
 
-<xacro:macro name="trollomatic" params="prefix arm_prefix transmission_hw_interface enable_collisions:=false enable_inertia:=true joint_type:=prismatic">
-    
+<xacro:macro name="trollomatic" params="prefix enable_collisions:=false enable_inertia:=true joint_type:=prismatic">
+
   <!-- <xacro:trolley_base_transmissions prefix="${prefix}" hw_interface="${transmission_hw_interface}" /> -->
   <xacro:property name="PI" value="3.1415926535897931"/>
   <material name="grey">
     <color rgba="0.5 0.5 0.5 1"/>
   </material>
 
-  <joint name="${prefix}world_joint" type="fixed">
-    <parent link="world" />
-    <child link = "${prefix}platform_start_link" />
-    <origin xyz="-1.0 -0.30 0.10" rpy="0.0 0.0 0.0" />
-  </joint>
-
-  <link name="${prefix}platform_start_link">
-    <xacro:cylinder_inertial radius="0.06" length="0.2" mass="1">
-      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
-    </xacro:cylinder_inertial>
-  </link>
-
-  <joint name="${prefix}platform_move_joint" type="${joint_type}">
-    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-    <axis xyz="1 0 0"/>
-    <limit upper="4.0" lower="0.0" effort="1000" velocity="1.0"/>
-    <parent link="${prefix}platform_start_link" />
-    <child link = "${prefix}base_link" />
-  </joint>
  <!-- scissorlift  -->
   <link name="${prefix}base_link">
     <visual>
@@ -55,7 +36,7 @@
             | 0.052040 0.107896 0.078777 |
             -->
         </geometry>
-        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <material name="grey"/>
     </visual>
     <xacro:if value="${enable_collisions}">
@@ -63,7 +44,7 @@
         <geometry>
           <mesh filename="package://horti_description/meshes/trolley/trolley_base.stl" scale="0.001 0.001 0.001"/>
         </geometry>
-        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
       </collision>
     </xacro:if>
     <xacro:if value="${enable_inertia}">
@@ -75,15 +56,16 @@
     </xacro:if>
   </link>
 
-  <joint name="${prefix}platform_lift_joint" type="${joint_type}">
-        <origin xyz="0.025734 0.000458 0.469001" rpy="0 0 0"/>
+  <joint name="${prefix}platform_joint" type="${joint_type}">
+<!--         <origin xyz="0.025734 0.000458 0.469001" rpy="0 0 0"/> -->
+        <origin xyz="0.0 0.000458 0.469001" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
         <limit upper="2.2" lower="0" effort="1000" velocity="1.0"/>
         <parent link="${prefix}base_link"/>
-        <child link="${prefix}platform_base"/>
+        <child link="${prefix}platform_link"/>
   </joint>
 
-  <link name="${prefix}platform_base">
+  <link name="${prefix}platform_link">
     <visual>
         <geometry>
             <mesh filename="package://horti_description/meshes//trolley/trolley_platform.stl" scale="0.001 0.001 0.001"/>
@@ -107,7 +89,7 @@
             | 0.001112 0.011134 0.012109 |
             -->
         </geometry>
-        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <material name="grey"/>
     </visual>
     <xacro:if value="${enable_collisions}">
@@ -115,7 +97,7 @@
         <geometry>
           <mesh filename="package://horti_description/meshes/trolley/trolley_platform.stl" scale="0.001 0.001 0.001"/>
         </geometry>
-        <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
       </collision>
     </xacro:if>
     <xacro:if value="${enable_inertia}">

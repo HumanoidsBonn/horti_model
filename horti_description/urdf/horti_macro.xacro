@@ -45,7 +45,7 @@
 
     <xacro:include filename="$(find horti_description)/urdf/inc/xarm/xarm7_robot_macro.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/inc/xarm/lite6_robot_macro.xacro" />
-    <xacro:include filename="$(find horti_description)/urdf/inc/trolley/trolley_macro_d435.xacro" />
+    <xacro:include filename="$(find horti_description)/urdf/inc/trolley/trolley_macro.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/inc/sensors/zed/zed_macro.urdf.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/horti_calibration.urdf.xacro" />
 
@@ -58,7 +58,7 @@
     <xacro:property name="arm_width" value="0.7" />
     <xacro:property name="arm_y_offset" value="-0.1" />
 
-    <xacro:trollomatic enable_collisions="false" enable_inertia="false" joint_type="fixed"/>
+    <xacro:trollomatic prefix="trolley_" enable_collisions="true" enable_inertia="false" joint_type="prismatic"/>
     <joint name="base_link_joint" type="fixed" >
         <origin xyz="0.0 0 0.1" rpy="0.0 0 1.5708" />
         <parent link="world" />
@@ -86,7 +86,7 @@
         <child link="arm_holder_link" />
     </joint>
 
-    <xacro:property name="back_height" value="1.5" />
+    <!--<xacro:property name="back_height" value="1.5" />
     <link name="trolley_back_link">
         <collision>
             <origin xyz="0 0 ${back_height / 2}" rpy="0 0 0" />
@@ -99,7 +99,7 @@
         <origin xyz="${-holder_length / 2} ${holder_width / 2 + 0.05} 0" rpy="0 0 0" />
         <parent link="trolley_platform_link" />
         <child link="trolley_back_link" />
-    </joint>
+    </joint>-->
 
 
     <xacro:property name="power_height" value="0.35" />
@@ -155,25 +155,84 @@
     <xacro:property name="basket_height" value="0.15" />
     <xacro:property name="basket_width" value="0.15" />
     <xacro:property name="basket_length" value="0.4" />
+    <xacro:property name="basket_wall_thickness" value="0.02" />
+
     <link name="basket_link" >
         <visual>
             <material name="gray" />
-            <origin xyz="0 0 ${basket_height / 2 + 0.04}" rpy="0 0 0" />
+            <origin xyz="0 0 ${basket_height + basket_wall_thickness / 2 + 0.04}" rpy="0 0 0" />
             <geometry>
-                <box size="${basket_length} ${basket_width} ${basket_height}" />
+                <box size="${basket_length} ${basket_width} ${basket_wall_thickness}" />
             </geometry>
         </visual>
-        <!-- <collision>
-            <origin xyz="0 0 ${basket_height / 2 + 0.04}" rpy="0 0 0" />
+        <visual>
+            <material name="gray" />
+            <origin xyz="${basket_length / 2 + basket_wall_thickness / 2} 0 ${basket_height / 2 + basket_wall_thickness / 2 + 0.04}" rpy="0 0 0" />
             <geometry>
-                <box size="${basket_length} ${basket_width} ${basket_height}" />
+                <box size="${basket_wall_thickness} ${basket_width} ${basket_height + basket_wall_thickness}" />
             </geometry>
-        </collision> -->
+        </visual>
+        <visual>
+            <material name="gray" />
+            <origin xyz="-${basket_length / 2 + basket_wall_thickness / 2} 0 ${basket_height / 2 + basket_wall_thickness / 2 + 0.04}" rpy="0 0 0" />
+            <geometry>
+                <box size="${basket_wall_thickness} ${basket_width} ${basket_height + basket_wall_thickness}" />
+            </geometry>
+        </visual>
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 ${basket_width / 2 + basket_wall_thickness / 2} ${basket_height / 2 + basket_wall_thickness / 2 + 0.04}" rpy="0 0 0" />
+            <geometry>
+                <box size="${basket_length + 2 * basket_wall_thickness} ${basket_wall_thickness} ${basket_height + basket_wall_thickness}" />
+            </geometry>
+        </visual>
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 -${basket_width / 2 + basket_wall_thickness / 2} ${basket_height / 2 + basket_wall_thickness / 2 + 0.04}" rpy="0 0 0" />
+            <geometry>
+                <box size="${basket_length + 2 * basket_wall_thickness} ${basket_wall_thickness} ${basket_height + basket_wall_thickness}" />
+            </geometry>
+        </visual>
+        <collision>
+            <material name="gray" />
+            <origin xyz="0 0 ${basket_height + basket_wall_thickness / 2 + 0.04}" rpy="0 0 0" />
+            <geometry>
+                <box size="${basket_length} ${basket_width} ${basket_wall_thickness}" />
+            </geometry>
+        </collision>
+        <collision>
+            <material name="gray" />
+            <origin xyz="${basket_length / 2 + basket_wall_thickness / 2} 0 ${basket_height / 2 + basket_wall_thickness / 2 + 0.04}" rpy="0 0 0" />
+            <geometry>
+                <box size="${basket_wall_thickness} ${basket_width} ${basket_height + basket_wall_thickness}" />
+            </geometry>
+        </collision>
+        <collision>
+            <material name="gray" />
+            <origin xyz="-${basket_length / 2 + basket_wall_thickness / 2} 0 ${basket_height / 2 + basket_wall_thickness / 2 + 0.04}" rpy="0 0 0" />
+            <geometry>
+                <box size="${basket_wall_thickness} ${basket_width} ${basket_height + basket_wall_thickness}" />
+            </geometry>
+        </collision>
+        <collision>
+            <material name="gray" />
+            <origin xyz="0 ${basket_width / 2 + basket_wall_thickness / 2} ${basket_height / 2 + basket_wall_thickness / 2 + 0.04}" rpy="0 0 0" />
+            <geometry>
+                <box size="${basket_length + 2 * basket_wall_thickness} ${basket_wall_thickness} ${basket_height + basket_wall_thickness}" />
+            </geometry>
+        </collision>
+        <collision>
+            <material name="gray" />
+            <origin xyz="0 -${basket_width / 2 + basket_wall_thickness / 2} ${basket_height / 2 + basket_wall_thickness / 2 + 0.04}" rpy="0 0 0" />
+            <geometry>
+                <box size="${basket_length + 2 * basket_wall_thickness} ${basket_wall_thickness} ${basket_height + basket_wall_thickness}" />
+            </geometry>
+        </collision>
     </link>
     <joint name="basket_joint" type="fixed">
         <parent link="trolley_platform_link"/>
         <child link="basket_link" />
-        <origin xyz="${-1.44 + basket_length / 2} ${-0.42 / 2 - 0.01 - basket_width / 2} 0.14" rpy="${pi} 0 0" />
+        <origin xyz="${-1.44 + basket_length / 2 + basket_wall_thickness} ${-0.42 / 2 - 0.01 - basket_width / 2} 0.14" rpy="${pi} 0 0" />
     </joint>
 
     <xacro:property name="controller_height" value="0.12" />

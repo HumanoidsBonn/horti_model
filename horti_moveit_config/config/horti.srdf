@@ -44,6 +44,10 @@
         <joint name="blade_joint"/>
     </group>
 
+    <group name="trolley">
+        <joint name="trolley_platform_joint"/>
+    </group>
+
 
     <group_state name="transport_pose" group="head">
         <joint name="head_joint1" value="0.0"/>
@@ -392,8 +396,6 @@
     <disable_collisions link1="arm_right_link7" link2="arm_right_gripper_link" reason="Adjacent"/>
 
     <disable_collisions link1="arm_left_ft_link" link2="arm_left_link7" reason="Adjacent"/>
-    <disable_collisions link1="arm_left_ft_link" link2="arm_left_gripper_link" reason="Adjacent"/>
-    <disable_collisions link1="arm_left_link7" link2="arm_left_gripper_link" reason="Adjacent"/>
 
     <disable_collisions link1="arm_holder_link" link2="arm_left_controller_link" reason="Adjacent"/>
     <disable_collisions link1="arm_holder_link" link2="arm_right_controller_link" reason="Adjacent"/>
@@ -413,5 +415,10 @@
     <disable_collisions link1="arm_left_marker_link" link2="arm_left_ft_link" reason="Adjacent"/>
     <disable_collisions link1="arm_left_marker_link" link2="arm_left_link7" reason="Adjacent"/>
 
+    <disable_collisions link1="arm_holder_link" link2="trolley_platform_link" reason="Adjacent"/>
+    <disable_collisions link1="base_control_link" link2="trolley_base_link" reason="Adjacent"/>
+    <disable_collisions link1="power_link" link2="trolley_base_link" reason="Adjacent"/>
+    <disable_collisions link1="arm_holder_link" link2="basket_link" reason="Adjacent"/>
+    <disable_collisions link1="trolley_platform_link" link2="basket_link" reason="Adjacent"/>
 
 </robot>
