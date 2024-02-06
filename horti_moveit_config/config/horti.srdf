@@ -313,6 +313,8 @@
     <disable_collisions link1="arm_left_link6" link2="arm_left_link7" reason="Adjacent"/>
     <disable_collisions link1="arm_left_link6" link2="arm_right_link1" reason="Never"/>
     <disable_collisions link1="arm_left_link6" link2="arm_right_link_base" reason="Never"/>
+    <disable_collisions link1="arm_left_link6" link2="arm_left_gripper_link" reason="Never"/>
+    <disable_collisions link1="arm_left_link6" link2="arm_left_ft_link" reason="Never"/>
     <disable_collisions link1="arm_left_link7" link2="arm_right_link1" reason="Never"/>
     <disable_collisions link1="arm_left_link7" link2="arm_right_link_base" reason="Never"/>
     <disable_collisions link1="arm_left_link_base" link2="arm_right_link1" reason="Never"/>
@@ -367,6 +369,8 @@
     <disable_collisions link1="arm_right_link5" link2="arm_right_link6" reason="Adjacent"/>
     <disable_collisions link1="arm_right_link5" link2="arm_right_link7" reason="Never"/>
     <disable_collisions link1="arm_right_link6" link2="arm_right_link7" reason="Adjacent"/>
+    <disable_collisions link1="arm_right_link6" link2="arm_right_gripper_link" reason="Never"/>
+    <disable_collisions link1="arm_right_link6" link2="arm_right_ft_link" reason="Never"/>
     <disable_collisions link1="arm_right_link_base" link2="head_link1" reason="Never"/>
     <disable_collisions link1="arm_right_link_base" link2="head_link2" reason="Never"/>
     <disable_collisions link1="arm_right_link_base" link2="head_link3" reason="Never"/>
