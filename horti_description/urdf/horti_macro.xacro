@@ -351,18 +351,18 @@
     <link name="arm_right_gripper_link">
         <visual>
             <material name="gray" />
-            <origin xyz="0 0 0.0" rpy="0 0 0" />
+            <origin xyz="0 0 0" rpy="0 0 ${pi/2}" />
             <geometry>
-                <mesh filename="package://horti_description/meshes/gripper/4Finger_visual.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://horti_description/meshes/gripper/HortiGripperWide.stl" />
             </geometry>
         </visual>
-    <!--<collision>
-            <origin xyz="0 0 -0.04" rpy="0 0 0" />
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 ${pi/2}" />
             <geometry>
-                <mesh filename="package://horti_description/meshes/gripper/4Finger_collision.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://horti_description/meshes/gripper/HortiGripperWide_collision.stl" scale="0.1 0.1 0.1" />
             </geometry>
-        </collision>-->
-        <xacro:capsule-collision e1="-0.000373856 -0.00111577 0.05043" e2="1.2756e-05 0.000562519 0.00209387" rad="0.048421797225357054" len="0.048366796323702978" rpy="-3.10689 0.00799342 -0.452684" mid="-0.00018055 -0.000276625 0.0262619" />
+        </collision>
+<!--         <xacro:capsule-collision e1="-0.000373856 -0.00111577 0.05043" e2="1.2756e-05 0.000562519 0.00209387" rad="0.048421797225357054" len="0.048366796323702978" rpy="-3.10689 0.00799342 -0.452684" mid="-0.00018055 -0.000276625 0.0262619" /> -->
     </link>
 
     <joint name="arm_right_gripper_joint" type="fixed">
