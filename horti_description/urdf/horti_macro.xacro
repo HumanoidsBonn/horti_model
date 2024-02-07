@@ -58,7 +58,7 @@
     <xacro:property name="arm_width" value="0.7" />
     <xacro:property name="arm_y_offset" value="-0.1" />
 
-    <xacro:trollomatic prefix="trolley_" enable_collisions="true" enable_inertia="false" joint_type="prismatic"/>
+    <xacro:trollomatic prefix="trolley_" enable_collisions="true" enable_inertia="false" joint_type="fixed"/>
     <joint name="base_link_joint" type="fixed" >
         <origin xyz="0.0 0 0.1" rpy="0.0 0 1.5708" />
         <parent link="world" />
@@ -449,7 +449,7 @@
     <!-- calibration marker -->
 
 
-<!--    <link name="arm_right_marker_calib_link" />
+    <link name="arm_right_marker_calib_link" />
     <joint name="arm_right_marker_calib_joint" type="fixed" >
 
         <origin xyz="${0.039 + 0.0027} 0 -0.0114" rpy="${pi/2} 0 ${pi/2}" />
@@ -483,7 +483,7 @@
     <link name="arm_left_marker_calib_link" />
     <joint name="arm_left_marker_calib_joint" type="fixed" >
 
-        <origin xyz="${0.039 + 0.0027} 0 -0.0114" rpy="${pi/2} 0 ${pi/2}" />
+        <origin xyz="${0.039 + 0.0027} 0 -0.0114" rpy="0 ${-pi/2} ${pi}" />
         <parent link="arm_left_ft_link" />
         <child link="arm_left_marker_calib_link" />
     </joint>
@@ -508,7 +508,7 @@
         <xacro:left_marker_calib />
         <parent link="arm_left_marker_calib_link" />
         <child link="arm_left_marker_link" />
-    </joint>-->
+    </joint>
 
 
 
@@ -578,7 +578,7 @@
     <joint name="zed_calib_joint" type="fixed" >
         <parent link="camera_holder_link" />
         <child link="zed_calib_link" />
-        <xacro:zed_calib />
+        <xacro:cam_calib />
     </joint>
 
     <xacro:zed_camera name="zed2i" model="zed2i" parent="zed_calib_link">
