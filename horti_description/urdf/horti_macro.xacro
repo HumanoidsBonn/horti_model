@@ -49,6 +49,7 @@
     <xacro:include filename="$(find horti_description)/urdf/inc/sensors/zed/zed_macro.urdf.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/horti_calibration.urdf.xacro" />
 
+    <xacro:property name="enable_cali_marker" value="false"/>
 
     <!-- Trolley -->
 
@@ -448,68 +449,70 @@
 
     <!-- calibration marker -->
 
+    <xacro:if value="${enable_cali_marker}">
 
-    <link name="arm_right_marker_calib_link" />
-    <joint name="arm_right_marker_calib_joint" type="fixed" >
+        <link name="arm_right_marker_calib_link" />
+        <joint name="arm_right_marker_calib_joint" type="fixed" >
 
-        <origin xyz="${0.039 + 0.0027} 0 -0.0114" rpy="${pi/2} 0 ${pi/2}" />
-        <parent link="arm_right_ft_link" />
-        <child link="arm_right_marker_calib_link" />
-    </joint>
+            <origin xyz="${0.039 + 0.0027} 0 -0.0114" rpy="${pi/2} 0 ${pi/2}" />
+            <parent link="arm_right_ft_link" />
+            <child link="arm_right_marker_calib_link" />
+        </joint>
 
-    <link name="arm_right_marker_link" >
-        <visual>
-            <material name="gray" />
-            <origin xyz="0 0 0.0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="package://horti_description/meshes/ft_sensor/Marker_mid.stl" scale="0.001 0.001 0.001" />
-            </geometry>
-        </visual>
-        <collision>
-            <origin xyz="0 0 0.0" rpy="0 0 0" />
-            <geometry>
-                <box size="0.07 0.07 0.005" />
-            </geometry>
-        </collision>
-    </link>
+        <link name="arm_right_marker_link" >
+            <visual>
+                <material name="gray" />
+                <origin xyz="0 0 0.0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://horti_description/meshes/ft_sensor/Marker_mid.stl" scale="0.001 0.001 0.001" />
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0.0" rpy="0 0 0" />
+                <geometry>
+                    <box size="0.07 0.07 0.005" />
+                </geometry>
+            </collision>
+        </link>
 
-    <joint name="arm_right_marker_joint" type="fixed" >
-        <xacro:right_marker_calib />
-        <parent link="arm_right_marker_calib_link" />
-        <child link="arm_right_marker_link" />
-    </joint>
+        <joint name="arm_right_marker_joint" type="fixed" >
+            <xacro:right_marker_calib />
+            <parent link="arm_right_marker_calib_link" />
+            <child link="arm_right_marker_link" />
+        </joint>
 
 
-    <link name="arm_left_marker_calib_link" />
-    <joint name="arm_left_marker_calib_joint" type="fixed" >
+        <link name="arm_left_marker_calib_link" />
+        <joint name="arm_left_marker_calib_joint" type="fixed" >
 
-        <origin xyz="${0.039 + 0.0027} 0 -0.0114" rpy="0 ${-pi/2} ${pi}" />
-        <parent link="arm_left_ft_link" />
-        <child link="arm_left_marker_calib_link" />
-    </joint>
+            <origin xyz="${0.039 + 0.0027} 0 -0.0114" rpy="0 ${-pi/2} ${pi}" />
+            <parent link="arm_left_ft_link" />
+            <child link="arm_left_marker_calib_link" />
+        </joint>
 
-    <link name="arm_left_marker_link" >
-        <visual>
-            <material name="gray" />
-            <origin xyz="0 0 0.0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="package://horti_description/meshes/ft_sensor/Marker_mid.stl" scale="0.001 0.001 0.001" />
-            </geometry>
-        </visual>
-        <collision>
-            <origin xyz="0 0 0.0" rpy="0 0 0" />
-            <geometry>
-                <box size="0.07 0.07 0.005" />
-            </geometry>
-        </collision>
-    </link>
+        <link name="arm_left_marker_link" >
+            <visual>
+                <material name="gray" />
+                <origin xyz="0 0 0.0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://horti_description/meshes/ft_sensor/Marker_mid.stl" scale="0.001 0.001 0.001" />
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0.0" rpy="0 0 0" />
+                <geometry>
+                    <box size="0.07 0.07 0.005" />
+                </geometry>
+            </collision>
+        </link>
 
-    <joint name="arm_left_marker_joint" type="fixed" >
-        <xacro:left_marker_calib />
-        <parent link="arm_left_marker_calib_link" />
-        <child link="arm_left_marker_link" />
-    </joint>
+        <joint name="arm_left_marker_joint" type="fixed" >
+            <xacro:left_marker_calib />
+            <parent link="arm_left_marker_calib_link" />
+            <child link="arm_left_marker_link" />
+        </joint>
 
+    </xacro:if>
 
 
 
@@ -526,10 +529,14 @@
             </geometry>
         </visual>
         <collision>
-            <origin xyz="0 0 ${-head_height / 2}" rpy="0 0 0" />
+            <origin xyz="0 0 -${head_height}" rpy="${pi/2} 0 0" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/lite6/visual/xarm6LiteHolder.STL"/>
+            </geometry>
+            <!--<origin xyz="0 0 ${-head_height / 2}" rpy="0 0 0" />
             <geometry>
                 <box size="${head_mount_width} ${head_mount_width} ${head_height}" />
-            </geometry>
+            </geometry>-->
         </collision>
     </link>
     <joint name="head_mount_joint" type="fixed" >
