@@ -592,6 +592,21 @@
         <origin xyz="-0.015 0 0.054" rpy="${pi} ${-pi/2} 0.0" />
     </xacro:zed_camera>
 
+    <link name="zed2i_collision_link">
+        <collision>
+            <origin xyz="-0.01 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/zed/zed2i.stl" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="zed2i_collision_join" type="fixed" >
+        <origin xyz="0 0 0.054" rpy="${pi} ${-pi/2} 0.0" />
+        <parent link="camera_holder_link" />
+        <child link="zed2i_collision_link" />
+    </joint>
+
 
     <!-- realsense calibration link -->
     <link name="realsense_calib_link" />
