@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<robot name="horti_gripper" xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:macro name="servo_gripper" params="prefix:='' parent:='' *origin">
+
+    <link name="${prefix}servo_holder_link">
+        <visual>
+            <material name="gray" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/servo_gripper/servo_holder.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <!--<collision>
+            <origin xyz="0 0 -${holder_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${holder_length} ${holder_width} ${holder_height}" />
+            </geometry>
+        </collision>-->
+    </link>
+
+    <joint name="${prefix}servo_holder_joint" type="fixed">
+        <xacro:insert_block name="origin" />
+        <parent link="${parent}"/>
+        <child link="${prefix}servo_holder_link"/>
+    </joint>
+
+
+    <link name="${prefix}servo_right_link">
+        <visual>
+            <material name="gray" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/servo_gripper/XM-430.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="${prefix}servo_right_joint" type="fixed">
+        <origin xyz="0 0 0.019793" rpy="${pi} 0 0" />
+        <parent link="${prefix}servo_holder_link" />
+        <child link="${prefix}servo_right_link" />
+    </joint>
+
+    <link name="${prefix}servo_left_link">
+        <visual>
+            <material name="gray" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/servo_gripper/XM-430.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="${prefix}servo_left_joint" type="fixed">
+        <origin xyz="0 0 0.019793" rpy="0 0 0" />
+        <parent link="${prefix}servo_holder_link" />
+        <child link="${prefix}servo_left_link" />
+    </joint>
+
+    <link name="${prefix}finger_right_link">
+        <visual>
+            <material name="gray" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/servo_gripper/finger_right.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="${prefix}finger_right_joint" type="revolute">
+        <origin xyz="0 -0.03525 0" rpy="${pi} 0 0" />
+        <parent link="${prefix}servo_right_link" />
+        <child link="${prefix}finger_right_link" />
+        <axis xyz="-1 0 0" />
+        <limit lower="-0.055" upper="${pi / 2}" effort="50" velocity="3.14" />
+    </joint>
+
+    <link name="${prefix}finger_left_link">
+        <visual>
+            <material name="gray" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/servo_gripper/finger_left.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="${prefix}finger_left_joint" type="revolute">
+        <origin xyz="0 -0.03525 0" rpy="0 0 0" />
+        <parent link="${prefix}servo_left_link" />
+        <child link="${prefix}finger_left_link" />
+        <axis xyz="1 0 0" />
+        <limit lower="-0.055" upper="${pi / 2}" effort="50" velocity="3.14" />
+    </joint>
+
+
+    </xacro:macro>
+</robot>
