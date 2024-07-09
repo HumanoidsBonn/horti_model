@@ -41,7 +41,7 @@
     </group>
 
     <group name="servos">
-<!--         <joint name="blade_joint"/> -->
+        <joint name="blade_joint"/>
         <joint name="finger_right_joint"/>
         <joint name="finger_left_joint"/>
     </group>
