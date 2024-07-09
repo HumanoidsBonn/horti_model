@@ -440,12 +440,12 @@
         </visual>
     </link>
 
-    <joint name="blade_joint" type="fixed" >
+    <joint name="blade_joint" type="revolute" >
         <origin xyz="0.0 0 0.10525" rpy="${pi/2} ${pi / 8} 0 " />
         <parent link="arm_left_cutter_link" />
         <child link="blade_link" />
-<!--         <axis xyz="0 0 -1" /> -->
-<!--         <limit lower="0" upper="1.1" effort="50" velocity="3.14" /> -->
+        <axis xyz="0 0 -1" />
+        <limit lower="0" upper="1.1" effort="50" velocity="3.14" />
     </joint>
 
 
