@@ -47,6 +47,8 @@
     <xacro:include filename="$(find horti_description)/urdf/inc/xarm/lite6_robot_macro.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/inc/trolley/trolley_macro.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/inc/sensors/zed/zed_macro.urdf.xacro" />
+    <xacro:include filename="$(find horti_description)/urdf/inc/sensors/d405/d405.urdf.xacro" />
+    <xacro:include filename="$(find horti_description)/urdf/inc/gripper/horti_gripper_macro.urdf.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/horti_calibration.urdf.xacro" />
 
     <xacro:property name="enable_cali_marker" value="false"/>
@@ -87,7 +89,7 @@
         <child link="arm_holder_link" />
     </joint>
 
-    <!--<xacro:property name="back_height" value="1.5" />
+    <xacro:property name="back_height" value="1.5" />
     <link name="trolley_back_link">
         <collision>
             <origin xyz="0 0 ${back_height / 2}" rpy="0 0 0" />
@@ -100,7 +102,7 @@
         <origin xyz="${-holder_length / 2} ${holder_width / 2 + 0.05} 0" rpy="0 0 0" />
         <parent link="trolley_platform_link" />
         <child link="trolley_back_link" />
-    </joint>-->
+    </joint>
 
 
     <xacro:property name="power_height" value="0.35" />
@@ -349,7 +351,7 @@
 
     <!-- right gripper & eef link -->
 
-    <link name="arm_right_gripper_link">
+<!--    <link name="arm_right_gripper_link">
         <visual>
             <material name="gray" />
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -363,22 +365,32 @@
                 <mesh filename="package://horti_description/meshes/gripper/HortiGripperWide_collision.stl" scale="0.1 0.1 0.1" />
             </geometry>
         </collision>
-<!--         <xacro:capsule-collision e1="-0.000373856 -0.00111577 0.05043" e2="1.2756e-05 0.000562519 0.00209387" rad="0.048421797225357054" len="0.048366796323702978" rpy="-3.10689 0.00799342 -0.452684" mid="-0.00018055 -0.000276625 0.0262619" /> -->
     </link>
 
     <joint name="arm_right_gripper_joint" type="fixed">
         <origin xyz="0 0 0" rpy="0 0 ${-pi/4}" />
         <parent link="arm_right_ft_link" />
         <child link="arm_right_gripper_link" />
-    </joint>
+    </joint>-->
 
-    <link name="arm_right_eef_link" />
+    <!--<link name="arm_right_eef_link" />
     <joint name="arm_right_eef_joint" type="fixed" >
         <origin xyz="0 0 0.08" rpy="0 0 0" />
         <parent link="arm_right_gripper_link" />
         <child link="arm_right_eef_link" />
-    </joint>
+    </joint>-->
 
+    <xacro:servo_gripper prefix="" parent="arm_right_ft_link" >
+        <origin xyz="0 0 0" rpy="0 0 ${pi/4}" />
+    </xacro:servo_gripper>
+
+
+    <link name="arm_right_eef_link" />
+    <joint name="arm_right_eef_joint" type="fixed" >
+        <origin xyz="0 0 0.0" rpy="0 0 0" />
+        <parent link="servo_holder_link" />
+        <child link="arm_right_eef_link" />
+    </joint>
 
     <!-- left gripper & eef link -->
 
@@ -428,12 +440,12 @@
         </visual>
     </link>
 
-    <joint name="blade_joint" type="revolute" >
+    <joint name="blade_joint" type="fixed" >
         <origin xyz="0.0 0 0.10525" rpy="${pi/2} ${pi / 8} 0 " />
         <parent link="arm_left_cutter_link" />
         <child link="blade_link" />
-        <axis xyz="0 0 -1" />
-        <limit lower="0" upper="1.1" effort="50" velocity="3.14" />
+<!--         <axis xyz="0 0 -1" /> -->
+<!--         <limit lower="0" upper="1.1" effort="50" velocity="3.14" /> -->
     </joint>
 
 
@@ -517,7 +529,7 @@
 
 
 <!-- Head -->
-    <xacro:property name="head_height" value="0.4" />
+    <xacro:property name="head_height" value="0.3" />
     <xacro:property name="head_mount_width" value="0.15" />
 
     <link name="head_mount_link" >
@@ -553,7 +565,7 @@
         <xacro:head_arm_calib />
     </joint>
 
-    <xacro:property name="head_mount_angle" value="${45 * pi / 180.0}" />
+    <xacro:property name="head_mount_angle" value="${30 * pi / 180.0}" />
     <xacro:property name="head_mount_shift" value="0.008" />
 
 	<xacro:lite6_robot prefix="head_" namespace="" limited="true" attach_to='head_mount_link_calib' xyz="${head_mount_shift * cos(head_mount_angle)} 0.0 -${head_mount_shift * sin(head_mount_angle)}" rpy=" 0 ${head_mount_angle} 0" />
@@ -616,7 +628,13 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
     </joint>
 
-    <link name="realsense_link" >
+
+    <xacro:sensor_d405 parent="realsense_calib_link">
+        <origin xyz="${0.019125 + 0.022} ${-0.021} ${0.044494 + 0.042 / 2 - 0.014628}" rpy="0 ${-pi / 2} ${-pi / 2}" />
+<!--         <origin xyz="${0.019125 + 0.022} 0 ${0.044494 + 0.042 / 2}" rpy="0 ${-pi / 2} ${-pi / 2}" /> -->
+    </xacro:sensor_d405>
+
+<!--    <link name="realsense_link" >
         <visual>
         <material name="gray" />
         <origin xyz="0 0 0" rpy="0 0 0" />
@@ -630,21 +648,20 @@
                 <box size="0.042 0.042 0.022" />
             </geometry>
         </collision>
-    </link>
+    </link>-->
 
-    <!-- values from 3d model -->
-    <joint name="realsense_joint" type="fixed" >
+<!--    <joint name="realsense_joint" type="fixed" >
         <parent link="realsense_calib_link" />
         <child link="realsense_link" />
         <origin xyz="${0.019125 + 0.022} 0 ${0.044494 + 0.042 / 2}" rpy="0 0 0" />
-    </joint>
+    </joint>-->
 
-    <link name="head_camera_d405_link" > </link>
+<!--    <link name="head_camera_d405_link" > </link>
     <joint name="head_camera_optical_joint" type="fixed" >
         <parent link="realsense_link" />
         <child link="head_camera_d405_link" />
         <origin xyz="0.008 0.019 -0.008" rpy="0 -1.5708 -1.5708" />
-    </joint>
+    </joint>-->
 
 
 

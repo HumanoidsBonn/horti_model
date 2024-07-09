@@ -40,8 +40,10 @@
         <chain base_link="head_link_base" tip_link="zed2i_camera_center"/>
     </group>
 
-    <group name="cutter">
-        <joint name="blade_joint"/>
+    <group name="servos">
+<!--         <joint name="blade_joint"/> -->
+        <joint name="finger_right_joint"/>
+        <joint name="finger_left_joint"/>
     </group>
 
     <group name="trolley">
@@ -439,4 +441,6 @@
     <disable_collisions link1="trolley_platform_link" link2="power_link" reason="Never"/>
     <disable_collisions link1="arm_holder_link" link2="power_link" reason="Never"/>
     <disable_collisions link1="camera_holder_link" link2="zed2i_collision_link" reason="Adjacent" />
+
+    <disable_collisions link1="camera_holder_link" link2="camera_link" reason="Adjacent" />
 </robot>

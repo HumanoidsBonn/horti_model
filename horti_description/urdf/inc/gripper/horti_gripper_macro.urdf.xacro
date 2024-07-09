@@ -89,5 +89,71 @@
     </joint>
 
 
+    <!-- fingertip links -->
+    <link name="${prefix}fingertip_right_top_link" />
+    <joint name="${prefix}fingertip_right_top_joint" type="fixed" >
+        <parent link="${prefix}finger_right_link" />
+        <child link="${prefix}fingertip_right_top_link" />
+        <origin xyz="0.024 -0.0056 0.11825" rpy="0 0 0" />
+    </joint>
+
+    <link name="${prefix}fingertip_right_bottom_link" />
+    <joint name="${prefix}fingertip_right_bottom_joint" type="fixed" >
+        <parent link="${prefix}finger_right_link" />
+        <child link="${prefix}fingertip_right_bottom_link" />
+        <origin xyz="-0.024 -0.0056 0.11825" rpy="0 0 0" />
+    </joint>
+
+    <link name="${prefix}fingertip_left_top_link" />
+    <joint name="${prefix}fingertip_left_top_joint" type="fixed" >
+        <parent link="${prefix}finger_left_link" />
+        <child link="${prefix}fingertip_left_top_link" />
+        <origin xyz="0.024 0.0056 0.11825" rpy="0 0 0" />
+    </joint>
+
+    <link name="${prefix}fingertip_left_bottom_link" />
+    <joint name="${prefix}fingertip_left_bottom_joint" type="fixed" >
+        <parent link="${prefix}finger_left_link" />
+        <child link="${prefix}fingertip_left_bottom_link" />
+        <origin xyz="-0.024 0.0056 0.11825" rpy="0 0 0" />
+    </joint>
+
+
+    <!-- d405 -->
+
+    <xacro:sensor_d405 parent="${prefix}servo_holder_link" name="${prefix}hand_cam">
+        <origin xyz="${0.021} 0 ${0.06293 -0.014628 - 0.01}" rpy="0 ${-pi / 2} 0" />
+    </xacro:sensor_d405>
+
+    <!--<link name="${prefix}hand_cam_link" >
+        <visual>
+        <material name="gray" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/camera/d405.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 ${-0.022 / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="0.042 0.042 0.022" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="${prefix}hand_cam_joint" type="fixed" >
+        <parent link="${prefix}servo_holder_link" />
+        <child link="${prefix}hand_cam_link" />
+        <origin xyz="0 0 0.06293" rpy="0 0 ${pi / 2}" />
+    </joint>
+
+    <link name="${prefix}hand_cam_optical_link" />
+    <joint name="${prefix}hand_cam_optical_joint" type="fixed" >
+        <parent link="${prefix}hand_cam_link" />
+        <child link="${prefix}hand_cam_optical_link" />
+        <origin xyz="0.008 0.019 -0.008" rpy="0 -1.5708 -1.5708" />
+    </joint>-->
+
+
     </xacro:macro>
 </robot>
