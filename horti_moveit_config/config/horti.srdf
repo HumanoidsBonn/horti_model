@@ -42,8 +42,8 @@
 
     <group name="servos">
         <joint name="blade_joint"/>
-        <joint name="finger_right_joint"/>
-        <joint name="finger_left_joint"/>
+<!--         <joint name="finger_right_joint"/> -->
+<!--         <joint name="finger_left_joint"/> -->
     </group>
 
     <group name="trolley">
