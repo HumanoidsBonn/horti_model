@@ -535,15 +535,15 @@
     <link name="head_mount_link" >
         <visual>
         <material name="gray" />
-        <origin xyz="0 0 -${head_height}" rpy="${pi/2} 0 0" />
+        <origin xyz="0 0 -${head_height}" rpy="0 0 ${pi/2}" />
             <geometry>
-                <mesh filename="package://horti_description/meshes/lite6/visual/xarm6LiteHolder.STL"/>
+                <mesh filename="package://horti_description/meshes/lite6/visual/Lite6Holder_30deg.stl"/>
             </geometry>
         </visual>
         <collision>
-            <origin xyz="0 0 -${head_height}" rpy="${pi/2} 0 0" />
+            <origin xyz="0 0 -${head_height}" rpy="0 0 ${pi/2}" />
             <geometry>
-                <mesh filename="package://horti_description/meshes/lite6/visual/xarm6LiteHolder.STL"/>
+                <mesh filename="package://horti_description/meshes/lite6/visual/Lite6Holder_30deg.stl"/>
             </geometry>
             <!--<origin xyz="0 0 ${-head_height / 2}" rpy="0 0 0" />
             <geometry>
@@ -629,10 +629,10 @@
     </joint>
 
 
-    <xacro:sensor_d405 parent="realsense_calib_link">
-        <origin xyz="${0.019125 + 0.022} ${-0.021} ${0.044494 + 0.042 / 2 - 0.014628}" rpy="0 ${-pi / 2} ${-pi / 2}" />
 <!--         <origin xyz="${0.019125 + 0.022} 0 ${0.044494 + 0.042 / 2}" rpy="0 ${-pi / 2} ${-pi / 2}" /> -->
-    </xacro:sensor_d405>
+<!--    <xacro:sensor_d405 parent="realsense_calib_link">
+        <origin xyz="${0.019125 + 0.022} ${-0.021} ${0.044494 + 0.042 / 2 - 0.014628}" rpy="0 ${-pi / 2} ${-pi / 2}" />
+    </xacro:sensor_d405>-->
 
 <!--    <link name="realsense_link" >
         <visual>

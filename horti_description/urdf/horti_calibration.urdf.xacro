@@ -6,8 +6,10 @@
 </xacro:macro>
 
 <!-- Calibrated head_mount_link_calib in head_mount_link -->
+<!-- <origin xyz="0.004829 -0.002214 0.012957" rpy="0.01970134 0.00736174 -0.03219660" /> -->
+
 <xacro:macro name="head_arm_calib">
-    <origin xyz="0.004829 -0.002214 0.012957" rpy="0.01970134 0.00736174 -0.03219660" /> <!-- 2.207° in total -->
+    <origin xyz="0 0 0" rpy="0 0 0" /> <!-- 2.207° in total -->
 </xacro:macro>
 
 <!-- Calibrated arm_left_mount_link in arm_left_calib_link -->
