@@ -94,35 +94,37 @@
     <joint name="${prefix}fingertip_right_top_joint" type="fixed" >
         <parent link="${prefix}finger_right_link" />
         <child link="${prefix}fingertip_right_top_link" />
-        <origin xyz="0.024 -0.0056 0.11825" rpy="0 0 0" />
+        <origin xyz="0.032 -0.0056 0.11825" rpy="0 0 0" />
     </joint>
 
     <link name="${prefix}fingertip_right_bottom_link" />
     <joint name="${prefix}fingertip_right_bottom_joint" type="fixed" >
         <parent link="${prefix}finger_right_link" />
         <child link="${prefix}fingertip_right_bottom_link" />
-        <origin xyz="-0.024 -0.0056 0.11825" rpy="0 0 0" />
+        <origin xyz="-0.032 -0.0056 0.11825" rpy="0 0 0" />
     </joint>
 
     <link name="${prefix}fingertip_left_top_link" />
     <joint name="${prefix}fingertip_left_top_joint" type="fixed" >
         <parent link="${prefix}finger_left_link" />
         <child link="${prefix}fingertip_left_top_link" />
-        <origin xyz="0.024 0.0056 0.11825" rpy="0 0 0" />
+        <origin xyz="0.032 0.0056 0.11825" rpy="0 0 0" />
+<!--         <origin xyz="0.024 0.0056 0.11825" rpy="0 0 0" /> -->
     </joint>
 
     <link name="${prefix}fingertip_left_bottom_link" />
     <joint name="${prefix}fingertip_left_bottom_joint" type="fixed" >
         <parent link="${prefix}finger_left_link" />
         <child link="${prefix}fingertip_left_bottom_link" />
-        <origin xyz="-0.024 0.0056 0.11825" rpy="0 0 0" />
+        <origin xyz="-0.032 0.0056 0.11825" rpy="0 0 0" />
     </joint>
 
 
     <!-- d405 -->
 
     <xacro:sensor_d405 parent="${prefix}servo_holder_link" name="${prefix}hand_cam">
-        <origin xyz="${0.021} 0 ${0.06293 -0.014628 - 0.01}" rpy="0 ${-pi / 2} 0" />
+        <origin xyz="${0.021} 0 ${0.06293 -0.014628 - 0.0}" rpy="0 ${-pi / 2} 0" />
+<!--         <origin xyz="${0.021} 0 ${0.06293 -0.014628 - 0.01}" rpy="0 ${-pi / 2} 0" /> -->
     </xacro:sensor_d405>
 
     <!--<link name="${prefix}hand_cam_link" >
