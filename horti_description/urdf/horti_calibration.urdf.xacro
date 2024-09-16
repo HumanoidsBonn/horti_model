@@ -2,30 +2,29 @@
 
 <!-- Calibrated zed_calib_link in camera_holder_link -->
 <xacro:macro name="cam_calib">
-    <origin xyz="-0.021595 -0.000283 0.026566" rpy="0.02278002 0.00652468 -0.00636368" /> <!-- 1.407° in total -->
+    <origin xyz="0.010461 -0.000510 0.020998" rpy="-0.00059976 -0.01692999 -0.01128172" /> <!-- 1.166° in total -->
 </xacro:macro>
 
 <!-- Calibrated head_mount_link_calib in head_mount_link -->
-<!-- <origin xyz="0.004829 -0.002214 0.012957" rpy="0.01970134 0.00736174 -0.03219660" /> -->
-
 <xacro:macro name="head_arm_calib">
-    <origin xyz="0 0 0" rpy="0 0 0" /> <!-- 2.207° in total -->
+    <origin xyz="-0.002786 -0.003560 -0.020922" rpy="0.03276276 -0.02290161 0.00391480" /> <!-- 2.303° in total -->
 </xacro:macro>
 
 <!-- Calibrated arm_left_mount_link in arm_left_calib_link -->
 <xacro:macro name="left_arm_calib">
-    <origin xyz="0.016278 0.005200 0.013994" rpy="0.03832443 0.00060948 0.00742907" /> <!-- 2.237° in total -->
+    <origin xyz="0.013316 0.003114 0.007513" rpy="0.02293920 -0.01281443 -0.00259630" /> <!-- 1.512° in total -->
 </xacro:macro>
 
 <!-- Calibrated arm_left_marker_link in arm_left_marker_calib_link -->
 <xacro:macro name="left_marker_calib">
-    <origin xyz="-0.000000 0.000000 0.000000" rpy="0.00000000 -0.00000000 3.14159265" /> <!-- 180.000° in total -->
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.00000000 -0.00000000 3.14159265" /> <!-- 180.000° in total -->
 </xacro:macro>
 
 <!-- Calibrated arm_right_marker_link in arm_right_marker_calib_link -->
 <xacro:macro name="right_marker_calib">
     <origin xyz="0.000000 0.000000 0.000000" rpy="0.00000000 -0.00000000 0.00000000" /> <!-- 0.000° in total -->
 </xacro:macro>
+
 
 
 
