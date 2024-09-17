@@ -61,7 +61,7 @@
     <xacro:property name="arm_width" value="0.7" />
     <xacro:property name="arm_y_offset" value="-0.1" />
 
-    <xacro:trollomatic prefix="trolley_" enable_collisions="true" enable_inertia="false" joint_type="fixed"/>
+    <xacro:trollomatic prefix="trolley_" enable_collisions="false" enable_inertia="false" joint_type="fixed"/>
     <joint name="base_link_joint" type="fixed" >
         <origin xyz="0.0 0 -0.469" rpy="0.0 0 -3.14159" />
         <parent link="world" />
@@ -88,7 +88,7 @@
         <parent link="trolley_platform_link" />
         <child link="arm_holder_link" />
     </joint>
-
+    <!--
     <xacro:property name="back_height" value="1.5" />
     <link name="trolley_back_link">
         <collision>
@@ -103,7 +103,7 @@
         <parent link="trolley_platform_link" />
         <child link="trolley_back_link" />
     </joint>
-
+    -->
 
     <xacro:property name="power_height" value="0.35" />
     <xacro:property name="power_width" value="0.10" />
