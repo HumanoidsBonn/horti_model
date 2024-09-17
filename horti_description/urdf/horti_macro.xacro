@@ -392,6 +392,13 @@
         <child link="arm_right_eef_link" />
     </joint>
 
+    <link name="arm_right_gripper_link" />
+    <joint name="arm_right_gripper_joint" type="fixed" >
+        <origin xyz="0 0 0.11" rpy="0 0 0" />
+        <parent link="arm_right_eef_link" />
+        <parent link="arm_right_gripper_link" />
+    </joint>
+
     <!-- left gripper & eef link -->
 
     <link name="arm_left_cutter_link">
