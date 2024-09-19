@@ -464,6 +464,10 @@
         <child link="arm_left_eef_link" />
     </joint>
 
+    <xacro:sensor_d405 parent="arm_left_cutter_link" name="cutter_cam">
+        <origin xyz="0 0.09 0.05" rpy="0 ${-(90 + 30) * pi / 180} ${pi / 2}" />
+    </xacro:sensor_d405>
+
 
 
     <!-- calibration marker -->

@@ -122,7 +122,7 @@
 
     <!-- d405 -->
 
-    <xacro:sensor_d405 parent="${prefix}servo_holder_link" name="${prefix}hand_cam">
+    <xacro:sensor_d405 parent="${prefix}servo_holder_link" name="gripper_cam">
         <origin xyz="${0.021} 0 ${0.06293 -0.014628 - 0.0}" rpy="0 ${-pi / 2} 0" />
 <!--         <origin xyz="${0.021} 0 ${0.06293 -0.014628 - 0.01}" rpy="0 ${-pi / 2} 0" /> -->
     </xacro:sensor_d405>
