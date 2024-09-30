@@ -406,7 +406,7 @@
             <material name="gray" />
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="package://horti_description/meshes/cutter/cutter.STL"/>
+                <mesh filename="package://horti_description/meshes/cutter/ass_shearer_2024_09_30_001.STL" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision>
@@ -430,7 +430,7 @@
     </link>
 
     <joint name="arm_left_cutter_joint" type="fixed">
-        <origin xyz="0 0 0" rpy="0 0 ${pi / 4}" />
+        <origin xyz="0 0 0" rpy="0 0 ${pi * 5 / 4}" />
         <parent link="arm_left_ft_link" />
         <child link="arm_left_cutter_link" />
     </joint>
@@ -448,7 +448,7 @@
     </link>
 
     <joint name="blade_joint" type="revolute" >
-        <origin xyz="0.0 0 0.10525" rpy="${pi/2} ${pi / 8} 0 " />
+        <origin xyz="0.0 0 0.10525" rpy="${pi/2} ${pi / 8} ${pi} " />
         <parent link="arm_left_cutter_link" />
         <child link="blade_link" />
         <axis xyz="0 0 -1" />
@@ -465,7 +465,7 @@
     </joint>
 
     <xacro:sensor_d405 parent="arm_left_cutter_link" name="cutter_cam">
-        <origin xyz="0 0.09 0.05" rpy="0 ${-(90 + 30) * pi / 180} ${pi / 2}" />
+        <origin xyz="0 -0.09738 0.03953" rpy="0 ${-(90 + 20) * pi / 180} ${-pi / 2}" />
     </xacro:sensor_d405>
 
 
