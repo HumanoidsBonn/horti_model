@@ -236,10 +236,38 @@
     </group> -->
 
     <group name="zed2i">
-        <link name="zed2i_camera_center" />
+        <joint name="arm_left_joint1"/>
+        <joint name="arm_left_joint2"/>
+        <joint name="arm_left_joint3"/>
+        <joint name="arm_left_joint4"/>
+        <joint name="arm_left_joint5"/>
+        <joint name="arm_left_joint6"/>
+        <joint name="arm_left_joint7"/>
+        <link name="zed2i_left_camera_optical_frame" />
     </group>
 
 
+    <group name="cutter_cam">
+        <joint name="arm_left_joint1"/>
+        <joint name="arm_left_joint2"/>
+        <joint name="arm_left_joint3"/>
+        <joint name="arm_left_joint4"/>
+        <joint name="arm_left_joint5"/>
+        <joint name="arm_left_joint6"/>
+        <joint name="arm_left_joint7"/>
+        <link name="cutter_cam_color_optical_frame" />
+    </group>
+
+    <group name="gripper_cam">
+        <joint name="arm_right_joint1"/>
+        <joint name="arm_right_joint2"/>
+        <joint name="arm_right_joint3"/>
+        <joint name="arm_right_joint4"/>
+        <joint name="arm_right_joint5"/>
+        <joint name="arm_right_joint6"/>
+        <joint name="arm_right_joint7"/>
+        <link  name="gripper_cam_color_optical_frame"/>
+    </group>
 
     <end_effector name="left_eef" parent_link="arm_left_eef_link" parent_group="arm_left" group="left_eef" />
     <end_effector name="right_eef" parent_link="arm_right_eef_link" parent_group="arm_right" group="right_eef" />
