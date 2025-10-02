@@ -465,7 +465,8 @@
     </joint>
 
     <xacro:sensor_d405 parent="arm_left_cutter_link" name="cutter_cam">
-        <origin xyz="0 -0.09738 0.03953" rpy="0 ${-(90 + 20) * pi / 180} ${-pi / 2}" />
+        <!-- <origin xyz="0 -0.09738 0.03953" rpy="0 ${-90 * pi / 180} ${00 * pi / 180}" /> -->
+        <origin xyz="0.021 -0.07764 0.03235" rpy="${-90 * pi/180} ${-(90-20) * pi /180} ${90*pi/180}" />
     </xacro:sensor_d405>
 
 
@@ -600,10 +601,23 @@
     </joint> -->
 
     <!-- zed holder-->
-    <link name="camera_holder_link" />
+    <link name="camera_holder_link" >
+        <visual>
+        <material name="gray" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/camera/zed_holder.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://horti_description/meshes/camera/zed_holder.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
 
     <joint name="camera_holder_joint" type="fixed" >
-        <origin xyz="-0.1 0.1 -0.05" rpy="0 ${10 * pi/180} -${pi/4}" />
+        <origin xyz="0 0 -0.001" rpy="0 0 ${pi + pi /4}" />
         <parent link="arm_left_link7" />
         <child link="camera_holder_link" />
     </joint>
@@ -617,7 +631,7 @@
     </joint>
 
     <xacro:zed_camera name="zed2i" model="zed2i" parent="zed_calib_link">
-        <origin xyz="-0.015 0 0.00" rpy="${pi} ${-pi/2} 0.0" />
+        <origin xyz="-0.0 -0.189232 0.046147" rpy="0 ${-(90+20)*pi/180} ${-pi/2}" />
     </xacro:zed_camera>
 
     <link name="zed2i_collision_link">

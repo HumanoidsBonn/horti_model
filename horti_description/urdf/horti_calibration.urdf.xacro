@@ -2,7 +2,8 @@
 
 <!-- Calibrated zed_calib_link in camera_holder_link -->
 <xacro:macro name="cam_calib">
-    <origin xyz="0.010461 -0.000510 0.020998" rpy="-0.00059976 -0.01692999 -0.01128172" /> <!-- 1.166° in total -->
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <!-- origin xyz="0.010461 -0.000510 0.020998" rpy="-0.00059976 -0.01692999 -0.01128172" /--> <!-- 1.166° in total -->
 </xacro:macro>
 
 <!-- Calibrated head_mount_link_calib in head_mount_link -->

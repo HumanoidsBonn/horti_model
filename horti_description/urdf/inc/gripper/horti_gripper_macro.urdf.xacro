@@ -6,7 +6,7 @@
         <visual>
             <material name="gray" />
             <geometry>
-                <mesh filename="package://horti_description/meshes/servo_gripper/servo_holder.stl" scale="0.001 0.001 0.001"/>
+                <mesh filename="package://horti_description/meshes/servo_gripper/horti_gripper_tomato.stl" scale="0.001 0.001 0.001"/>
             </geometry>
         </visual>
         <!--<collision>
@@ -123,7 +123,7 @@
     <!-- d405 -->
 
     <xacro:sensor_d405 parent="${prefix}servo_holder_link" name="gripper_cam">
-        <origin xyz="${0.021} 0 ${0.06293 -0.014628 - 0.0}" rpy="0 ${-pi / 2} 0" />
+        <origin xyz="0.082745 0 0.026409" rpy="0 ${-pi / 2 - 8 * pi / 180} 0" />
 <!--         <origin xyz="${0.021} 0 ${0.06293 -0.014628 - 0.01}" rpy="0 ${-pi / 2} 0" /> -->
     </xacro:sensor_d405>
 
