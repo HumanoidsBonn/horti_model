@@ -643,7 +643,7 @@
     </link>
 
     <joint name="zed2i_collision_joint" type="fixed" >
-        <origin xyz="0.01 0 0.02" rpy="${pi} ${-pi/2} 0.0" />
+        <origin xyz="0.0 ${-0.189232 + 0.011} ${0.046147 - 0.015}" rpy="0 ${-(90+20)*pi/180} ${-pi/2}" />
         <parent link="camera_holder_link" />
         <child link="zed2i_collision_link" />
     </joint>
