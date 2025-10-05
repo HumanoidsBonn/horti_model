@@ -481,4 +481,7 @@
     <disable_collisions link1="arm_left_marker_link" link2="arm_left_link7" reason="Adjacent"/>
     <disable_collisions link1="arm_left_marker_link" link2="arm_left_link6" reason="Adjacent" />-->
 
+    <disable_collisions link1="vacuum_link" link2="arm_holder_link" reason="Never"/>
+    <disable_collisions link1="zotac_link" link2="arm_holder_link" reason="Never"/>
+
 </robot>

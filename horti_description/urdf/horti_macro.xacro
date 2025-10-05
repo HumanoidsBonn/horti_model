@@ -126,7 +126,7 @@
     <joint name="power_joint" type="fixed">
         <parent link="trolley_base_link"/>
         <child link="power_link" />
-        <origin xyz="${-1.44 / 2} ${-0.42 / 2 - 0.01} 0.18" rpy="0 0 0" />
+        <origin xyz="${-holder_length / 2} ${-0.42 / 2 - 0.01} 0.18" rpy="0 0 0" />
     </joint>
 
 
@@ -151,7 +151,7 @@
     <joint name="base_control_joint" type="fixed">
         <parent link="trolley_base_link"/>
         <child link="base_control_link" />
-        <origin xyz="${-1.44 / 2 + 0.5} ${-0.42 / 2 - 0.01} 0.18" rpy="0 0 0" />
+        <origin xyz="${-holder_length / 2 + 0.5} ${-0.42 / 2 - 0.01} 0.18" rpy="0 0 0" />
     </joint>
 
 
@@ -258,7 +258,7 @@
         </collision>
     </link>
     <joint name="arm_right_controller_joint" type="fixed" >
-        <origin xyz=" ${-1.44 + 0.05 + controller_length /2} 0 ${holder_height+0.05}" rpy="0 0 0" />
+        <origin xyz=" ${-holder_length + 0.5 + controller_length /2} ${holder_width / 2 - 0.035 - controller_width / 2} ${holder_height+0.05}" rpy="0 0 0" />
         <child link="arm_right_controller_link" />
         <parent link="trolley_platform_link" />
     </joint>
@@ -284,6 +284,55 @@
         <parent link="trolley_platform_link" />
     </joint>
 
+    <xacro:property name="vacuum_height" value="0.055" />
+    <xacro:property name="vacuum_width" value="0.21" />
+    <xacro:property name="vacuum_length" value="0.16" />
+
+    <link name="vacuum_link" >
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 0 ${vacuum_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${vacuum_length} ${vacuum_width} ${vacuum_height}" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 ${vacuum_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${vacuum_length} ${vacuum_width} ${vacuum_height}" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="vacuum_joint" type="fixed" >
+        <origin xyz=" ${-holder_length + 0.018 + vacuum_length  / 2} ${holder_width / 2 - 0.148 - vacuum_width / 2} ${holder_height+0.05}" rpy="0 0 0" />
+        <child link="vacuum_link" />
+        <parent link="trolley_platform_link" />
+    </joint>
+
+    <xacro:property name="zotac_height" value="0.07" />
+    <xacro:property name="zotac_width" value="0.22" />
+    <xacro:property name="zotac_length" value="0.21" />
+
+    <link name="zotac_link">
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 0 ${zotac_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${zotac_length} ${zotac_width} ${zotac_height}" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 ${zotac_height / 2}" rpy="0 0 0" />
+            <geometry>
+                <box size="${zotac_length} ${zotac_width} ${zotac_height}" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="zotac_joint" type="fixed" >
+        <origin xyz=" ${- 0.52 - zotac_length  / 2} ${holder_width / 2 - 0.015 - zotac_width / 2} ${holder_height+0.05}" rpy="0 0 0" />
+        <child link="zotac_link" />
+        <parent link="trolley_platform_link" />
+    </joint>
 
 
     <link name="trolley_local_link" />
