@@ -6,7 +6,7 @@
         <visual>
             <material name="gray" />
             <geometry>
-                <mesh filename="package://horti_description/meshes/servo_gripper/horti_gripper_tomato.stl" scale="0.001 0.001 0.001"/>
+                <mesh filename="package://horti_description/meshes/servo_gripper/horti_gripper_tomato.stl"/>
             </geometry>
         </visual>
         <!--<collision>
@@ -34,7 +34,7 @@
     </link>
 
     <joint name="${prefix}servo_right_joint" type="fixed">
-        <origin xyz="0 0 0.019793" rpy="${pi} 0 0" />
+        <origin xyz="0 0.0075 0.019793" rpy="${pi} 0 0" />
         <parent link="${prefix}servo_holder_link" />
         <child link="${prefix}servo_right_link" />
     </joint>
@@ -49,7 +49,7 @@
     </link>
 
     <joint name="${prefix}servo_left_joint" type="fixed">
-        <origin xyz="0 0 0.019793" rpy="0 0 0" />
+        <origin xyz="0 -0.0075 0.019793" rpy="0 0 0" />
         <parent link="${prefix}servo_holder_link" />
         <child link="${prefix}servo_left_link" />
     </joint>
@@ -122,8 +122,36 @@
 
     <!-- d405 -->
 
-    <xacro:sensor_d405 parent="${prefix}servo_holder_link" name="gripper_cam">
-        <origin xyz="0.082745 0 0.026409" rpy="0 ${-pi / 2 - 8 * pi / 180} 0" />
+    <link name="${prefix}gripper_cam_holder_link" >
+        <visual>
+            <material name="gray" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/camera/realsense_ft_holder.stl" />
+            </geometry>
+        </visual>
+        <!-- <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.042 0.042 0.022" />
+            </geometry>
+        </collision> -->
+    </link>
+
+    <joint name="${prefix}gripper_cam_holder_joint" type="fixed" >
+        <parent link="arm_right_link7" />
+        <child link="${prefix}gripper_cam_holder_link" />
+        <origin xyz="0.0 0 0" rpy="0 0 ${-pi * 6 / 8}" />
+    </joint>
+
+    <link name="${prefix}gripper_cam_calib_link" />
+    <joint name="${prefix}gripper_cam_calib_joint" type="fixed" >
+        <parent link="${prefix}gripper_cam_holder_link" />
+        <child link="${prefix}gripper_cam_calib_link" />
+        <xacro:gripper_cam_calib />
+    </joint>
+
+    <xacro:sensor_d405 parent="${prefix}gripper_cam_calib_link" name="gripper_cam">
+        <origin xyz="-0.101051 -0.021 0.011221" rpy="${-pi/2} ${-pi / 2 + 8 * pi / 180} 0" />
 <!--         <origin xyz="${0.021} 0 ${0.06293 -0.014628 - 0.01}" rpy="0 ${-pi / 2} 0" /> -->
     </xacro:sensor_d405>
 

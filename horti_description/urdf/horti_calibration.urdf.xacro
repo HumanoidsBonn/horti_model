@@ -1,32 +1,41 @@
-<robot name="anna_calib" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<?xml version="1.0" ?>
+<robot name="horti_calib" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <!-- Calibrated zed_calib_link in camera_holder_link -->
-<xacro:macro name="cam_calib">
-    <origin xyz="0 0 0" rpy="0 0 0" />
-    <!-- origin xyz="0.010461 -0.000510 0.020998" rpy="-0.00059976 -0.01692999 -0.01128172" /--> <!-- 1.166° in total -->
+<xacro:macro name="zed_calib">
+    <!-- 0.000° and 0.000cm in total -->
+    <origin xyz="-0.002 -0.000000 0.006" rpy="0.00000000 ${ - 0.6 * pi / 180} 0.00000000" />
 </xacro:macro>
 
-<!-- Calibrated head_mount_link_calib in head_mount_link -->
-<xacro:macro name="head_arm_calib">
-    <origin xyz="-0.002786 -0.003560 -0.020922" rpy="0.03276276 -0.02290161 0.00391480" /> <!-- 2.303° in total -->
+<!-- Calibrated gripper_cam_link in camera_holder_link -->
+<xacro:macro name="gripper_cam_calib">
+    <!-- 2.695° and 1.806cm in total -->
+    <origin xyz="-0.001598 -0.0 -0.005723" rpy="-0.03321741 -0.02310178 -0.02362534" />
+</xacro:macro>
+
+<!-- Calibrated cutter_cam_link in camera_holder_link -->
+<xacro:macro name="cutter_cam_calib">
+    <!-- 0.000° and 0.000cm in total -->
+    <origin xyz="-0.000000 -0.000000 -0.000000" rpy="0.00000000 -0.00000000 0.00000000" />
 </xacro:macro>
 
 <!-- Calibrated arm_left_mount_link in arm_left_calib_link -->
 <xacro:macro name="left_arm_calib">
+    <!-- 2.800° and 3.278cm in total -->
     <origin xyz="0.013316 0.003114 0.007513" rpy="0.02293920 -0.01281443 -0.00259630" /> <!-- 1.512° in total -->
 </xacro:macro>
 
 <!-- Calibrated arm_left_marker_link in arm_left_marker_calib_link -->
 <xacro:macro name="left_marker_calib">
-    <origin xyz="0.000000 0.000000 0.000000" rpy="0.00000000 -0.00000000 3.14159265" /> <!-- 180.000° in total -->
+    <!-- 0.000° and 0.000cm in total -->
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.00000000 -0.00000000 0.00000000" />
 </xacro:macro>
 
 <!-- Calibrated arm_right_marker_link in arm_right_marker_calib_link -->
 <xacro:macro name="right_marker_calib">
-    <origin xyz="0.000000 0.000000 0.000000" rpy="0.00000000 -0.00000000 0.00000000" /> <!-- 0.000° in total -->
+    <!-- 0.000° and 0.000cm in total -->
+    <origin xyz="0.000000 0.000000 0.000000" rpy="0.00000000 -0.00000000 0.00000000" />
 </xacro:macro>
-
-
 
 
 

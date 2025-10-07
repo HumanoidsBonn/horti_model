@@ -484,4 +484,10 @@
     <disable_collisions link1="vacuum_link" link2="arm_holder_link" reason="Never"/>
     <disable_collisions link1="zotac_link" link2="arm_holder_link" reason="Never"/>
 
+    <disable_collisions link1="arm_left_cutter_link" link2="arm_left_marker_link" reason="Adjacent"/>
+    <disable_collisions link1="arm_left_ft_link" link2="arm_left_marker_link" reason="Adjacent"/>
+    <disable_collisions link1="arm_left_link7" link2="arm_left_marker_link" reason="Adjacent"/>
+    <disable_collisions link1="arm_right_ft_link" link2="arm_right_marker_link" reason="Adjacent"/>
+    <disable_collisions link1="arm_right_link7" link2="arm_right_marker_link" reason="Adjacent"/>
+
 </robot>

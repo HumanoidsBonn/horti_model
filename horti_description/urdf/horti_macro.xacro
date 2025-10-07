@@ -51,7 +51,7 @@
     <xacro:include filename="$(find horti_description)/urdf/inc/gripper/horti_gripper_macro.urdf.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/horti_calibration.urdf.xacro" />
 
-    <xacro:property name="enable_cali_marker" value="false"/>
+    <xacro:property name="enable_cali_marker" value="true"/>
 
     <!-- Trolley -->
 
@@ -377,7 +377,7 @@
                 <origin xyz="0 0 -${ft_height}" rpy="0 0 0" />
                 <material name="gray" />
                 <geometry>
-                    <mesh filename="package://horti_description/meshes/ft_sensor/FT_Sensor_Calib_Holder.stl" scale="0.001 0.001 0.001" />
+                    <mesh filename="package://horti_description/meshes/ft_sensor/FT-sensor.stl" scale="0.001 0.001 0.001" />
                 </geometry>
             </visual>
             <collision>
@@ -397,6 +397,38 @@
 
     <xacro:ft_and_gripper prefix="arm_right" parent="arm_right_link7" />
     <xacro:ft_and_gripper prefix="arm_left" parent="arm_left_link7" />
+
+    <link name="arm_right_calib_holder_link" >
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/ft_sensor/calibration_pattern.stl" />
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="arm_right_calib_holder_joint" type="fixed" >
+        <origin xyz="0 0 0" rpy="0 0 ${-pi/3*2}" />
+        <parent link="arm_right_link7" />
+        <child link="arm_right_calib_holder_link" />
+    </joint>
+
+    <link name="arm_left_calib_holder_link" >
+        <visual>
+            <material name="gray" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://horti_description/meshes/ft_sensor/calibration_pattern.stl" />
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="arm_left_calib_holder_joint" type="fixed" >
+        <origin xyz="0 0 0" rpy="0 0 ${-pi/3}" />
+        <parent link="arm_left_link7" />
+        <child link="arm_left_calib_holder_link" />
+    </joint>
 
     <!-- right gripper & eef link -->
 
@@ -513,9 +545,16 @@
         <child link="arm_left_eef_link" />
     </joint>
 
-    <xacro:sensor_d405 parent="arm_left_cutter_link" name="cutter_cam">
+    <link name="cutter_cam_calib_link" />
+    <joint name="cutter_cam_calib_joint" type="fixed" >
+        <parent link="arm_left_cutter_link" />
+        <child link="cutter_cam_calib_link" />
+        <xacro:cutter_cam_calib />
+    </joint>
+
+    <xacro:sensor_d405 parent="cutter_cam_calib_link" name="cutter_cam">
         <!-- <origin xyz="0 -0.09738 0.03953" rpy="0 ${-90 * pi / 180} ${00 * pi / 180}" /> -->
-        <origin xyz="0.021 -0.07764 0.03235" rpy="${-90 * pi/180} ${-(90-20) * pi /180} ${90*pi/180}" />
+        <origin xyz="-0.021 ${-0.07764-0.019734} ${0.03235+0.0071824}" rpy="${90 * pi/180} ${-(90-20) * pi /180} ${90*pi/180}" />
     </xacro:sensor_d405>
 
 
@@ -527,8 +566,9 @@
         <link name="arm_right_marker_calib_link" />
         <joint name="arm_right_marker_calib_joint" type="fixed" >
 
-            <origin xyz="${0.039 + 0.0027} 0 -0.0114" rpy="${pi/2} 0 ${pi/2}" />
-            <parent link="arm_right_ft_link" />
+            <!-- <origin xyz="${0.039 + 0.0027} 0 -0.0114" rpy="0 0  ${pi/2}" /> -->
+            <origin xyz="0.0417 0 0.02495" rpy="${pi/2} 0 ${pi/2}" />
+            <parent link="arm_right_calib_holder_link" />
             <child link="arm_right_marker_calib_link" />
         </joint>
 
@@ -558,8 +598,9 @@
         <link name="arm_left_marker_calib_link" />
         <joint name="arm_left_marker_calib_joint" type="fixed" >
 
-            <origin xyz="${0.039 + 0.0027} 0 -0.0114" rpy="0 ${-pi/2} ${pi}" />
-            <parent link="arm_left_ft_link" />
+            <!-- <origin xyz="${0.039 + 0.0027} 0 -0.0114" rpy="0 ${-pi/2} ${pi}" /> -->
+            <origin xyz="0.0417 0 0.02495" rpy="0 ${pi/2} 0" />
+            <parent link="arm_left_calib_holder_link" />
             <child link="arm_left_marker_calib_link" />
         </joint>
 
@@ -666,7 +707,7 @@
     </link>
 
     <joint name="camera_holder_joint" type="fixed" >
-        <origin xyz="0 0 -0.001" rpy="0 0 ${pi + pi /4}" />
+        <origin xyz="0 0 -0.001" rpy="${-1.5 * pi / 180} 0 ${pi + pi /4}" />
         <parent link="arm_left_link7" />
         <child link="camera_holder_link" />
     </joint>
@@ -676,7 +717,7 @@
     <joint name="zed_calib_joint" type="fixed" >
         <parent link="camera_holder_link" />
         <child link="zed_calib_link" />
-        <xacro:cam_calib />
+        <xacro:zed_calib />
     </joint>
 
     <xacro:zed_camera name="zed2i" model="zed2i" parent="zed_calib_link">
