@@ -51,7 +51,7 @@
     <xacro:include filename="$(find horti_description)/urdf/inc/gripper/horti_gripper_macro.urdf.xacro" />
     <xacro:include filename="$(find horti_description)/urdf/horti_calibration.urdf.xacro" />
 
-    <xacro:property name="enable_cali_marker" value="true"/>
+    <xacro:property name="enable_cali_marker" value="false"/>
 
     <!-- Trolley -->
 
