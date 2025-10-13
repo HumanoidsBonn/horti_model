@@ -34,7 +34,7 @@
     </link>
 
     <joint name="${prefix}servo_right_joint" type="fixed">
-        <origin xyz="0 0.0075 0.019793" rpy="${pi} 0 0" />
+        <origin xyz="0 ${0.0075 / 2} 0.019793" rpy="${pi} 0 0" />
         <parent link="${prefix}servo_holder_link" />
         <child link="${prefix}servo_right_link" />
     </joint>
@@ -49,7 +49,7 @@
     </link>
 
     <joint name="${prefix}servo_left_joint" type="fixed">
-        <origin xyz="0 -0.0075 0.019793" rpy="0 0 0" />
+        <origin xyz="0 ${-0.0075 / 2} 0.019793" rpy="0 0 0" />
         <parent link="${prefix}servo_holder_link" />
         <child link="${prefix}servo_left_link" />
     </joint>
